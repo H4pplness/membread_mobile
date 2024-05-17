@@ -1,5 +1,6 @@
 
 import 'package:equatable/equatable.dart';
+import 'package:membreadflutter/src/domain/models/user.dart';
 
 import 'lesson.dart';
 
@@ -8,8 +9,11 @@ class Course extends Equatable{
   String? title;
   String? description;
   List<Lesson>? lessons;
-
-  Course({this.id,this.title,this.description,this.lessons});
+  User? author;
+  String? avatar;
+  double? rating;
+  int? numberOfParticipants;
+  Course({this.id,this.title,this.description,this.lessons,this.avatar,this.author,this.rating,this.numberOfParticipants});
 
   @override
   // TODO: implement props

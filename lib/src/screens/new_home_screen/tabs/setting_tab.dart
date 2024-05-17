@@ -1,7 +1,5 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../domain/models/user.dart';
 import '../../../widgets/atoms/cards/setting_card.dart';
 import '../../achievement_screen/achievement_screen.dart';
@@ -9,10 +7,9 @@ import '../../help_center_screen/help_center_screen.dart';
 import '../../notification_screen/notification_screen.dart';
 import '../../profile_screen/profile_screen.dart';
 import '../../welcome_screen/welcome_screen.dart';
-import '../new_home_screen.dart';
 
-class Setting extends StatelessWidget {
-  const Setting({super.key});
+class SettingTab extends StatelessWidget {
+  const SettingTab({super.key});
 
   @override
   Widget build(BuildContext context) {

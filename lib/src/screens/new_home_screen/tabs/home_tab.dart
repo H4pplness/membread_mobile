@@ -1,14 +1,13 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/widgets/atoms/sliders/progress_slider.dart';
 
-import '../notifier/tab_index_notifier.dart';
+import '../notifier/tab_index/tab_index_notifier.dart';
 
-class Home extends ConsumerWidget {
-  const Home({super.key});
+class HomeTab extends ConsumerWidget {
+  const HomeTab({super.key});
 
   @override
   Widget build(BuildContext context,ref) {
@@ -34,7 +33,7 @@ class Home extends ConsumerWidget {
                 )
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(

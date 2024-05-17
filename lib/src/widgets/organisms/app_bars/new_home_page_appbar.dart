@@ -25,14 +25,14 @@ class NewHomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 Text(
                   "Hi, ${user.username} !",
-                  style: GoogleFonts.notoSans(
-                      fontSize: 20, fontWeight: FontWeight.w600,color : Colors.white),
+                  style: GoogleFonts.poppins(
+                      fontSize: 20, fontWeight: FontWeight.w700,color : Colors.white),
                   overflow: TextOverflow.clip,
                 ),
                 const SizedBox(height: 5),
                 Text(
                   "Let's start learning",
-                  style: GoogleFonts.notoSans(
+                  style: GoogleFonts.poppins(
                       fontSize: 15, fontWeight: FontWeight.w500 , color : Colors.white),
                 )
               ],

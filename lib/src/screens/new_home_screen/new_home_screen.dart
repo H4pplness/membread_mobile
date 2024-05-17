@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:membreadflutter/src/domain/repositories/course_repository/get_course_info.dart';
 import 'package:membreadflutter/src/domain/repositories/course_repository/index.dart';
-import 'package:membreadflutter/src/screens/new_home_screen/notifier/tab_index_notifier.dart';
+import 'package:membreadflutter/src/screens/new_home_screen/notifier/tab_index/tab_index_notifier.dart';
+import 'package:membreadflutter/src/screens/new_home_screen/tabs/course_tab.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/home_tab.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/setting_tab.dart';
+import 'package:membreadflutter/src/widgets/organisms/app_bars/course_app_bar.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/new_home_page_appbar.dart';
 import '../../domain/models/user.dart';
 import '../../widgets/organisms/app_bars/title_appbar.dart';
@@ -28,16 +30,14 @@ class NewHomeScreen extends ConsumerWidget {
     
     final List<PreferredSizeWidget?> appBars = [
       NewHomePageAppBar(user: user),
-      TitleAppbar(
-        title: Text("OKE"),
-      ),
+      const CourseAppBar(),
       null
     ];
 
     final List<Widget> contents = [
-      Home(),
-      Container(),
-      Setting()
+      HomeTab(),
+      CourseTab(),
+      SettingTab()
     ];
 
     final index = ref.watch(tabIndexNotifierProvider);

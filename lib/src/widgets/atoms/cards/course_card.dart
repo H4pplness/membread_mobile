@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:membreadflutter/src/dtos/getcourseinfodto/getcourseinfodto.dart';
 import 'package:membreadflutter/src/dtos/getlearningcoursedto/getlearningcoursedto.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/primary_card.dart';
 

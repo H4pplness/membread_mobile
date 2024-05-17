@@ -16,50 +16,50 @@ ThemeData lightTheme = ThemeData(
     appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 0,
-        titleTextStyle: GoogleFonts.notoSans(
+        titleTextStyle: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
                 fontSize: 20)),
         iconTheme: const IconThemeData(size: 25, color: Colors.black)),
     textTheme: TextTheme(
-        titleLarge: GoogleFonts.notoSans(
+        titleLarge: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
                 color: Colors.black)),
-        titleMedium: GoogleFonts.notoSans(
+        titleMedium: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
                 color: Colors.black)),
-        titleSmall: GoogleFonts.notoSans(
+        titleSmall: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w600,
                 color: Colors.black)),
-        displayMedium: GoogleFonts.notoSans(
+        displayMedium: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,
                 color: Colors.black)),
-        displayLarge: GoogleFonts.notoSans(
+        displayLarge: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
                 color: Colors.black)),
-        displaySmall: GoogleFonts.notoSans(
+        displaySmall: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 color: Colors.black)),
-        labelMedium: GoogleFonts.notoSans(
+        labelMedium: GoogleFonts.poppins(
             textStyle: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: Colors.white)),
-        labelLarge: GoogleFonts.notoSans(
+        labelLarge: GoogleFonts.poppins(
             textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: Colors.white)),
-        labelSmall: GoogleFonts.notoSans(
+        labelSmall: GoogleFonts.poppins(
             textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white))
     ));
