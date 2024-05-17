@@ -43,7 +43,7 @@ class CourseCard extends StatelessWidget {
                     const SizedBox(height: 5),
                     Row(
                       children: [
-                        Icon(Icons.person, color: Colors.white54),
+                        const Icon(Icons.person, color: Colors.white54),
                         const SizedBox(width: 3),
                         Text(
                           course.author?.username ?? "",
@@ -62,8 +62,6 @@ class CourseCard extends StatelessWidget {
                         StarRating(),
                         StarRating(),
                         StarRating(value: 0.5,),
-                        SizedBox(width: 10),
-
                       ],
                     )
                   ],

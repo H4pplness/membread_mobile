@@ -4,6 +4,7 @@ class Lesson<T extends Learning> {
   int? id;
   String? title;
   String? description;
+  // String type = T.;
 
   List<T>? listLearning;
 

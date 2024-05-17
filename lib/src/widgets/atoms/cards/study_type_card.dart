@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/primary_card.dart';
 
 class StudyTypeCard extends StatelessWidget {
@@ -19,9 +20,17 @@ class StudyTypeCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title,style: Theme.of(context).textTheme.titleSmall,),
+              Text(title,style: GoogleFonts.poppins(
+                fontSize : 18,
+                fontWeight : FontWeight.w600,
+                color : Colors.white
+              ),),
               const SizedBox(height: 5,),
-              Text(summary,style: Theme.of(context).textTheme.displaySmall,)
+              Text(summary,style: GoogleFonts.poppins(
+                  fontSize : 13,
+                  fontWeight : FontWeight.w500,
+                  color : Colors.white
+              ),)
             ],
           )
         ],

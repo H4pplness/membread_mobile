@@ -10,7 +10,9 @@ ThemeData darkTheme = ThemeData(
       background: const Color.fromARGB(255, 24, 26, 31),
       primary: Color.lerp(const Color.fromARGB(255, 59, 117, 245),
           const Color.fromARGB(255, 76, 142, 246), 1)!,
-      secondary: Colors.grey[800]!),
+      secondary: Colors.grey[800]!,
+
+  ),
   iconTheme: const IconThemeData(size: 20, color: Colors.white),
   appBarTheme: AppBarTheme(
       backgroundColor: const Color.fromARGB(255, 24, 26, 31),
