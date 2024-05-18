@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/domain/models/vocabulary_lesson.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/study_vocabulary_screen.dart';
+import 'package:membreadflutter/src/screens/lesson_study_option_screen/test_vocabulary_screen/test_vocabulary_screen.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/flip_card.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/title_appbar.dart';
 
@@ -85,7 +86,7 @@ class VocabularyLessonScreen extends ConsumerWidget {
                 icon: Icons.task_rounded,
                 title: "Test",
                 summary: "Review what you've learned",
-                onTap: (){},
+                onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>TestVocabularyScreen(lesson: lesson))),
               ),
             ),
             const SizedBox(

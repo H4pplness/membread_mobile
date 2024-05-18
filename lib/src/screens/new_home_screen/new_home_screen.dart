@@ -31,7 +31,9 @@ class NewHomeScreen extends ConsumerWidget {
     final List<PreferredSizeWidget?> appBars = [
       NewHomePageAppBar(user: user),
       const CourseAppBar(),
-      null
+      AppBar(
+        title: Text("Settings",style: Theme.of(context).appBarTheme.titleTextStyle,),
+      )
     ];
 
     final List<Widget> contents = [

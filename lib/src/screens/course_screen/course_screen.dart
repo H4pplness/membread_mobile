@@ -5,7 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/domain/models/course.dart';
 import 'package:membreadflutter/src/domain/models/learning.dart';
 import 'package:membreadflutter/src/domain/models/vocabulary_lesson.dart';
+import 'package:membreadflutter/src/screens/profile_screen/profile_screen.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/new_lesson_card.dart';
+import 'package:membreadflutter/src/widgets/atoms/ratings/star_rating.dart';
+import 'package:membreadflutter/src/widgets/molecules/star_group/star_group.dart';
 
 import '../../domain/models/lesson.dart';
 import '../lesson_screen/vocabulary_lesson_screen.dart';
@@ -44,11 +47,11 @@ class CourseScreen extends ConsumerWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () =>Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen(user: course.author,))),
                     child: Row(
                       children: [
                         course.author?.avatar != null
@@ -66,6 +69,8 @@ class CourseScreen extends ConsumerWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 5),
+                  StarGroup(rating: 4.5,),
                   const SizedBox(height: 5),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,6 +91,8 @@ class CourseScreen extends ConsumerWidget {
                               color: Theme.of(context).colorScheme.onSurface))
                     ],
                   ),
+                  SizedBox(height: 5,),
+
                   Text(course.description ?? "",
                       style: Theme.of(context).textTheme.displaySmall)
                 ],
@@ -96,7 +103,6 @@ class CourseScreen extends ConsumerWidget {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 Lesson<Learning>? lesson = course.lessons?[index];
-                print("LESSON : ${lesson.runtimeType}");
                 return LessonCard(
                   title: course.lessons?[index].title ?? "",
                   description: course.lessons?[index].description ?? "",

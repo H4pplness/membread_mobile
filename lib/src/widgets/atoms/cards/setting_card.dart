@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/primary_card.dart';
 
 class SettingCard extends StatefulWidget {
@@ -46,7 +47,11 @@ class _SettingCardState extends State<SettingCard> {
                 ),
                 Text(
                   widget.content,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: GoogleFonts.poppins(
+                    fontSize : 20,
+                    color : Colors.white,
+                    fontWeight : FontWeight.w600
+                  ),
                 )
               ],
             ),

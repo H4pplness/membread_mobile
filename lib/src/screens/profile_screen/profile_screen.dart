@@ -83,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
               height: 10,
             ),
             Text(
-              "Elon Musk",
+              user!.username??"",
               style: Theme.of(context).textTheme.displayLarge,
             ),
             const SizedBox(

@@ -14,7 +14,7 @@ class SettingTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 20,right: 20,top: 40,bottom: 30),
+      padding: EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 30),
       child: Column(
         children: [
           SettingCard(
@@ -36,14 +36,14 @@ class SettingTab extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => const AchievementScreen())),
           ),
-          // const SizedBox(
-          //   height: 10,
-          // ),
-          // SettingCard(
-          //   icon: Icons.light_mode,
-          //   content: "Screen mode",
-          //   haveToggleButton: true,
-          // ),
+          const SizedBox(
+            height: 10,
+          ),
+          SettingCard(
+            icon: Icons.calendar_month_sharp,
+            content: "Goal",
+            onTap: () {}
+          ),
           const SizedBox(
             height: 10,
           ),
