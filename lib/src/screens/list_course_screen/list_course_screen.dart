@@ -14,7 +14,7 @@ class ListCourseScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: CloseTitleAppbar(
         title: course_title,
-        onPressed: () => Navigator.pop(context),
+        onLeadingButtonPressed: () => Navigator.pop(context),
         actions: [
           IconButton(
               onPressed: (){

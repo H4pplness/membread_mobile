@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CloseTitleAppbar(
-        onPressed: () => Navigator.pop(context),
+        onLeadingButtonPressed: () => Navigator.pop(context),
         actions: [
           IconButton(
               onPressed: () {

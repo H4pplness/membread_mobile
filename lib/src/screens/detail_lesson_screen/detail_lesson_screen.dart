@@ -31,7 +31,7 @@ class DetailLessonScreen extends ConsumerWidget {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: CloseTitleAppbar(
-          onPressed: () => Navigator.pop(context),
+          onLeadingButtonPressed: () => Navigator.pop(context),
           title: _data.when(data: (data)=>data.title, error: (err,s)=> "" , loading: ()=>""),
         ),
         body: Stack(

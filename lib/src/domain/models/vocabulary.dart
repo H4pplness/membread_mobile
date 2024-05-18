@@ -5,7 +5,9 @@ class Vocabulary extends Learning{
   String? mean;
   List<String>? example;
   String? explain;
-  Vocabulary({super.id ,this.vocabulary, this.mean,this.example,this.explain});
+  int? progress;
+  int studiedLevel;
+  Vocabulary({super.id ,this.vocabulary, this.mean,this.example,this.explain,this.progress,this.studiedLevel = 0});
 
   @override
   List<Object?> get props => [id, vocabulary, mean];
