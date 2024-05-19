@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/domain/models/course.dart';
 import 'package:membreadflutter/src/widgets/atoms/images/circle_image.dart';
-import 'package:membreadflutter/src/widgets/atoms/ratings/star_rating.dart';
+
+
+import '../../molecules/icon_group/star_group.dart';
+import '../icons/star_rating.dart';
+
 
 class CourseCard extends StatelessWidget {
   Course course;
@@ -55,15 +59,7 @@ class CourseCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 5),
-                    Row(
-                      children: [
-                        StarRating(),
-                        StarRating(),
-                        StarRating(),
-                        StarRating(),
-                        StarRating(value: 0.5,),
-                      ],
-                    )
+                    StarGroup(rating: 4.5)
                   ],
                 ))
           ],

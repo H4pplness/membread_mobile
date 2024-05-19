@@ -7,10 +7,10 @@ import 'package:membreadflutter/src/domain/models/learning.dart';
 import 'package:membreadflutter/src/domain/models/vocabulary_lesson.dart';
 import 'package:membreadflutter/src/screens/profile_screen/profile_screen.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/new_lesson_card.dart';
-import 'package:membreadflutter/src/widgets/atoms/ratings/star_rating.dart';
-import 'package:membreadflutter/src/widgets/molecules/star_group/star_group.dart';
+
 
 import '../../domain/models/lesson.dart';
+import '../../widgets/molecules/icon_group/star_group.dart';
 import '../lesson_screen/vocabulary_lesson_screen.dart';
 
 class CourseScreen extends ConsumerWidget {

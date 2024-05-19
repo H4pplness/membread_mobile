@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/domain/models/vocabulary_lesson.dart';
+import 'package:membreadflutter/src/screens/lesson_study_option_screen/speed_review_screen/speed_review_screen.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/study_vocabulary_screen.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/test_vocabulary_screen/test_vocabulary_screen.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/flip_card.dart';
@@ -98,7 +99,7 @@ class VocabularyLessonScreen extends ConsumerWidget {
                 icon: Icons.speed,
                 title: "Speed review",
                 summary: "Review what you've learned ",
-                onTap: (){},
+                onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>SpeedReviewScreen())),
               ),
             ),
           ],

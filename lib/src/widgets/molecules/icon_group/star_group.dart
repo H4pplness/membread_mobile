@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:membreadflutter/src/widgets/atoms/ratings/star_rating.dart';
+
+import '../../atoms/icons/star_rating.dart';
+
 
 class StarGroup extends StatelessWidget {
   double rating;

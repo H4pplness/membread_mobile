@@ -24,11 +24,14 @@ class ChooseAnswerOption extends ConsumerWidget {
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            vocabulary,
-            style: Theme.of(context).textTheme.titleLarge,
+          Padding(
+              padding: EdgeInsets.only(top: 30),
+            child: Text(
+              vocabulary,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),

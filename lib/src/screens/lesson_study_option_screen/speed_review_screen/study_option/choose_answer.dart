@@ -1,7 +1,9 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/notifiers/choice_notifier/choice_notifier.dart';
+
+import '../notifier/speed_choice_notifier/speed_choice_notifier.dart';
 
 class Choice {
   String choice;
@@ -19,7 +21,7 @@ class ChooseAnswerOption extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final choiceStates = ref.watch(choiceNotifierProvider);
+    final choiceStates = ref.watch(speedChoiceNotifierProvider);
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,
       child: Column(
@@ -67,14 +69,14 @@ class ChooseAnswerOption extends ConsumerWidget {
                 return GestureDetector(
                   onTap: () async {
                     print("CHOOSE... ");
-                    ref.read(choiceNotifierProvider.notifier).choose(index);
+                    ref.read(speedChoiceNotifierProvider.notifier).choose(index);
                     await Future.delayed(const Duration(milliseconds: 500),(){
                       print("NEXT ...");
                     });
                     if (onTap != null) {
                       onTap!(choices[index].isTrue);
                     }
-                    ref.read(choiceNotifierProvider.notifier).resetChoice();
+                    ref.read(speedChoiceNotifierProvider.notifier).resetChoice();
                   },
                   child: Container(
                     alignment: Alignment.center,
