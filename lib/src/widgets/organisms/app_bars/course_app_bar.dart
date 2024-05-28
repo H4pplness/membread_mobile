@@ -12,6 +12,7 @@ class CourseAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       title: Text("Course",style: Theme.of(context).appBarTheme.titleTextStyle,),
       actions: [
         GestureDetector(

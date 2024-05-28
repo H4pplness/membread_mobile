@@ -8,7 +8,7 @@ part 'lessonvocabularydto.g.dart';
 class LessonVocabularyDTO with _$LessonVocabularyDTO{
   const factory LessonVocabularyDTO({
     required String title,
-    required String description,
+    String? description,
     List<VocabularyDTO>? listVocabulary
   }) = _LessonVocabularyDTO;
 

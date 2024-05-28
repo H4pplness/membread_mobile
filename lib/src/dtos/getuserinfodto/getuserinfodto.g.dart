@@ -8,6 +8,7 @@ part of 'getuserinfodto.dart';
 
 _$GetUserInfoDTOImpl _$$GetUserInfoDTOImplFromJson(Map<String, dynamic> json) =>
     _$GetUserInfoDTOImpl(
+      id: json['id'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       avatar: json['avatar'] as String?,
@@ -16,6 +17,7 @@ _$GetUserInfoDTOImpl _$$GetUserInfoDTOImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$GetUserInfoDTOImplToJson(
         _$GetUserInfoDTOImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'avatar': instance.avatar,

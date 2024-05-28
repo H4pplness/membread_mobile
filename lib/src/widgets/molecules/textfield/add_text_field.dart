@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:membreadflutter/src/dtos/createcoursedto/createcoursedto.dart';
-import '../../../domain/services/course_service/course.service.dart';
+import 'package:membreadflutter/src/domain/repositories/course_repository/create_course/create_course.dart';
+import '../../../screens/new_home_screen/new_home_screen.dart';
 import '../../atoms/buttons/primarybutton.dart';
 import '../../atoms/text_fields/custom_textfield.dart';
 
-class AddTextField extends ConsumerWidget {
+class AddTextField extends ConsumerStatefulWidget {
+  const AddTextField({super.key});
+
+  @override
+  ConsumerState createState() => _AddTextFieldState();
+}
+
+class _AddTextFieldState extends ConsumerState<AddTextField> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    final courseRef = ref.watch(courseService);
+  Widget build(BuildContext context) {
     return Column(
       children: [
         CustomTextField(controller: _titleController, name: "Title"),
@@ -24,12 +30,11 @@ class AddTextField extends ConsumerWidget {
             child: Text("Next",
               style: Theme.of(context).textTheme.labelMedium,),
             onPressed: () async {
-              print("DA BAM VAO DAY >>>>>>>>>>>>>>>>>");
-              courseRef.crearteCourse(CreateCourseDTO(title: _titleController.text,description: _descriptionController.text,author_id: 1)).then((value){
-                Navigator.pop(context);
-              }).onError((error, stackTrace){
-                print("ERROR : " + error.toString());
-              });
+              ref.read(createCourseProvider(CreateCourseDTO(title: _titleController.text,description: _descriptionController.text)).future);
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context)=>NewHomeScreen()),
+                      (route) => false);
             },
           ),
         )
@@ -37,5 +42,6 @@ class AddTextField extends ConsumerWidget {
     );
   }
 }
+
 
 

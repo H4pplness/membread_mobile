@@ -16,6 +16,9 @@ _$GetCourseInfoDTOImpl _$$GetCourseInfoDTOImplFromJson(
           ?.map((e) => LessonInfoDTO.fromJson(e as Map<String, dynamic>))
           .toList(),
       currentLesson: (json['currentLesson'] as num?)?.toInt(),
+      author: json['author'] == null
+          ? null
+          : GetUserInfoDTO.fromJson(json['author'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$GetCourseInfoDTOImplToJson(
@@ -26,4 +29,5 @@ Map<String, dynamic> _$$GetCourseInfoDTOImplToJson(
       'description': instance.description,
       'listLesson': instance.listLesson,
       'currentLesson': instance.currentLesson,
+      'author': instance.author,
     };

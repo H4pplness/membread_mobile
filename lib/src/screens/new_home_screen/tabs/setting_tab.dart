@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:membreadflutter/src/database/local/user/logined_user.dart';
+import 'package:membreadflutter/src/domain/notifiers/user_notifier/user_notifier.dart';
+import 'package:membreadflutter/src/screens/goal_screen/goal_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../domain/models/user.dart';
 import '../../../widgets/atoms/cards/setting_card.dart';
 import '../../achievement_screen/achievement_screen.dart';
@@ -8,11 +13,21 @@ import '../../notification_screen/notification_screen.dart';
 import '../../profile_screen/profile_screen.dart';
 import '../../welcome_screen/welcome_screen.dart';
 
-class SettingTab extends StatelessWidget {
+class SettingTab extends ConsumerWidget {
   const SettingTab({super.key});
 
+  Future<void> clearSharedPreferences() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+
+    final loginedUser = ref.watch(loginedUserProvider);
+
+    User user = loginedUser.getUser();
+
     return Container(
       padding: EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 30),
       child: Column(
@@ -23,7 +38,7 @@ class SettingTab extends StatelessWidget {
             onTap: ()=>Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ProfileScreen(user: User()))),
+                    builder: (context) => ProfileScreen(user: user))),
           ),
           const SizedBox(
             height: 10,
@@ -42,7 +57,9 @@ class SettingTab extends StatelessWidget {
           SettingCard(
             icon: Icons.calendar_month_sharp,
             content: "Goal",
-            onTap: () {}
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>GoalScreen()));
+            }
           ),
           const SizedBox(
             height: 10,
@@ -77,8 +94,10 @@ class SettingTab extends StatelessWidget {
           SettingCard(
             icon: Icons.logout,
             content: "Logout",
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => WelcomeScreen())),
+            onTap: () async {
+              Navigator.push(context,MaterialPageRoute(builder: (context) => WelcomeScreen()));
+              await clearSharedPreferences();
+            },
           )
         ],
       ),

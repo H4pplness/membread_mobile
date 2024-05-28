@@ -7,8 +7,8 @@ part 'vocabularydto.g.dart';
 class VocabularyDTO with _$VocabularyDTO {
   const factory VocabularyDTO({
     int? id,
-    required String vocabulary,
-    required String mean,
+    String? vocabulary,
+    String? mean,
     int? progress
   }) = _VocbularyDTO;
 

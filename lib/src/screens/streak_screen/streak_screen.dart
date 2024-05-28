@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../widgets/atoms/buttons/lightbutton.dart';
 import '../../widgets/atoms/buttons/primarybutton.dart';
-import '../course_home_screen/home_screen.dart';
 
 
 class StreakScreen extends ConsumerWidget {
@@ -15,17 +14,6 @@ class StreakScreen extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(),
       body:
-      // value.when(data : (courseData){
-      //   Course? course = courseData;
-      //   return Center(
-      //     child: Text(course?.title??'NULL',style: TextStyle(fontSize: 50),),
-      //   );
-      // },
-      //   error: (error, s) => Text(error.toString()),
-      //   loading: () => const Center(
-      //     child: CircularProgressIndicator(),
-      //   )
-      // )
       Container(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
         width: MediaQuery.of(context).size.width,
@@ -51,7 +39,7 @@ class StreakScreen extends ConsumerWidget {
                     child: Center(child: Text("Share",style: Theme.of(context).textTheme.labelMedium,),),
                   ),
                   PrimaryButton(
-                    onPressed:() => Navigator.push(context,MaterialPageRoute(builder: (context)=>HomeScreen(courseId: 2,))),
+                    // onPressed:() => Navigator.push(context,MaterialPageRoute(builder: (context)=>HomeScreen(courseId: 2,))),
                     width: MediaQuery.of(context).size.width/2 - 50,
                     child: Center(child: Text("Continue",style: Theme.of(context).textTheme.labelMedium,),),
                   )

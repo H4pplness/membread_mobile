@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:membreadflutter/src/dtos/getuserinfodto/getuserinfodto.dart';
 
 import '../lessoninfodto/lessoninfodto.dart';
 
@@ -12,7 +13,8 @@ class GetCourseInfoDTO with _$GetCourseInfoDTO{
     String? title,
     String? description,
     List<LessonInfoDTO>? listLesson,
-    int? currentLesson
+    int? currentLesson,
+    GetUserInfoDTO? author
   }) = _GetCourseInfoDTO;
 
   factory GetCourseInfoDTO.fromJson(Map<String,dynamic> json) => _$GetCourseInfoDTOFromJson(json);

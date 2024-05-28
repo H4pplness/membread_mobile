@@ -19,7 +19,7 @@ class CloseTitleAppbar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
           icon: IconTheme(
               data: Theme.of(context).appBarTheme.iconTheme!,
-              child: const Icon(Icons.close)),
+              child: const Icon(Icons.close,size: 25)),
           onPressed: onLeadingButtonPressed),
       actions: actions,
     );

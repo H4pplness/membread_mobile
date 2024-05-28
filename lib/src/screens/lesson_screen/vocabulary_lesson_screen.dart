@@ -9,13 +9,14 @@ import 'package:membreadflutter/src/screens/lesson_study_option_screen/test_voca
 import 'package:membreadflutter/src/widgets/atoms/cards/flip_card.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/title_appbar.dart';
 
+import '../../domain/repositories/course_repository/get_lesson/get_lesson.dart';
 import '../../widgets/atoms/cards/study_type_card.dart';
 
 class VocabularyLessonScreen extends ConsumerWidget {
   VocabularyLesson lesson;
   VocabularyLessonScreen({super.key, required this.lesson});
 
-  _buildShowVocabulary(context)
+  _buildShowVocabulary(context,VocabularyLesson lesson)
   {
     List<Widget> listVocabularyCard = [];
     lesson.listLearning?.forEach((vocabulary) {
@@ -54,6 +55,8 @@ class VocabularyLessonScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentLesson = ref.watch(getLessonProvider(lesson.id??0));
+    
     return Scaffold(
       appBar: TitleAppbar(
         leadingButtonOnPressed:()=>Navigator.pop(context),
@@ -63,12 +66,16 @@ class VocabularyLessonScreen extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                  children: _buildShowVocabulary(context)
-              ),
-            ),
+            currentLesson.when(data: (lesson){
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                    children: _buildShowVocabulary(context,lesson as VocabularyLesson)
+                ),
+              );
+            }, error: (error,__){
+              return Text(error.toString());
+            }, loading: (){return CircularProgressIndicator();}),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: StudyTypeCard(

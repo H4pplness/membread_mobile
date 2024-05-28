@@ -5,6 +5,7 @@ part 'getuserinfodto.g.dart';
 @freezed
 class GetUserInfoDTO with _$GetUserInfoDTO {
   const factory GetUserInfoDTO({
+    String? id,
     String? firstName,
     String? lastName,
     String? avatar

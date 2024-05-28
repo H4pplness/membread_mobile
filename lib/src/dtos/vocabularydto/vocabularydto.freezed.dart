@@ -21,8 +21,8 @@ VocabularyDTO _$VocabularyDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$VocabularyDTO {
   int? get id => throw _privateConstructorUsedError;
-  String get vocabulary => throw _privateConstructorUsedError;
-  String get mean => throw _privateConstructorUsedError;
+  String? get vocabulary => throw _privateConstructorUsedError;
+  String? get mean => throw _privateConstructorUsedError;
   int? get progress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $VocabularyDTOCopyWith<$Res> {
           VocabularyDTO value, $Res Function(VocabularyDTO) then) =
       _$VocabularyDTOCopyWithImpl<$Res, VocabularyDTO>;
   @useResult
-  $Res call({int? id, String vocabulary, String mean, int? progress});
+  $Res call({int? id, String? vocabulary, String? mean, int? progress});
 }
 
 /// @nodoc
@@ -54,8 +54,8 @@ class _$VocabularyDTOCopyWithImpl<$Res, $Val extends VocabularyDTO>
   @override
   $Res call({
     Object? id = freezed,
-    Object? vocabulary = null,
-    Object? mean = null,
+    Object? vocabulary = freezed,
+    Object? mean = freezed,
     Object? progress = freezed,
   }) {
     return _then(_value.copyWith(
@@ -63,14 +63,14 @@ class _$VocabularyDTOCopyWithImpl<$Res, $Val extends VocabularyDTO>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      vocabulary: null == vocabulary
+      vocabulary: freezed == vocabulary
           ? _value.vocabulary
           : vocabulary // ignore: cast_nullable_to_non_nullable
-              as String,
-      mean: null == mean
+              as String?,
+      mean: freezed == mean
           ? _value.mean
           : mean // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       progress: freezed == progress
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
@@ -87,7 +87,7 @@ abstract class _$$VocbularyDTOImplCopyWith<$Res>
       __$$VocbularyDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String vocabulary, String mean, int? progress});
+  $Res call({int? id, String? vocabulary, String? mean, int? progress});
 }
 
 /// @nodoc
@@ -102,8 +102,8 @@ class __$$VocbularyDTOImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? vocabulary = null,
-    Object? mean = null,
+    Object? vocabulary = freezed,
+    Object? mean = freezed,
     Object? progress = freezed,
   }) {
     return _then(_$VocbularyDTOImpl(
@@ -111,14 +111,14 @@ class __$$VocbularyDTOImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      vocabulary: null == vocabulary
+      vocabulary: freezed == vocabulary
           ? _value.vocabulary
           : vocabulary // ignore: cast_nullable_to_non_nullable
-              as String,
-      mean: null == mean
+              as String?,
+      mean: freezed == mean
           ? _value.mean
           : mean // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       progress: freezed == progress
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
@@ -131,7 +131,7 @@ class __$$VocbularyDTOImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$VocbularyDTOImpl implements _VocbularyDTO {
   const _$VocbularyDTOImpl(
-      {this.id, required this.vocabulary, required this.mean, this.progress});
+      {this.id, this.vocabulary, this.mean, this.progress});
 
   factory _$VocbularyDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$VocbularyDTOImplFromJson(json);
@@ -139,9 +139,9 @@ class _$VocbularyDTOImpl implements _VocbularyDTO {
   @override
   final int? id;
   @override
-  final String vocabulary;
+  final String? vocabulary;
   @override
-  final String mean;
+  final String? mean;
   @override
   final int? progress;
 
@@ -184,8 +184,8 @@ class _$VocbularyDTOImpl implements _VocbularyDTO {
 abstract class _VocbularyDTO implements VocabularyDTO {
   const factory _VocbularyDTO(
       {final int? id,
-      required final String vocabulary,
-      required final String mean,
+      final String? vocabulary,
+      final String? mean,
       final int? progress}) = _$VocbularyDTOImpl;
 
   factory _VocbularyDTO.fromJson(Map<String, dynamic> json) =
@@ -194,9 +194,9 @@ abstract class _VocbularyDTO implements VocabularyDTO {
   @override
   int? get id;
   @override
-  String get vocabulary;
+  String? get vocabulary;
   @override
-  String get mean;
+  String? get mean;
   @override
   int? get progress;
   @override

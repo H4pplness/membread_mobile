@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 
+import '../../domain/repositories/course_repository/get_lesson/get_lesson.dart';
 import '../../dtos/vocabularydto/vocabularydto.dart';
-import '../../domain/services/lesson_service/lesson.service.dart';
 import '../../widgets/atoms/cards/voca_card.dart';
 import '../../widgets/atoms/sliders/progress_slider.dart';
 import '../../widgets/organisms/app_bars/close_title_appbar.dart';
@@ -16,7 +15,7 @@ class DetailLessonScreen extends ConsumerWidget {
   {
     List<Widget> listCard = [];
     listVocabulary.forEach((vocabulary) {
-      listCard.add(VocaCard(voca: vocabulary.vocabulary, mean: vocabulary.mean,level: vocabulary.progress??0));
+      listCard.add(VocaCard(voca: vocabulary.vocabulary??"", mean: vocabulary.mean??"",level: vocabulary.progress??0));
       listCard.add(const SizedBox(height: 5));
     });
 
@@ -62,14 +61,14 @@ class DetailLessonScreen extends ConsumerWidget {
                               padding: const EdgeInsets.only(left: 15),
                               child: Column(
                                 children: [
-                                  Text(
-                                    _data.when(data: (data)=>data.title, error: (err,s){
-                                      print(err.toString());
-                                      return "Error";
-                                    }, loading: ()=>"Loading"),
-                                    style:
-                                    Theme.of(context).textTheme.titleMedium,
-                                  ),
+                                  // Text(
+                                  //   _data.when(data: (data)=>data.title, error: (err,s){
+                                  //     print(err.toString());
+                                  //     return "Error";
+                                  //   }, loading: ()=>"Loading"),
+                                  //   style:
+                                  //   Theme.of(context).textTheme.titleMedium,
+                                  // ),
                                   Text(
                                     "1/100",
                                     style: Theme.of(context)
@@ -89,11 +88,11 @@ class DetailLessonScreen extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  _data.when(
-                      data:(data)=>_buildVocabularyCards(data.listVocabulary??[]),
-                      error: (err,s)=>Text(err.toString()),
-                      loading: ()=>const Center(child: CircularProgressIndicator(),)
-                  ),
+                  // _data.when(
+                  //     data:(data)=>_buildVocabularyCards(data.listVocabulary??[]),
+                  //     error: (err,s)=>Text(err.toString()),
+                  //     loading: ()=>const Center(child: CircularProgressIndicator(),)
+                  // ),
                   const SizedBox(
                     height: 5,
                   ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:membreadflutter/src/domain/models/user.dart';
+import 'package:membreadflutter/src/domain/notifiers/user_notifier/user_notifier.dart';
 import 'package:membreadflutter/src/screens/achievement_screen/achievement_screen.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/new_home_screen.dart';
 import 'package:membreadflutter/src/screens/notification_screen/notification_screen.dart';
@@ -10,11 +12,13 @@ import '../help_center_screen/help_center_screen.dart';
 import '../profile_screen/profile_screen.dart';
 import '../welcome_screen/welcome_screen.dart';
 
-class SettingScreen extends StatelessWidget {
+class SettingScreen extends ConsumerWidget {
   const SettingScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    User user = ref.watch(userNotifierProvider);
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: TitleAppbar(
@@ -29,13 +33,17 @@ class SettingScreen extends StatelessWidget {
         child: Column(
           children: [
             SettingCard(
-              icon: Icons.person,
-              content: "Profile",
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ProfileScreen(user: User(),))),
-            ),
+                icon: Icons.person,
+                content: "Profile",
+                onTap: () {
+                  print("USER : ${user.username}");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfileScreen(
+                                user: user,
+                              )));
+                }),
             const SizedBox(
               height: 10,
             ),

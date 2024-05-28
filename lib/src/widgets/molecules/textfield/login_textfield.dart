@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:membreadflutter/src/database/local/token/auth/login.dart';
+import 'package:membreadflutter/src/screens/new_home_screen/new_home_screen.dart';
 import 'package:membreadflutter/src/widgets/atoms/checkboxs/checkbox.dart';
 import '../../../screens/forgot_pass_screen/forgot_pass_page.dart';
 import '../../atoms/buttons/primarybutton.dart';
 import '../../atoms/text_fields/email_textfield.dart';
 import '../../atoms/text_fields/pass_textfield.dart';
 
-class LoginTextField extends StatefulWidget {
-  const LoginTextField({Key? key}) : super(key: key);
+class LoginTextField extends ConsumerStatefulWidget {
+  LoginTextField({Key? key}) : super(key: key);
 
   @override
-  State<LoginTextField> createState() => _LoginTextFieldState();
+  _LoginTextFieldState createState() => _LoginTextFieldState();
 }
 
-class _LoginTextFieldState extends State<LoginTextField> {
+class _LoginTextFieldState extends ConsumerState<LoginTextField> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
-  late bool status = false; // neu ma mat khau sai thi status = true
+
+  bool status = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -81,20 +86,39 @@ class _LoginTextFieldState extends State<LoginTextField> {
         ),
         PrimaryButton(
           onPressed: () async {
-            // final response = await User.login(emailController.text, passController.text);
-            // if(response.statusCode == 200) {
-            //   Navigator.push(context,
-            //       MaterialPageRoute(builder: (context) => HomePage(courseId: 2,)));
-            // }else{
-            //   print(response.statusCode);
-            //   setState(() {
-            //     status = true;
-            //   });
-            // }
+            final loginFuture = ref.read(loginProvider(LoginParams(
+              email: emailController.text,
+              password: passController.text,
+            )).future);
+
+            // Set loading status
+            setState(() {
+              status = true;
+            });
+
+            loginFuture.then((result) {
+              if (result) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => NewHomeScreen()),
+                );
+              }
+            }).catchError((error) {
+              // Handle error
+              setState(() {
+                status = false;
+              });
+              // Display error message
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Login failed: $error')),
+              );
+            });
           },
           width: MediaQuery.of(context).size.width - 40,
           child: Center(
-            child: Text(
+            child: status
+                ? CircularProgressIndicator()
+                : Text(
               "Sign in",
               style: Theme.of(context).textTheme.labelMedium,
             ),

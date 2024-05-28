@@ -9,8 +9,8 @@ part of 'vocabularydto.dart';
 _$VocbularyDTOImpl _$$VocbularyDTOImplFromJson(Map<String, dynamic> json) =>
     _$VocbularyDTOImpl(
       id: (json['id'] as num?)?.toInt(),
-      vocabulary: json['vocabulary'] as String,
-      mean: json['mean'] as String,
+      vocabulary: json['vocabulary'] as String?,
+      mean: json['mean'] as String?,
       progress: (json['progress'] as num?)?.toInt(),
     );
 

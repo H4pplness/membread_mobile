@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/domain/models/user.dart';
+import 'package:membreadflutter/src/domain/notifiers/user_notifier/user_notifier.dart';
 import 'package:membreadflutter/src/screens/personal_edit_screen/personal_edit_screen.dart';
-import '../../widgets/atoms/buttons/primary_text_button.dart';
+import 'package:membreadflutter/src/screens/profile_screen/notifiers/list_course_tab/list_course_tab_notifier.dart';
+import 'package:membreadflutter/src/widgets/atoms/buttons/text_only_button.dart';
+import 'package:membreadflutter/src/widgets/atoms/images/profile_avatar.dart';
 import '../../widgets/organisms/app_bars/close_title_appbar.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   User? user;
   ProfileScreen({super.key, this.user});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final listCourseTab = ref.watch(listCourseTabNotifierProvider);
+
     return Scaffold(
       appBar: CloseTitleAppbar(
         onLeadingButtonPressed: () => Navigator.pop(context),
@@ -31,53 +38,7 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: Stack(
-                children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                        image: user!.avatar != null
-                            ? DecorationImage(
-                                image: NetworkImage(user!.avatar ?? ""),
-                                fit: BoxFit.cover,
-                              )
-                            : const DecorationImage(
-                                image: AssetImage('assets/membread.jpg'),
-                                fit: BoxFit.cover,
-                              ),
-                        border: const Border(
-                          bottom: BorderSide(color: Colors.grey),
-                          top: BorderSide(color: Colors.grey),
-                          left: BorderSide(color: Colors.grey),
-                          right: BorderSide(color: Colors.grey),
-                        ),
-                        borderRadius: BorderRadius.circular(50)),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(50),
-                          border: Border.all(color: Colors.black, width: 1)),
-                      child: Center(
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.edit,
-                            size: 17,
-                            color: Colors.black,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+              child: ProfileAvatar(avatarUrl: user?.avatar,)
             ),
             const SizedBox(
               height: 10,
@@ -177,17 +138,37 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     PrimaryTextButton(
+            //       text: "Follow",
+            //       width: MediaQuery.of(context).size.width / 2 - 50,
+            //     ),
+            //     PrimaryTextButton(
+            //       text: "Message",
+            //       width: MediaQuery.of(context).size.width / 2 - 50,
+            //     )
+            //   ],
+            // ),
+            //
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                PrimaryTextButton(
-                  text: "Follow",
-                  width: MediaQuery.of(context).size.width / 2 - 50,
-                ),
-                PrimaryTextButton(
-                  text: "Message",
-                  width: MediaQuery.of(context).size.width / 2 - 50,
-                )
+                TextOnlyButton(
+                  label: "Learning",
+                  color: listCourseTab == 0 ? Theme.of(context).primaryColor : Colors.black,
+                  onPressed: (){
+                    ref.read(listCourseTabNotifierProvider.notifier).setIndex(0);
+                  },
+                  hasUnderline: listCourseTab == 0,),
+                TextOnlyButton(
+                  label: "Teaching",
+                  color: listCourseTab == 1 ? Theme.of(context).primaryColor : Colors.black,
+                  onPressed: (){
+                    ref.read(listCourseTabNotifierProvider.notifier).setIndex(1);
+                  },
+                  hasUnderline: listCourseTab == 1)
               ],
             )
           ],

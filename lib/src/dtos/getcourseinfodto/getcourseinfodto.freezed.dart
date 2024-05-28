@@ -25,6 +25,7 @@ mixin _$GetCourseInfoDTO {
   String? get description => throw _privateConstructorUsedError;
   List<LessonInfoDTO>? get listLesson => throw _privateConstructorUsedError;
   int? get currentLesson => throw _privateConstructorUsedError;
+  GetUserInfoDTO? get author => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,10 @@ abstract class $GetCourseInfoDTOCopyWith<$Res> {
       String? title,
       String? description,
       List<LessonInfoDTO>? listLesson,
-      int? currentLesson});
+      int? currentLesson,
+      GetUserInfoDTO? author});
+
+  $GetUserInfoDTOCopyWith<$Res>? get author;
 }
 
 /// @nodoc
@@ -64,6 +68,7 @@ class _$GetCourseInfoDTOCopyWithImpl<$Res, $Val extends GetCourseInfoDTO>
     Object? description = freezed,
     Object? listLesson = freezed,
     Object? currentLesson = freezed,
+    Object? author = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -86,7 +91,23 @@ class _$GetCourseInfoDTOCopyWithImpl<$Res, $Val extends GetCourseInfoDTO>
           ? _value.currentLesson
           : currentLesson // ignore: cast_nullable_to_non_nullable
               as int?,
+      author: freezed == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as GetUserInfoDTO?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $GetUserInfoDTOCopyWith<$Res>? get author {
+    if (_value.author == null) {
+      return null;
+    }
+
+    return $GetUserInfoDTOCopyWith<$Res>(_value.author!, (value) {
+      return _then(_value.copyWith(author: value) as $Val);
+    });
   }
 }
 
@@ -103,7 +124,11 @@ abstract class _$$GetCourseInfoDTOImplCopyWith<$Res>
       String? title,
       String? description,
       List<LessonInfoDTO>? listLesson,
-      int? currentLesson});
+      int? currentLesson,
+      GetUserInfoDTO? author});
+
+  @override
+  $GetUserInfoDTOCopyWith<$Res>? get author;
 }
 
 /// @nodoc
@@ -122,6 +147,7 @@ class __$$GetCourseInfoDTOImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? listLesson = freezed,
     Object? currentLesson = freezed,
+    Object? author = freezed,
   }) {
     return _then(_$GetCourseInfoDTOImpl(
       id: freezed == id
@@ -144,6 +170,10 @@ class __$$GetCourseInfoDTOImplCopyWithImpl<$Res>
           ? _value.currentLesson
           : currentLesson // ignore: cast_nullable_to_non_nullable
               as int?,
+      author: freezed == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as GetUserInfoDTO?,
     ));
   }
 }
@@ -156,7 +186,8 @@ class _$GetCourseInfoDTOImpl implements _GetCourseInfoDTO {
       this.title,
       this.description,
       final List<LessonInfoDTO>? listLesson,
-      this.currentLesson})
+      this.currentLesson,
+      this.author})
       : _listLesson = listLesson;
 
   factory _$GetCourseInfoDTOImpl.fromJson(Map<String, dynamic> json) =>
@@ -180,10 +211,12 @@ class _$GetCourseInfoDTOImpl implements _GetCourseInfoDTO {
 
   @override
   final int? currentLesson;
+  @override
+  final GetUserInfoDTO? author;
 
   @override
   String toString() {
-    return 'GetCourseInfoDTO(id: $id, title: $title, description: $description, listLesson: $listLesson, currentLesson: $currentLesson)';
+    return 'GetCourseInfoDTO(id: $id, title: $title, description: $description, listLesson: $listLesson, currentLesson: $currentLesson, author: $author)';
   }
 
   @override
@@ -198,13 +231,14 @@ class _$GetCourseInfoDTOImpl implements _GetCourseInfoDTO {
             const DeepCollectionEquality()
                 .equals(other._listLesson, _listLesson) &&
             (identical(other.currentLesson, currentLesson) ||
-                other.currentLesson == currentLesson));
+                other.currentLesson == currentLesson) &&
+            (identical(other.author, author) || other.author == author));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, description,
-      const DeepCollectionEquality().hash(_listLesson), currentLesson);
+      const DeepCollectionEquality().hash(_listLesson), currentLesson, author);
 
   @JsonKey(ignore: true)
   @override
@@ -227,7 +261,8 @@ abstract class _GetCourseInfoDTO implements GetCourseInfoDTO {
       final String? title,
       final String? description,
       final List<LessonInfoDTO>? listLesson,
-      final int? currentLesson}) = _$GetCourseInfoDTOImpl;
+      final int? currentLesson,
+      final GetUserInfoDTO? author}) = _$GetCourseInfoDTOImpl;
 
   factory _GetCourseInfoDTO.fromJson(Map<String, dynamic> json) =
       _$GetCourseInfoDTOImpl.fromJson;
@@ -242,6 +277,8 @@ abstract class _GetCourseInfoDTO implements GetCourseInfoDTO {
   List<LessonInfoDTO>? get listLesson;
   @override
   int? get currentLesson;
+  @override
+  GetUserInfoDTO? get author;
   @override
   @JsonKey(ignore: true)
   _$$GetCourseInfoDTOImplCopyWith<_$GetCourseInfoDTOImpl> get copyWith =>

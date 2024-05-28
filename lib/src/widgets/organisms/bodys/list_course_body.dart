@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import '../../../domain/services/course_service/course.service.dart';
+import '../../../domain/repositories/course_repository/get_learning_courses/get_learning_courses.dart';
 import '../../../dtos/getlearningcoursedto/getlearningcoursedto.dart';
 import '../../atoms/cards/course_card.dart';
 
@@ -21,7 +21,7 @@ class ListCourseBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final listCourse = ref.watch(getLearningCourseProvider(1));
+    final listCourse = ref.watch(getLearningCourseProvider);
     return Container(
       padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: SingleChildScrollView(
@@ -42,7 +42,7 @@ class ListCourseBody extends ConsumerWidget {
                         return Column(
                           children: [
                             const SizedBox(height: 5,),
-                            CourseCard(course: data[index]),
+                            // CourseCard(course: data[index]),
                           ],
                         );
                       }
