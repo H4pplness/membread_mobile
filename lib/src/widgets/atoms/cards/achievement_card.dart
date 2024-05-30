@@ -5,24 +5,38 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/widgets/atoms/sliders/progress_slider.dart';
 
-class AchievementCard extends ConsumerWidget {
-  void Function()? onTap;
+class AchievementCard extends StatefulWidget {
+  void Function()? receive;
   AssetImage achievementImage;
   String title;
   String description;
-  double? progress;
+  double progress;
   bool isReceived;
   AchievementCard(
       {super.key,
-      this.onTap,
+      this.receive,
       required this.achievementImage,
       required this.title,
       required this.description,
-      this.progress,
+      this.progress = 0,
       this.isReceived = false});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<AchievementCard> createState() => _AchievementCardState();
+}
+
+class _AchievementCardState extends State<AchievementCard> {
+  late bool _isReceived;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _isReceived = widget.isReceived;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         // Hiển thị modal khi nút được nhấn
@@ -45,7 +59,7 @@ class AchievementCard extends ConsumerWidget {
                           height: 140,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: achievementImage,
+                                image: widget.achievementImage,
                                 fit: BoxFit.cover,
                               ),
                               border: const Border(
@@ -56,16 +70,16 @@ class AchievementCard extends ConsumerWidget {
                               ),
                               borderRadius: BorderRadius.circular(20)),
                         ),
-                        SizedBox(width: 20),
-                        Text(title,
+                        const SizedBox(width: 20),
+                        Text(widget.title,
                             style: Theme.of(context).textTheme.titleMedium),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        description,
+                        widget.description,
                         style: Theme.of(context).textTheme.bodyMedium,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
@@ -85,11 +99,11 @@ class AchievementCard extends ConsumerWidget {
         width: MediaQuery.of(context).size.width - 40,
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Container(
-            width: 100,
-            height: 100,
+            width: 120,
+            height: 120,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: achievementImage,
+                  image: widget.achievementImage,
                   fit: BoxFit.cover,
                 ),
                 border: const Border(
@@ -102,47 +116,58 @@ class AchievementCard extends ConsumerWidget {
           ),
           Container(
             constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width - 140,
+              maxWidth: MediaQuery.of(context).size.width - 160,
             ),
             height: 120,
             padding: const EdgeInsets.only(left: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: Theme.of(context).textTheme.titleMedium),
+                    Text(widget.title,
+                        style: Theme.of(context).textTheme.titleMedium),
                     Text(
-                      description,
+                      widget.description,
                       style: Theme.of(context).textTheme.bodyMedium,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),
                   ],
                 ),
-                progress == 1
+                widget.progress >= 1
                     ? Align(
                         alignment: Alignment.bottomRight,
                         child: TextButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              if (!_isReceived) {
+                                if (widget.receive != null) widget.receive!();
+                                setState(() {
+                                  _isReceived = true;
+                                });
+                              }
+                            },
                             child: Text(
-                              isReceived ? "Received" : "Receive",
+                              _isReceived ? "Received" : "Receive",
                               style: GoogleFonts.poppins(
                                   fontSize: 18,
-                                  color: isReceived
+                                  color: _isReceived
                                       ? Theme.of(context).colorScheme.secondary
                                       : Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.w500),
                             )),
                       )
-                    : ProgressSlider(
-                        progress: progress ?? 0.0,
-                        height: 8,
-                        width: MediaQuery.of(context).size.width - 150,
-                        borderRadius: 2,
-                        contentColor: Theme.of(context).primaryColor,
+                    : Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: ProgressSlider(
+                          progress: widget.progress >= 1 ? 1 : widget.progress,
+                          height: 8,
+                          width: MediaQuery.of(context).size.width - 150,
+                          borderRadius: 2,
+                          contentColor: Theme.of(context).primaryColor,
+                        ),
                       )
               ],
             ),

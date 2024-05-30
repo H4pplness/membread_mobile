@@ -10,5 +10,5 @@ class Vocabulary extends Learning{
   Vocabulary({super.id ,this.vocabulary, this.mean,this.example,this.explain,this.progress,this.studiedLevel = 0});
 
   @override
-  List<Object?> get props => [id, vocabulary, mean];
+  List<Object?> get props => [id];
 }

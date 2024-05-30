@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:membreadflutter/src/database/local/core/share_preferences.dart';
+import 'package:membreadflutter/src/database/local/token/token.dart';
 import 'package:membreadflutter/src/database/local/user/logined_user.dart';
 import 'package:membreadflutter/src/domain/notifiers/user_notifier/user_notifier.dart';
 import 'package:membreadflutter/src/screens/goal_screen/goal_screen.dart';
@@ -95,8 +97,10 @@ class SettingTab extends ConsumerWidget {
             icon: Icons.logout,
             content: "Logout",
             onTap: () async {
-              Navigator.push(context,MaterialPageRoute(builder: (context) => WelcomeScreen()));
               await clearSharedPreferences();
+              Navigator.push(context,MaterialPageRoute(builder: (context) => WelcomeScreen()));
+              final token = ref.read(tokenProvider);
+              print("ACCESS TOKEN : ${token.getRefreshToken()}");
             },
           )
         ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../widgets/molecules/textfield/signup_textfield.dart';
+import '../../widgets/molecules/textfield/sign_up_textfield/signup_textfield.dart';
 import '../../widgets/organisms/app_bars/none_title_appbar.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(20),
-            child: const SignInTextField(),
+            child: SignUpTextField(),
           ),
         )
     );
