@@ -28,7 +28,7 @@ class LessonCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.montserrat(
                         fontSize : 17,
                         fontWeight : FontWeight.w500,
                         color : Colors.black
@@ -39,7 +39,7 @@ class LessonCard extends StatelessWidget {
                   const SizedBox(height: 5),
                   Text(
                     description,
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.montserrat(
                         fontSize : 14,
                         fontWeight : FontWeight.w500,
                         color : Colors.black

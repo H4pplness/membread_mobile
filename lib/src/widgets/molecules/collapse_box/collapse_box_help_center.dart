@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../atoms/buttons/expanded_button.dart';
-import '../../atoms/collapse_text/helpcenter_collapse_text.dart';
+import '../../atoms/collapse_box_element/helpcenter_collapse_text.dart';
 
 
 class HelpCenterCollapseBox extends StatefulWidget {
@@ -58,7 +58,7 @@ class _HelpCenterCollapseBoxState extends State<HelpCenterCollapseBox> with Tick
               ),
             ],
           ),
-          HelpCenterCollapseText(content: "abc",controller: _controller,)
+          HelpCenterCollapseText(content: "xyz",controller: _controller,)
         ],
       ),
     );

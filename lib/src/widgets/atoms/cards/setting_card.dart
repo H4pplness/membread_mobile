@@ -47,7 +47,7 @@ class _SettingCardState extends State<SettingCard> {
                 ),
                 Text(
                   widget.content,
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.montserrat(
                     fontSize : 20,
                     color : Colors.white,
                     fontWeight : FontWeight.w600

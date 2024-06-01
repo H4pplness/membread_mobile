@@ -18,7 +18,7 @@ Future<Lesson> getLesson(ref,int lessonId) async{
   if (response.statusCode == 200) {
     final result = LessonVocabularyDTO.fromJson(response.data);
     final listLearning =  result.listVocabulary?.map((vocabulary){
-      return Vocabulary(id: vocabulary.id,vocabulary: vocabulary.vocabulary,mean: vocabulary.mean,progress: vocabulary.progress);
+      return Vocabulary(id: vocabulary.id,vocabulary: vocabulary.vocabulary,mean: vocabulary.mean,progress: vocabulary.progress??0);
     }).toList();
 
     print("LIST LEARNING : ${listLearning?.first.vocabulary}");

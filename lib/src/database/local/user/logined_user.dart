@@ -24,6 +24,8 @@ class LoginedUser {
   static const _usernamekey = 'loginedUsername';
   static const _idkey = 'loginedId';
   static const _avatarkey = 'loginedAvatar';
+  static const _firstnamekey = 'firstname';
+  static const _lastnamekey = 'lastname';
 
   Future<void> setUsername(String username) async {
     await sharedPreferences.setString(_usernamekey,username);
@@ -35,6 +37,14 @@ class LoginedUser {
 
   Future<void> setAvatar(String avatar) async {
     await sharedPreferences.setString(_avatarkey, avatar);
+  }
+
+  Future<void> setFirstName(String firstname) async {
+    await sharedPreferences.setString(_firstnamekey, firstname);
+  }
+
+  Future<void> setLastName(String lastname) async {
+    await sharedPreferences.setString(_lastnamekey, lastname);
   }
 
   String? getUserName(){
@@ -53,6 +63,18 @@ class LoginedUser {
     final avatar =  sharedPreferences.getString(_avatarkey);
     if(avatar == '' || avatar == null)return null;
     return avatar;
+  }
+
+  String? getFirstName(){
+    final firstname = sharedPreferences.getString(_firstnamekey);
+    if(firstname == ''||firstname == null)return null;
+    return firstname;
+  }
+
+  String? getLastName(){
+    final lastname = sharedPreferences.getString(_lastnamekey);
+    if(lastname == ''||lastname == null)return null;
+    return lastname;
   }
 
   User getUser(){

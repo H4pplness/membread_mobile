@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:membreadflutter/src/domain/repositories/course_repository/create_course/create_course.dart';
+import 'package:membreadflutter/src/domain/repositories/course_repository/get_teaching_courses/get_teaching_courses.dart';
 import '../../../screens/new_home_screen/new_home_screen.dart';
 import '../../atoms/buttons/primarybutton.dart';
 import '../../atoms/text_fields/custom_textfield.dart';
@@ -31,6 +32,7 @@ class _AddTextFieldState extends ConsumerState<AddTextField> {
               style: Theme.of(context).textTheme.labelMedium,),
             onPressed: () async {
               ref.read(createCourseProvider(CreateCourseDTO(title: _titleController.text,description: _descriptionController.text)).future);
+              ref.refresh(getTeachingCourseProvider.future);
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context)=>NewHomeScreen()),

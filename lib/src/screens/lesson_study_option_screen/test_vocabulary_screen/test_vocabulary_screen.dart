@@ -2,11 +2,16 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/study_option/choose_answer.dart';
+import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/study_option/result.dart';
+import 'package:membreadflutter/src/screens/lesson_study_option_screen/test_vocabulary_screen/notifiers/result_notifier/result_notifier.dart';
+import 'package:membreadflutter/src/screens/lesson_study_option_screen/test_vocabulary_screen/study_option/choose_answer.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/test_vocabulary_screen/notifiers/progress_notifier/progress_notifier.dart';
 import 'package:membreadflutter/src/widgets/atoms/sliders/progress_slider.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/close_title_appbar.dart';
 import '../../../domain/models/vocabulary.dart';
+import '../../../domain/repositories/course_repository/update_progress_lesson/update_progress_lesson.dart';
+import '../../../dtos/progressvocabularydto/progress_vocabulary_dto.dart';
+import '../../../dtos/updateprogresslessondto/update_progress_lesson_vocabulary_dto.dart';
 
 class TestVocabularyScreen extends ConsumerWidget {
   List<Vocabulary> listVocabulary;
@@ -36,6 +41,8 @@ class TestVocabularyScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final scoreStatistics = ref.watch(resultNotifierProvider);
+
     final progress = ref.watch(progressNotifierProvider);
 
     Widget body;
@@ -43,17 +50,24 @@ class TestVocabularyScreen extends ConsumerWidget {
     if (listVocabulary.length <= 3) {
       body = Center(
           child: Text(
-            "Something wrong :v",
-            style: Theme
-                .of(context)
-                .textTheme
-                .titleMedium,
-          ));
-    }else{
+        "Something wrong :v",
+        style: Theme.of(context).textTheme.titleMedium,
+      ));
+    } else {
       if (listVocabulary.every((vocabulary) => vocabulary.studiedLevel > 0)) {
-        body = const Center(
-          child: Text("SUCCESS"),
-        );
+        body = ResultOption(
+            listVocabulary: listVocabulary,
+            backFunction: () async {
+              final learned = UpdateProgressLessonVocabularyDTO(
+                  score: scoreStatistics.totalScore,
+                  listVocabulary: listVocabulary
+                      .map((vocabulary) => ProgressVocabularyDTO(
+                          learning_id: vocabulary.id ?? 0,
+                          progress: vocabulary.progress))
+                      .toList());
+              await ref.read(updateProgressLessonProvider(learned).future);
+              Navigator.pop(context);
+            });
       } else {
         Vocabulary randomVocabulary;
         while (true) {
@@ -83,6 +97,12 @@ class TestVocabularyScreen extends ConsumerWidget {
             onTap: (isTrue) {
               ref.read(progressNotifierProvider.notifier).increase();
               randomVocabulary.studiedLevel++;
+              if (isTrue) {
+                randomVocabulary.progress++;
+                ref.read(resultNotifierProvider.notifier).correctAnswer();
+              } else {
+                ref.read(resultNotifierProvider.notifier).wrongAnswer();
+              }
             });
       }
     }
@@ -90,6 +110,15 @@ class TestVocabularyScreen extends ConsumerWidget {
     return Scaffold(
       appBar: CloseTitleAppbar(
         onLeadingButtonPressed: () => Navigator.pop(context),
+        actions: [
+          Text(
+            scoreStatistics.totalScore.toString(),
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+        ],
       ),
       body: Column(
         children: [

@@ -70,7 +70,7 @@ class CourseTab extends ConsumerWidget {
                     ref.read(courseTabNotifierProvider.notifier).setIndex(0);
                   },
                   child: Text("Popular",
-                      style: GoogleFonts.poppins(
+                      style: GoogleFonts.montserrat(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color:
@@ -82,7 +82,7 @@ class CourseTab extends ConsumerWidget {
                     ref.read(courseTabNotifierProvider.notifier).setIndex(1);
                   },
                   child: Text("Learning",
-                      style: GoogleFonts.poppins(
+                      style: GoogleFonts.montserrat(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color:
@@ -94,7 +94,7 @@ class CourseTab extends ConsumerWidget {
                     ref.read(courseTabNotifierProvider.notifier).setIndex(2);
                   },
                   child: Text("Teaching",
-                      style: GoogleFonts.poppins(
+                      style: GoogleFonts.montserrat(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color:

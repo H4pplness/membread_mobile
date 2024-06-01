@@ -11,26 +11,37 @@ import '../../../models/course.dart';
 
 part 'get_course_info.g.dart';
 
-class GetCourseInfoParams{
+class GetCourseInfoParams {
   int courseId;
 
   GetCourseInfoParams(this.courseId);
 }
 
 @riverpod
-Future<Course> getCourseInfo(ref,GetCourseInfoParams getCourseInfoParams) async{
+Future<Course> getCourseInfo(
+    ref, GetCourseInfoParams getCourseInfoParams) async {
   final dio = await ref.read(dioProviderWithAccessToken.future);
-  Response response = await dio.get('study/course/info?course_id=${getCourseInfoParams.courseId}');
-  if(response.statusCode == 200){
+  Response response = await dio
+      .get('study/course/info?course_id=${getCourseInfoParams.courseId}');
+  if (response.statusCode == 200) {
     final result = response.data;
     final getCourseInfoDTO = GetCourseInfoDTO.fromJson(result);
     List<Lesson> lessons = [];
     getCourseInfoDTO.listLesson?.forEach((lesson) {
-        lessons.add(VocabularyLesson(id: lesson.id,title: lesson.title,description: lesson.description));
+      lessons.add(VocabularyLesson(
+          id: lesson.id, title: lesson.title, description: lesson.description));
     });
-    Course course = Course(id: getCourseInfoParams.courseId,title: getCourseInfoDTO.title,description: getCourseInfoDTO.description,lessons: lessons,author: User(id: getCourseInfoDTO.author?.id??"",username: "${getCourseInfoDTO.author!.firstName??''} ${getCourseInfoDTO.author!.lastName??''}",avatar: getCourseInfoDTO.author?.avatar));
+    Course course = Course(
+        id: getCourseInfoParams.courseId,
+        title: getCourseInfoDTO.title,
+        description: getCourseInfoDTO.description,
+        lessons: lessons,
+        author: User(
+            id: getCourseInfoDTO.author?.id ?? "",
+            username: getCourseInfoDTO.author?.userName,
+            avatar: getCourseInfoDTO.author?.avatar));
     return course;
-  }else {
+  } else {
     throw Exception("Error : ${response.statusMessage}");
   }
 }

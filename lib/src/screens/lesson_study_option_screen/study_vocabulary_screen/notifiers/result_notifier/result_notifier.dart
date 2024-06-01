@@ -1,27 +1,29 @@
 
-import 'package:membreadflutter/src/dtos/updateprogresslessondto/update_progress_lesson_vocabulary_dto.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../../dtos/progressvocabularydto/progress_vocabulary_dto.dart';
-
 part 'result_notifier.g.dart';
+
+class ScoreStatistics{
+  int totalScore;
+  int nextScore;
+
+  ScoreStatistics({this.totalScore = 0,this.nextScore = 200});
+}
 
 @riverpod
 class ResultNotifier extends _$ResultNotifier {
   @override
-  UpdateProgressLessonVocabularyDTO build(){
-    return const UpdateProgressLessonVocabularyDTO();
+  ScoreStatistics build(){
+    return ScoreStatistics();
   }
 
-  void setCourseId(int courseId){
-    state = UpdateProgressLessonVocabularyDTO(course_id: courseId);
+  void wrongAnswer(){
+    state = ScoreStatistics(totalScore: state.totalScore,nextScore: 200);
   }
 
-  void setResult(int result){
-    state = UpdateProgressLessonVocabularyDTO(course_id: state.course_id,score: result,listVocabulary: state.listVocabulary);
+  void correctAnswer(){
+    state = ScoreStatistics(totalScore: (state.totalScore + state.nextScore),nextScore: (state.nextScore+10));
   }
 
-  void setLearningProgress(List<ProgressVocabularyDTO> listLearning){
-    state = UpdateProgressLessonVocabularyDTO(course_id: state.course_id,score: state.score,listVocabulary: listLearning);
-  }
+
 }

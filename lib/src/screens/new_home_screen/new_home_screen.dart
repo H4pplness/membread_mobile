@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/notifier/tab_index/tab_index_notifier.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/course_tab.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/home_tab.dart';
@@ -14,7 +15,14 @@ class NewHomeScreen extends ConsumerWidget {
       NewHomePageAppBar(),
       CourseAppBar(),
       AppBar(
-        title: Text("Settings",style: Theme.of(context).appBarTheme.titleTextStyle,),
+        title: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Text("Settings",style: GoogleFonts.montserrat(
+              fontSize : 25,
+              color : Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
+              fontWeight : FontWeight.w600
+          ),),
+        ),
         automaticallyImplyLeading: false,
       )
     ];

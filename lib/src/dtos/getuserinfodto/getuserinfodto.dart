@@ -8,6 +8,7 @@ class GetUserInfoDTO with _$GetUserInfoDTO {
     String? id,
     String? firstName,
     String? lastName,
+    String? userName,
     String? avatar
   }) = _GetUserInfoDTO;
 

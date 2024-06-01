@@ -2,13 +2,17 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:membreadflutter/src/domain/repositories/course_repository/update_progress_lesson/update_progress_lesson.dart';
+import 'package:membreadflutter/src/dtos/progressvocabularydto/progress_vocabulary_dto.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/notifiers/learning_notifier/learning_notifier.dart';
+import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/notifiers/result_notifier/result_notifier.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/study_option/choose_answer.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/study_option/new_vocabulary.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/study_option/result.dart';
 import 'package:membreadflutter/src/widgets/atoms/sliders/progress_slider.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/close_title_appbar.dart';
 import '../../../domain/models/vocabulary.dart';
+import '../../../dtos/updateprogresslessondto/update_progress_lesson_vocabulary_dto.dart';
 
 class StudyVocabularyScreen extends ConsumerWidget {
   List<Vocabulary> listVocabulary;
@@ -38,6 +42,8 @@ class StudyVocabularyScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final scoreStatistics = ref.watch(resultNotifierProvider);
+
     Widget body;
     final learningProgress = ref.watch(learningNotifierProvider);
     if (listVocabulary.length <= 3) {
@@ -48,7 +54,19 @@ class StudyVocabularyScreen extends ConsumerWidget {
       ));
     } else {
       if (listVocabulary.every((vocabulary) => vocabulary.studiedLevel >= 3)) {
-        body = ResultOption();
+        body = ResultOption(
+            listVocabulary: listVocabulary,
+            backFunction: () async {
+              final learned = UpdateProgressLessonVocabularyDTO(
+                  score: scoreStatistics.totalScore,
+                  listVocabulary: listVocabulary
+                      .map((vocabulary) => ProgressVocabularyDTO(
+                          learning_id: vocabulary.id ?? 0,
+                          progress: vocabulary.progress))
+                      .toList());
+              await ref.read(updateProgressLessonProvider(learned).future);
+              Navigator.pop(context);
+            });
       } else {
         Vocabulary randomVocabulary;
         while (true) {
@@ -63,6 +81,7 @@ class StudyVocabularyScreen extends ConsumerWidget {
               onPressed: () {
                 ref.read(learningNotifierProvider.notifier).increase();
                 randomVocabulary.studiedLevel++;
+                randomVocabulary.progress++;
               });
         } else {
           print(
@@ -87,6 +106,10 @@ class StudyVocabularyScreen extends ConsumerWidget {
                 ref.read(learningNotifierProvider.notifier).increase();
                 if (isTrue) {
                   randomVocabulary.studiedLevel++;
+                  randomVocabulary.progress++;
+                  ref.read(resultNotifierProvider.notifier).correctAnswer();
+                } else {
+                  ref.read(resultNotifierProvider.notifier).wrongAnswer();
                 }
               });
         }
@@ -102,22 +125,29 @@ class StudyVocabularyScreen extends ConsumerWidget {
         onLeadingButtonPressed: () {
           Navigator.pop(context);
         },
+        actions: [
+          Text(
+            scoreStatistics.totalScore.toString(),
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          SizedBox(
+            width: 10,
+          ),
+        ],
       ),
-      body: Container(
-        child: Column(
-          children: [
-            ProgressSlider(
-              progress: listVocabulary.isNotEmpty
-                  ? correctAnswer / (listVocabulary.length * 3)
-                  : 0,
-              width: MediaQuery.of(context).size.width,
-              contentColor: Theme.of(context).primaryColor,
-              outLineColor: Theme.of(context).colorScheme.secondary,
-              borderRadius: 0,
-            ),
-            body
-          ],
-        ),
+      body: Column(
+        children: [
+          ProgressSlider(
+            progress: listVocabulary.isNotEmpty
+                ? correctAnswer / (listVocabulary.length * 3)
+                : 0,
+            width: MediaQuery.of(context).size.width,
+            contentColor: Theme.of(context).primaryColor,
+            outLineColor: Theme.of(context).colorScheme.secondary,
+            borderRadius: 0,
+          ),
+          body
+        ],
       ),
     );
   }

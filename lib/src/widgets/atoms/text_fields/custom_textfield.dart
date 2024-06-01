@@ -17,7 +17,7 @@ class CustomTextField extends StatelessWidget {
           style: Theme
               .of(context)
               .textTheme
-              .displayMedium,
+              .titleMedium,
         ),
         const SizedBox(height: 10,),
         TextField(

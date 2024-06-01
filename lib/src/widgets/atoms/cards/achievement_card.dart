@@ -151,7 +151,7 @@ class _AchievementCardState extends State<AchievementCard> {
                             },
                             child: Text(
                               _isReceived ? "Received" : "Receive",
-                              style: GoogleFonts.poppins(
+                              style: GoogleFonts.montserrat(
                                   fontSize: 18,
                                   color: _isReceived
                                       ? Theme.of(context).colorScheme.secondary

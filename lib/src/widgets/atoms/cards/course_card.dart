@@ -23,7 +23,7 @@ class CourseCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(course.title!,style: Theme.of(context).textTheme.titleSmall,overflow: TextOverflow.ellipsis,),
+                Text(course.title,style: Theme.of(context).textTheme.titleSmall,overflow: TextOverflow.ellipsis,),
                 const SizedBox(height: 5,),
                 Text(course.description??"",style: const TextStyle(
                     fontSize: 13,

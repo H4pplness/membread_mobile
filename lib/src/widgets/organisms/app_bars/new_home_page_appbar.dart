@@ -34,7 +34,7 @@ class NewHomePageAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 children: [
                   Text(
                     "Hi, ${user.username} !",
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.montserrat(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                         color: Colors.white),
@@ -43,7 +43,7 @@ class NewHomePageAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   const SizedBox(height: 5),
                   Text(
                     "Let's start learning",
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.montserrat(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                         color: Colors.white),
@@ -112,7 +112,11 @@ class NewHomePageAppBar extends ConsumerWidget implements PreferredSizeWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Today's score",
-                              style: Theme.of(context).textTheme.displaySmall),
+                              style: GoogleFonts.montserrat(
+                                fontSize : 17,
+                                color : Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
+                                fontWeight : FontWeight.w500
+                              )),
                           const SizedBox(height: 5),
                           dailyScore.when(data: (data){
                             return Text(data.dailyScore,style: Theme.of(context).textTheme.titleMedium);

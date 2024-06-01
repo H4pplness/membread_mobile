@@ -33,7 +33,7 @@ class NewVocabularyOption extends ConsumerWidget {
               onPressed: onPressed,
               width: MediaQuery.of(context).size.width-40,
               child: Center(
-                child: Text("Next",style: GoogleFonts.poppins(
+                child: Text("Next",style: GoogleFonts.montserrat(
                   fontSize : 18,
                   fontWeight : FontWeight.w600,
                   color : Colors.white

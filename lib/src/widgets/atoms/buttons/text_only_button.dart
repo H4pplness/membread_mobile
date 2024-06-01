@@ -20,7 +20,7 @@ class TextOnlyButton extends StatelessWidget {
                   bottom: BorderSide(color: color)
               )
           ) : null,
-          child: Text(label,style: GoogleFonts.poppins(
+          child: Text(label,style: GoogleFonts.montserrat(
               fontSize : 20,
               color : color,
               fontWeight : FontWeight.w600

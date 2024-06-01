@@ -34,7 +34,8 @@ class MyApp extends ConsumerWidget {
       darkTheme: darkTheme,
       theme: lightTheme,
       themeMode:isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home : isLogin?NewHomeScreen() : WelcomeScreen()
+      // home : isLogin?NewHomeScreen() : WelcomeScreen()
+      home: AddLessonScreen(courseId: 1,),
     );
   }
 }

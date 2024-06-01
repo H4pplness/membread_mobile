@@ -23,6 +23,7 @@ mixin _$GetUserInfoDTO {
   String? get id => throw _privateConstructorUsedError;
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
+  String? get userName => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +38,12 @@ abstract class $GetUserInfoDTOCopyWith<$Res> {
           GetUserInfoDTO value, $Res Function(GetUserInfoDTO) then) =
       _$GetUserInfoDTOCopyWithImpl<$Res, GetUserInfoDTO>;
   @useResult
-  $Res call({String? id, String? firstName, String? lastName, String? avatar});
+  $Res call(
+      {String? id,
+      String? firstName,
+      String? lastName,
+      String? userName,
+      String? avatar});
 }
 
 /// @nodoc
@@ -56,6 +62,7 @@ class _$GetUserInfoDTOCopyWithImpl<$Res, $Val extends GetUserInfoDTO>
     Object? id = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? userName = freezed,
     Object? avatar = freezed,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +77,10 @@ class _$GetUserInfoDTOCopyWithImpl<$Res, $Val extends GetUserInfoDTO>
       lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userName: freezed == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String?,
       avatar: freezed == avatar
           ? _value.avatar
@@ -87,7 +98,12 @@ abstract class _$$GetUserInfoDTOImplCopyWith<$Res>
       __$$GetUserInfoDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String? firstName, String? lastName, String? avatar});
+  $Res call(
+      {String? id,
+      String? firstName,
+      String? lastName,
+      String? userName,
+      String? avatar});
 }
 
 /// @nodoc
@@ -104,6 +120,7 @@ class __$$GetUserInfoDTOImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? userName = freezed,
     Object? avatar = freezed,
   }) {
     return _then(_$GetUserInfoDTOImpl(
@@ -119,6 +136,10 @@ class __$$GetUserInfoDTOImplCopyWithImpl<$Res>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
+      userName: freezed == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String?,
       avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
@@ -131,7 +152,7 @@ class __$$GetUserInfoDTOImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$GetUserInfoDTOImpl implements _GetUserInfoDTO {
   const _$GetUserInfoDTOImpl(
-      {this.id, this.firstName, this.lastName, this.avatar});
+      {this.id, this.firstName, this.lastName, this.userName, this.avatar});
 
   factory _$GetUserInfoDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$GetUserInfoDTOImplFromJson(json);
@@ -143,11 +164,13 @@ class _$GetUserInfoDTOImpl implements _GetUserInfoDTO {
   @override
   final String? lastName;
   @override
+  final String? userName;
+  @override
   final String? avatar;
 
   @override
   String toString() {
-    return 'GetUserInfoDTO(id: $id, firstName: $firstName, lastName: $lastName, avatar: $avatar)';
+    return 'GetUserInfoDTO(id: $id, firstName: $firstName, lastName: $lastName, userName: $userName, avatar: $avatar)';
   }
 
   @override
@@ -160,12 +183,15 @@ class _$GetUserInfoDTOImpl implements _GetUserInfoDTO {
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.avatar, avatar) || other.avatar == avatar));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, firstName, lastName, avatar);
+  int get hashCode =>
+      Object.hash(runtimeType, id, firstName, lastName, userName, avatar);
 
   @JsonKey(ignore: true)
   @override
@@ -187,6 +213,7 @@ abstract class _GetUserInfoDTO implements GetUserInfoDTO {
       {final String? id,
       final String? firstName,
       final String? lastName,
+      final String? userName,
       final String? avatar}) = _$GetUserInfoDTOImpl;
 
   factory _GetUserInfoDTO.fromJson(Map<String, dynamic> json) =
@@ -198,6 +225,8 @@ abstract class _GetUserInfoDTO implements GetUserInfoDTO {
   String? get firstName;
   @override
   String? get lastName;
+  @override
+  String? get userName;
   @override
   String? get avatar;
   @override

@@ -16,50 +16,50 @@ ThemeData lightTheme = ThemeData(
     appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 0,
-        titleTextStyle: GoogleFonts.poppins(
+        titleTextStyle: GoogleFonts.montserrat(
             textStyle: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
                 fontSize: 20)),
         iconTheme: const IconThemeData(size: 25, color: Colors.black)),
     textTheme: TextTheme(
-        titleLarge: GoogleFonts.poppins(
+        titleLarge: GoogleFonts.montserrat(
             textStyle: const TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
                 color: Colors.black)),
-        titleMedium: GoogleFonts.poppins(
+        titleMedium: GoogleFonts.montserrat(
             textStyle: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 color: Colors.black)),
-        titleSmall: GoogleFonts.poppins(
+        titleSmall: GoogleFonts.montserrat(
             textStyle: const TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w600,
                 color: Colors.black)),
-        displayMedium: GoogleFonts.poppins(
+        displayMedium: GoogleFonts.montserrat(
             textStyle: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,
                 color: Colors.black)),
-        displayLarge: GoogleFonts.poppins(
+        displayLarge: GoogleFonts.montserrat(
             textStyle: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
                 color: Colors.black)),
-        displaySmall: GoogleFonts.poppins(
+        displaySmall: GoogleFonts.montserrat(
             textStyle: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 color: Colors.black)),
-        labelMedium: GoogleFonts.poppins(
+        labelMedium: GoogleFonts.montserrat(
             textStyle: const TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Colors.white)),
-        labelLarge: GoogleFonts.poppins(
+        labelLarge: GoogleFonts.montserrat(
             textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: Colors.white)),
-        labelSmall: GoogleFonts.poppins(
+        labelSmall: GoogleFonts.montserrat(
             textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white))
     ));

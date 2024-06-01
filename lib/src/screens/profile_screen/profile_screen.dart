@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/domain/models/user.dart';
-import 'package:membreadflutter/src/domain/notifiers/user_notifier/user_notifier.dart';
 import 'package:membreadflutter/src/screens/personal_edit_screen/personal_edit_screen.dart';
 import 'package:membreadflutter/src/screens/profile_screen/notifiers/list_course_tab/list_course_tab_notifier.dart';
 import 'package:membreadflutter/src/widgets/atoms/buttons/text_only_button.dart';

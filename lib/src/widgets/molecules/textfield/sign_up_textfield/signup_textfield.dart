@@ -54,7 +54,7 @@ class SignUpTextField extends ConsumerWidget {
                   ? SizedBox(
                       height: 30,
                       child: Text(signUpNotifier,
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.montserrat(
                               fontSize: 15,
                               color: Colors.red,
                               fontWeight: FontWeight.w400)),

@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:membreadflutter/src/database/local/core/share_preferences.dart';
 import 'package:membreadflutter/src/database/local/token/token.dart';
 import 'package:membreadflutter/src/database/local/user/logined_user.dart';
-import 'package:membreadflutter/src/domain/notifiers/user_notifier/user_notifier.dart';
-import 'package:membreadflutter/src/screens/goal_screen/goal_screen.dart';
+import 'package:membreadflutter/src/screens/learning_setting_screen/learning_setting_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../domain/models/user.dart';
 import '../../../widgets/atoms/cards/setting_card.dart';
@@ -58,9 +56,9 @@ class SettingTab extends ConsumerWidget {
           ),
           SettingCard(
             icon: Icons.calendar_month_sharp,
-            content: "Goal",
+            content: "Learning Settings",
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>GoalScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>LearningSettingScreen()));
             }
           ),
           const SizedBox(

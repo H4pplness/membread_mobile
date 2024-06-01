@@ -38,7 +38,7 @@ class VocabularyLessonScreen extends ConsumerWidget {
               frontSide: Center(
                 child: Text(
                   vocabulary.vocabulary ?? "",
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.montserrat(
                       fontSize: 23,
                       color: Colors.white,
                       fontWeight: FontWeight.w600),
@@ -47,7 +47,7 @@ class VocabularyLessonScreen extends ConsumerWidget {
               backSide: Center(
                 child: Text(
                   vocabulary.mean ?? "",
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.montserrat(
                       fontSize: 23,
                       color: Colors.white,
                       fontWeight: FontWeight.w600),
