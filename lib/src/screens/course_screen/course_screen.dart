@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/database/local/user/logined_user.dart';
 import 'package:membreadflutter/src/domain/models/course.dart';
 import 'package:membreadflutter/src/domain/models/learning.dart';
 import 'package:membreadflutter/src/domain/models/vocabulary_lesson.dart';
 import 'package:membreadflutter/src/domain/repositories/course_repository/get_course_info/get_course_info.dart';
 import 'package:membreadflutter/src/screens/add_lesson_screen/add_leson_screen.dart';
+import 'package:membreadflutter/src/screens/course_edit_screen/course_edit_screen.dart';
 import 'package:membreadflutter/src/screens/leader_board_screen/leader_board_screen.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/new_home_screen.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/new_lesson_card.dart';
@@ -20,10 +22,20 @@ class CourseScreen extends ConsumerWidget {
   final Course course;
   CourseScreen({super.key, required this.course});
 
+  _buildAlert() {
+    return SnackBar(
+      duration: Duration(seconds: 2),
+      backgroundColor: Colors.red,
+      content: Text(
+        'You must subcribe to study!',
+        style: GoogleFonts.montserrat(fontSize : 15,color:Colors.white),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final courseParams = GetCourseInfoParams(
-        course.id ?? 0);
+    final courseParams = GetCourseInfoParams(course.id ?? 0);
     final courseDetailFuture =
         ref.read(getCourseInfoProvider(courseParams).future);
     final user = ref.watch(loginedUserProvider);
@@ -34,18 +46,17 @@ class CourseScreen extends ConsumerWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
               appBar: NonTitleAppBar(
-                onPressed: () => Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context)=>NewHomeScreen()),
-                    (route) => false)
-              ),
-              body: Center(
+                  onPressed: () => Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => NewHomeScreen()),
+                      (route) => false)),
+              body: const Center(
                 child: CircularProgressIndicator(),
               ));
         } else if (snapshot.hasError) {
           return Scaffold(
             appBar: NonTitleAppBar(onPressed: () => Navigator.pop(context)),
-            body: Center(
+            body: const Center(
               child: Text("Some thing wrong :v"),
             ),
           );
@@ -67,18 +78,25 @@ class CourseScreen extends ConsumerWidget {
                   ),
                   actions: [
                     IconButton(
-                        onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>LeaderBoardScreen(course: course,))), 
-                        icon: Icon(Icons.leaderboard,weight: 50,size: 25)),
-                    isAuthor ? IconButton(
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => AddLessonScreen(courseId: course.id??0,))),
-                        icon: const Icon(
-                          Icons.settings,
-                          weight: 50,
-                          size: 25,
-                        )) : Container(),
+                                builder: (context) => LeaderBoardScreen(
+                                      course: course,
+                                    ))),
+                        icon: const Icon(Icons.leaderboard, weight: 50, size: 25)),
+                    isAuthor
+                        ? IconButton(
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CourseEditScreen(course: course,))),
+                            icon: const Icon(
+                              Icons.settings,
+                              weight: 50,
+                              size: 25,
+                            ))
+                        : Container(),
                   ],
                   pinned: true,
                   floating: true,
@@ -91,7 +109,9 @@ class CourseScreen extends ConsumerWidget {
                   ),
                 ),
                 SliverToBoxAdapter(
-                  child: SummaryCourseAppbar(course: course,),
+                  child: SummaryCourseAppbar(
+                    course: course,
+                  ),
                 ),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
@@ -100,28 +120,35 @@ class CourseScreen extends ConsumerWidget {
                       return LessonCard(
                         title: course.lessons?[index].title ?? "",
                         description: course.lessons?[index].description ?? "",
-                        onTap: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          switch (course.lessons![index].runtimeType) {
-                            case VocabularyLesson:
-                              return VocabularyLessonScreen(
-                                  lesson: lesson as VocabularyLesson);
-                            default:
-                              return Scaffold(
-                                appBar: AppBar(
-                                    title: Text('Unknown Lesson Type',
-                                        style: Theme.of(context)
-                                            .appBarTheme
-                                            .titleTextStyle)),
-                                body: Center(
-                                    child: Text(
-                                        'This lesson type is not supported.',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium)),
-                              );
+                        onTap: () {
+                          if (course.canStudy!) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              switch (course.lessons![index].runtimeType) {
+                                case VocabularyLesson:
+                                  return VocabularyLessonScreen(
+                                      lesson: lesson as VocabularyLesson);
+                                default:
+                                  return Scaffold(
+                                    appBar: AppBar(
+                                        title: Text('Unknown Lesson Type',
+                                            style: Theme.of(context)
+                                                .appBarTheme
+                                                .titleTextStyle)),
+                                    body: Center(
+                                        child: Text(
+                                            'This lesson type is not supported.',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium)),
+                                  );
+                              }
+                            }));
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(_buildAlert());
                           }
-                        })),
+                        },
                       );
                     },
                     childCount: course.lessons?.length ?? 0,
@@ -131,10 +158,8 @@ class CourseScreen extends ConsumerWidget {
             ),
           );
         } else {
-          return Container(
-            child: Center(
-              child: Text("No data available"),
-            ),
+          return const Center(
+            child: Text("No data available"),
           );
         }
       },

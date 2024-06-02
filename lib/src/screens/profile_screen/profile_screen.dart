@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:membreadflutter/src/database/local/user/logined_user.dart';
 import 'package:membreadflutter/src/domain/models/user.dart';
 import 'package:membreadflutter/src/screens/personal_edit_screen/personal_edit_screen.dart';
 import 'package:membreadflutter/src/screens/profile_screen/notifiers/list_course_tab/list_course_tab_notifier.dart';
@@ -15,18 +16,21 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context,WidgetRef ref) {
     final listCourseTab = ref.watch(listCourseTabNotifierProvider);
 
+    final userLoginedId = ref.watch(loginedUserProvider).getId();
+    final isOwner = userLoginedId == user!.id;
+
     return Scaffold(
       appBar: CloseTitleAppbar(
         onLeadingButtonPressed: () => Navigator.pop(context),
         actions: [
-          IconButton(
+          isOwner ? IconButton(
               onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => PersonalEditScreen()));
               },
-              icon: const Icon(Icons.edit))
+              icon: const Icon(Icons.edit)) : Container()
         ],
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -36,7 +40,7 @@ class ProfileScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: ProfileAvatar(avatarUrl: user?.avatar,)
+              child: ProfileAvatar(avatarUrl: user?.avatar,isOwner: isOwner,)
             ),
             const SizedBox(
               height: 10,

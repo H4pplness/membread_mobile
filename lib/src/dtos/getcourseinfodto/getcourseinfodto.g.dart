@@ -19,6 +19,8 @@ _$GetCourseInfoDTOImpl _$$GetCourseInfoDTOImplFromJson(
       author: json['author'] == null
           ? null
           : GetUserInfoDTO.fromJson(json['author'] as Map<String, dynamic>),
+      canStudy: json['canStudy'] as bool?,
+      avatar: json['avatar'] as String?,
     );
 
 Map<String, dynamic> _$$GetCourseInfoDTOImplToJson(
@@ -30,4 +32,6 @@ Map<String, dynamic> _$$GetCourseInfoDTOImplToJson(
       'listLesson': instance.listLesson,
       'currentLesson': instance.currentLesson,
       'author': instance.author,
+      'canStudy': instance.canStudy,
+      'avatar': instance.avatar,
     };

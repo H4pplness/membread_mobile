@@ -119,7 +119,7 @@ class NewHomePageAppBar extends ConsumerWidget implements PreferredSizeWidget {
                               )),
                           const SizedBox(height: 5),
                           dailyScore.when(data: (data){
-                            return Text(data.dailyScore,style: Theme.of(context).textTheme.titleMedium);
+                            return Text(data.dailyScore.toString(),style: Theme.of(context).textTheme.titleMedium);
                           }, error: (error,__){
                             print("ERROR : $error");
                             return Text("0",style: Theme.of(context).textTheme.titleMedium);
@@ -127,15 +127,34 @@ class NewHomePageAppBar extends ConsumerWidget implements PreferredSizeWidget {
                             return Text("",style: Theme.of(context).textTheme.titleMedium);
                           }),
                           const SizedBox(height: 5),
-                          ProgressSlider(
-                              contentColor:
-                              MediaQuery.of(context).platformBrightness ==
-                                  Brightness.dark
-                                  ? Colors.white
-                                  : Colors.black12,
-                              progress: 0.5,
-                              height: 8,
-                              width: MediaQuery.of(context).size.width * 0.7)
+                          dailyScore.when(data: (data){
+                            final progress = (data.dailyScore/data.goal >= 1) ? 1.0 : data.dailyScore/data.goal;
+                            return ProgressSlider(
+                                contentColor: Colors.blue[200],
+                                progress: progress,
+                                height: 8,
+                                width: MediaQuery.of(context).size.width * 0.7);
+                          }, error: (_,__){
+                            return ProgressSlider(
+                                contentColor:
+                                MediaQuery.of(context).platformBrightness ==
+                                    Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black12,
+                                progress: 0,
+                                height: 8,
+                                width: MediaQuery.of(context).size.width * 0.7);
+                          }, loading: (){
+                            return ProgressSlider(
+                                contentColor:
+                                MediaQuery.of(context).platformBrightness ==
+                                    Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black12,
+                                progress: 0,
+                                height: 8,
+                                width: MediaQuery.of(context).size.width * 0.7);
+                          })
                         ],
                       ),
                     )),

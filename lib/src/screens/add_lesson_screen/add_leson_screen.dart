@@ -88,22 +88,26 @@ class AddLessonScreen extends ConsumerWidget {
               const SizedBox(height: 10),
               Text(
                 "Type",
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .titleMedium,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 20,
+              ),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 40,
                 child: DropdownButton(
-                    isExpanded : true,
+                    underline: Container(
+                      height: 1,
+                      color: Colors.black,
+                    ),
+                    isExpanded: true,
                     value: lessonType,
                     items: LessonType.values
                         .map<DropdownMenuItem<LessonType>>((value) {
                       return DropdownMenuItem<LessonType>(
                         value: value,
                         child: SizedBox(
+                          height: 40,
                           child: Text(
                             value.value,
                             style: Theme.of(context).textTheme.displayMedium,

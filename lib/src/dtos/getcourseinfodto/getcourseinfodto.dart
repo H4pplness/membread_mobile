@@ -14,7 +14,9 @@ class GetCourseInfoDTO with _$GetCourseInfoDTO{
     String? description,
     List<LessonInfoDTO>? listLesson,
     int? currentLesson,
-    GetUserInfoDTO? author
+    GetUserInfoDTO? author,
+    bool? canStudy,
+    String? avatar
   }) = _GetCourseInfoDTO;
 
   factory GetCourseInfoDTO.fromJson(Map<String,dynamic> json) => _$GetCourseInfoDTOFromJson(json);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:membreadflutter/src/database/local/core/share_preferences.dart';
 import 'package:membreadflutter/src/database/local/token/token.dart';
@@ -11,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(ProviderScope(
     overrides: [
@@ -34,8 +36,7 @@ class MyApp extends ConsumerWidget {
       darkTheme: darkTheme,
       theme: lightTheme,
       themeMode:isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      // home : isLogin?NewHomeScreen() : WelcomeScreen()
-      home: AddLessonScreen(courseId: 1,),
+      home : isLogin?NewHomeScreen() : WelcomeScreen()
     );
   }
 }

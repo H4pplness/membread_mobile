@@ -6,7 +6,8 @@ class LessonCard extends StatelessWidget {
   String title;
   String description;
   Function()? onTap;
-  LessonCard({super.key,required this.title,required this.description,this.onTap});
+  Color? color;
+  LessonCard({super.key,required this.title,required this.description,this.onTap,this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,8 @@ class LessonCard extends StatelessWidget {
           margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.blue[100]),
+              color: color??Colors.blue[100]
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           // height: 100.0,
           child: Row(

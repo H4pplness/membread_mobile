@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({super.key,required this.controller,required this.name,this.decoration});
+  CustomTextField({super.key,required this.controller,required this.name,this.decoration,this.labelStyle});
 
   TextEditingController? controller;
   String name;
   InputDecoration? decoration;
+  TextStyle? labelStyle;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,7 +15,7 @@ class CustomTextField extends StatelessWidget {
       children: [
         Text(
           name,
-          style: Theme
+          style: labelStyle?? Theme
               .of(context)
               .textTheme
               .titleMedium,

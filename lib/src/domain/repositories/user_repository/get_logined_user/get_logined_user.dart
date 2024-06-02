@@ -22,7 +22,7 @@ Future<User> getLoginedUser(GetLoginedUserRef ref) async {
           id: result['id'],
           email: result['email'],
           username: result['userName'],
-          avatar: result["avatar"],
+          avatar: avatar(result["avatar"]),
           firstname: result["firstName"],
           lastname: result["lastName"]
       );

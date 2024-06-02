@@ -1,9 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:membreadflutter/src/database/local/core/share_preferences.dart';
+import 'package:membreadflutter/src/database/local/user/logined_user.dart';
+import 'package:membreadflutter/src/domain/repositories/user_repository/upload_avatar/upload_avatar.dart';
 
-class ProfileAvatar extends StatelessWidget {
+class ProfileAvatar extends ConsumerStatefulWidget {
   String? avatarUrl;
-  ProfileAvatar({super.key,this.avatarUrl});
+  bool isOwner;
+  ProfileAvatar({super.key,this.avatarUrl,this.isOwner = false});
+
+  @override
+  ConsumerState createState() => _ProfileAvatarState();
+}
+
+class _ProfileAvatarState extends ConsumerState<ProfileAvatar> {
+  late String? _avatarUrl;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _avatarUrl = widget.avatarUrl;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +33,9 @@ class ProfileAvatar extends StatelessWidget {
           width: 100,
           height: 100,
           decoration: BoxDecoration(
-              image: avatarUrl != null
+              image: _avatarUrl != null
                   ? DecorationImage(
-                image: NetworkImage(avatarUrl ?? ""),
+                image: NetworkImage(_avatarUrl ?? ""),
                 fit: BoxFit.cover,
               )
                   : const DecorationImage(
@@ -33,7 +53,7 @@ class ProfileAvatar extends StatelessWidget {
         Positioned(
           bottom: 0,
           right: 0,
-          child: Container(
+          child: widget.isOwner ? Container(
             width: 35,
             height: 35,
             decoration: BoxDecoration(
@@ -47,10 +67,17 @@ class ProfileAvatar extends StatelessWidget {
                   size: 17,
                   color: Colors.black,
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  print("CHINH AVATAR!");
+                  XFile? resourceImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+                  await ref.read(uploadAvatarProvider(resourceImage).future);
+                  setState(() {
+                    _avatarUrl = ref.watch(loginedUserProvider).getAvatar();
+                  });
+                },
               ),
             ),
-          ),
+          ) : Container(),
         )
       ],
     );

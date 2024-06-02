@@ -36,10 +36,12 @@ Future<Course> getCourseInfo(
         title: getCourseInfoDTO.title,
         description: getCourseInfoDTO.description,
         lessons: lessons,
+        canStudy: getCourseInfoDTO.canStudy,
         author: User(
             id: getCourseInfoDTO.author?.id ?? "",
             username: getCourseInfoDTO.author?.userName,
-            avatar: getCourseInfoDTO.author?.avatar));
+            avatar: avatar(getCourseInfoDTO.author?.avatar)),
+        avatar: getCourseInfoDTO.avatar);
     return course;
   } else {
     throw Exception("Error : ${response.statusMessage}");

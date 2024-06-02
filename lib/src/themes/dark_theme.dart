@@ -3,13 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 ThemeData darkTheme = ThemeData(
   dividerColor: Colors.grey[700],
-  primaryColor: Color.lerp(const Color.fromARGB(255, 59, 117, 245),
-      const Color.fromARGB(255, 76, 142, 246), 1)!,
+  primaryColor: Color.lerp(const Color.fromARGB(255, 89, 139, 255),
+      const Color.fromARGB(255, 68, 124, 255), 1)!,
   brightness: Brightness.dark,
   colorScheme: ColorScheme.dark(
       background: const Color.fromARGB(255, 24, 26, 31),
-      primary: Color.lerp(const Color.fromARGB(255, 59, 117, 245),
-          const Color.fromARGB(255, 76, 142, 246), 1)!,
+      primary: Color.lerp(const Color.fromARGB(255, 89, 139, 255),
+          const Color.fromARGB(255, 68, 124, 255), 1)!,
       secondary: Colors.grey[800]!,
 
   ),

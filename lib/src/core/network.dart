@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get_connect/http/src/exceptions/exceptions.dart';
@@ -5,9 +6,10 @@ import 'package:get/get_connect/http/src/exceptions/exceptions.dart';
 import '../database/local/token/token.dart';
 
 final dioProvider = Provider<Dio>((ref) {
+  final baseUrl = dotenv.env['API'];
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'http://10.0.2.2:3000/',
+      baseUrl: baseUrl??'http://10.0.2.2:3000/',
       connectTimeout: Duration(seconds: 100000),
       receiveTimeout: Duration(seconds: 2),
     ),
@@ -29,10 +31,10 @@ final dioProviderWithAccessToken = FutureProvider<Dio>((ref) async {
       'Authorization': 'Bearer $accessToken',
       // Thêm các header khác nếu cần
     };
-
+    final baseUrl = dotenv.env['API'];
     final dio = Dio(
       BaseOptions(
-          baseUrl: 'http://10.0.2.2:3000/',
+          baseUrl: baseUrl??'http://10.0.2.2:3000/',
           connectTimeout: Duration(seconds: 10000),
           receiveTimeout: Duration(seconds: 2),
           headers: headers),
@@ -46,3 +48,9 @@ final dioProviderWithAccessToken = FutureProvider<Dio>((ref) async {
     throw UnauthorizedException();
   }
 });
+
+String? avatar(String? avatarPath){
+  final baseUrl = dotenv.env['API'];
+  if(avatarPath==null)return null;
+  return baseUrl!+avatarPath;
+}
