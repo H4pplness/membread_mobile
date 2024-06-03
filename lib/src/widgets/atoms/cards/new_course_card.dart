@@ -4,10 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/domain/models/course.dart';
 import 'package:membreadflutter/src/widgets/atoms/images/circle_image.dart';
-
-
+import 'package:membreadflutter/src/widgets/atoms/images/rectangle_image.dart';
 import '../../molecules/icon_group/star_group.dart';
-import '../icons/star_rating.dart';
 
 
 class CourseCard extends StatelessWidget {
@@ -31,8 +29,9 @@ class CourseCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CircleImage(
-                diameter: 50,
+            RectangleImage(
+                width: 50,
+                height: 50,
                 image: course.avatar != null
                     ? DecorationImage(
                     image: NetworkImage(course.avatar ?? ""),

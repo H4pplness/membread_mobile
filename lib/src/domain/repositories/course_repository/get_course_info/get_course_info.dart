@@ -41,7 +41,7 @@ Future<Course> getCourseInfo(
             id: getCourseInfoDTO.author?.id ?? "",
             username: getCourseInfoDTO.author?.userName,
             avatar: avatar(getCourseInfoDTO.author?.avatar)),
-        avatar: getCourseInfoDTO.avatar);
+        avatar: avatar(getCourseInfoDTO.avatar));
     return course;
   } else {
     throw Exception("Error : ${response.statusMessage}");

@@ -68,7 +68,6 @@ class _ProfileAvatarState extends ConsumerState<ProfileAvatar> {
                   color: Colors.black,
                 ),
                 onPressed: () async {
-                  print("CHINH AVATAR!");
                   XFile? resourceImage = await ImagePicker().pickImage(source: ImageSource.gallery);
                   await ref.read(uploadAvatarProvider(resourceImage).future);
                   setState(() {
