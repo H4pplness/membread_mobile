@@ -11,7 +11,8 @@ Future<User> getLoginedUser(GetLoginedUserRef ref) async {
   final loginedUser = ref.read(loginedUserProvider);
 
   User user = loginedUser.getUser();
-  if (user.id == null || user.id == '') {
+  bool checkExpiry = await loginedUser.checkExpiry();
+  if (user.id == null || user.id == '' || checkExpiry) {
     print("Loi o day nay");
     final dio = await ref.refresh(dioProviderWithAccessToken.future);
 
@@ -24,7 +25,9 @@ Future<User> getLoginedUser(GetLoginedUserRef ref) async {
           username: result['userName'],
           avatar: avatar(result["avatar"]),
           firstname: result["firstName"],
-          lastname: result["lastName"]
+          lastname: result["lastName"],
+          numberOfFollowers: result["numberOfFollowers"],
+          numberOfFollowings: result["numberOfFollowings"]
       );
 
       await loginedUser.setId(newUser.id??'');
@@ -32,6 +35,8 @@ Future<User> getLoginedUser(GetLoginedUserRef ref) async {
       await loginedUser.setUsername(newUser.username??'');
       await loginedUser.setLastName(newUser.lastname??'');
       await loginedUser.setFirstName(newUser.firstname??'');
+      if(newUser.numberOfFollowers!=null)await loginedUser.setNumberOfFollowers(newUser.numberOfFollowers??0);
+      if(newUser.numberOfFollowings!=null)await loginedUser.setNumberOfFollowings(newUser.numberOfFollowings??0);
 
       return newUser;
     } else {

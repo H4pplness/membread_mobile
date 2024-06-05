@@ -11,6 +11,8 @@ import 'package:membreadflutter/src/domain/repositories/course_repository/update
 import 'package:membreadflutter/src/domain/repositories/course_repository/update_course_info/update_course_info.dart';
 import 'package:membreadflutter/src/dtos/edit_course_dto/edit_course_dto.dart';
 import 'package:membreadflutter/src/screens/course_edit_screen/notifiers/course_edit_notifier.dart';
+import 'package:membreadflutter/src/widgets/atoms/cards/description_course_edit_card.dart';
+import 'package:membreadflutter/src/widgets/atoms/cards/title_course_edit_card.dart';
 import 'package:membreadflutter/src/widgets/atoms/images/rectangle_image.dart';
 import 'package:membreadflutter/src/widgets/molecules/dialog/edit_course_description_dialog/edit_course_description_dialog.dart';
 import 'package:membreadflutter/src/widgets/molecules/dialog/edit_course_title_dialog/edit_course_title_dialog.dart';
@@ -123,7 +125,6 @@ class _CourseEditScreenState extends ConsumerState<CourseEditScreen> {
                             colorFilter: ColorFilter.mode(
                                 Colors.grey[500]!, BlendMode.modulate))
                         : DecorationImage(
-
                             image: const AssetImage('assets/membread.jpg'),
                             fit: BoxFit.cover,
                             colorFilter: ColorFilter.mode(
@@ -139,11 +140,15 @@ class _CourseEditScreenState extends ConsumerState<CourseEditScreen> {
                           size: 30,
                         ),
                         onPressed: () async {
-                          XFile? resourceImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+                          XFile? resourceImage = await ImagePicker()
+                              .pickImage(source: ImageSource.gallery);
                           int? courseId = widget.course.id;
-                          UpdateCourseBackgroundParams data = UpdateCourseBackgroundParams(resourceImage, courseId);
-                          final path = await ref.read(updateCourseBackgroundProvider(data).future);
-                          if(path!=null){
+                          UpdateCourseBackgroundParams data =
+                              UpdateCourseBackgroundParams(
+                                  resourceImage, courseId);
+                          final path = await ref.read(
+                              updateCourseBackgroundProvider(data).future);
+                          if (path != null) {
                             setState(() {
                               _avatar = avatar(path);
                             });
@@ -155,81 +160,20 @@ class _CourseEditScreenState extends ConsumerState<CourseEditScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                width: MediaQuery.of(context).size.width - 40,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey[200]!)),
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Text(
-                        "Title",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
-                    Text(
-                      editCourse.title ?? "",
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          _buildTitleDialog(ref);
-                        },
-                        icon: const Icon(
-                          Icons.arrow_forward_ios,
-                          size: 20,
-                        ))
-                  ],
-                ),
+              TitleCourseEditCard(
+                title: editCourse.title ?? "",
+                onPressed: () {
+                  _buildTitleDialog(ref);
+                },
               ),
               const SizedBox(
                 height: 10,
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                width: MediaQuery.of(context).size.width - 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey[200]!),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Description",
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            Text(
-                              editCourse.description ?? "",
-                              style: Theme.of(context).textTheme.displaySmall,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        _buildDescriptionDialog(ref);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20,
-                      ),
-                    ),
-                  ],
-                ),
+              DescriptionCourseEditCard(
+                description: editCourse.description ?? "",
+                onPressed: () {
+                  _buildDescriptionDialog(ref);
+                },
               )
             ],
           ),

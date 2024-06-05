@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/notifier/tab_index/tab_index_notifier.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/course_tab.dart';
+import 'package:membreadflutter/src/screens/new_home_screen/tabs/explore_tab.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/home_tab.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/setting_tab.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/course_app_bar.dart';
@@ -14,6 +15,7 @@ class NewHomeScreen extends ConsumerWidget {
     final List<PreferredSizeWidget?> appBars = [
       NewHomePageAppBar(),
       CourseAppBar(),
+      null,
       AppBar(
         title: Padding(
           padding: const EdgeInsets.only(left: 10),
@@ -30,6 +32,7 @@ class NewHomeScreen extends ConsumerWidget {
     final List<Widget> contents = [
       HomeTab(),
       CourseTab(),
+      ExploreTab(),
       SettingTab()
     ];
 
@@ -61,6 +64,10 @@ class NewHomeScreen extends ConsumerWidget {
                   Icons.school,
                 ),
                 label: "Course"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.explore),
+                label : "Explore"
+            ),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.settings,

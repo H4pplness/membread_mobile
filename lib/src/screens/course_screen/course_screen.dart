@@ -28,7 +28,7 @@ class CourseScreen extends ConsumerWidget {
       backgroundColor: Colors.red,
       content: Text(
         'You must subcribe to study!',
-        style: GoogleFonts.montserrat(fontSize : 15,color:Colors.white),
+        style: GoogleFonts.montserrat(fontSize: 15, color: Colors.white),
       ),
     );
   }
@@ -84,13 +84,16 @@ class CourseScreen extends ConsumerWidget {
                                 builder: (context) => LeaderBoardScreen(
                                       course: course,
                                     ))),
-                        icon: const Icon(Icons.leaderboard, weight: 50, size: 25)),
+                        icon: const Icon(Icons.leaderboard,
+                            weight: 50, size: 25)),
                     isAuthor
                         ? IconButton(
                             onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CourseEditScreen(course: course,))),
+                                    builder: (context) => CourseEditScreen(
+                                          course: course,
+                                        ))),
                             icon: const Icon(
                               Icons.settings,
                               weight: 50,
@@ -113,6 +116,32 @@ class CourseScreen extends ConsumerWidget {
                     course: course,
                   ),
                 ),
+                if (isAuthor)
+                  SliverToBoxAdapter(
+                      child: GestureDetector(
+                    child: Container(
+                      height: 70,
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.grey,
+                          ),
+                          color: Colors.grey[100]),
+                      child: const Center(
+                        child: Icon(
+                          Icons.add,
+                          size: 50,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                AddLessonScreen(courseId: course.id!))),
+                  )),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
