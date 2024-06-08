@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:membreadflutter/src/core/network.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../models/notification.dart';
+import '../../../models/notification.dart';
 
 part 'get_notification.g.dart';
 

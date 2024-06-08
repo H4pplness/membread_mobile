@@ -19,6 +19,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform
   );
   await FirebaseApi().initNotifications();
+
   await dotenv.load(fileName: ".env");
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(ProviderScope(

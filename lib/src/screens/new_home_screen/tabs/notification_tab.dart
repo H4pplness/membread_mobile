@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:membreadflutter/src/domain/repositories/notification_repository/get_notification.dart';
+import 'package:membreadflutter/src/domain/repositories/notification_repository/get_notifications/get_notification.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/notification_card.dart';
 
 class NotificationTab extends ConsumerWidget {
