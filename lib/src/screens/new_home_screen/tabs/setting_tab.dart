@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:membreadflutter/src/database/local/token/token.dart';
 import 'package:membreadflutter/src/database/local/user/logined_user.dart';
 import 'package:membreadflutter/src/screens/learning_setting_screen/learning_setting_screen.dart';
+import 'package:membreadflutter/src/screens/schedule_screen/schedule_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../domain/models/user.dart';
 import '../../../widgets/atoms/cards/setting_card.dart';
@@ -44,6 +45,17 @@ class SettingTab extends ConsumerWidget {
             height: 10,
           ),
           SettingCard(
+            icon: Icons.calendar_month,
+            content: "Schedule",
+            onTap: ()=>Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ScheduleScreen())),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          SettingCard(
             icon: Icons.breakfast_dining_rounded,
             content: "Achievement",
             onTap: () => Navigator.push(
@@ -55,7 +67,7 @@ class SettingTab extends ConsumerWidget {
             height: 10,
           ),
           SettingCard(
-            icon: Icons.calendar_month_sharp,
+            icon: Icons.task,
             content: "Learning Settings",
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>LearningSettingScreen()));

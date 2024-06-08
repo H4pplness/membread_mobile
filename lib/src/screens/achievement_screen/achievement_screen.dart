@@ -7,7 +7,6 @@ import 'package:membreadflutter/src/domain/models/honor.dart';
 import 'package:membreadflutter/src/domain/repositories/honor_repository/achieve-honor/achieve_honor.dart';
 import 'package:membreadflutter/src/domain/repositories/honor_repository/get_honor/get_honor.dart';
 import 'package:membreadflutter/src/domain/repositories/score_repository/get_total_score/get_total_score.dart';
-import 'package:membreadflutter/src/domain/repositories/user_repository/user_repository.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/achievement_card.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/title_appbar.dart';
 
@@ -21,7 +20,7 @@ class AchievementScreen extends ConsumerWidget {
     for (var honor in defaultHonors) {
       if (honors.contains(honor)) {
         achievementComponents.add(AchievementCard(
-          achievementImage: AssetImage('assets/newbie_achievement.jpg'),
+          achievementImage: honor.image != '' ? AssetImage(honor.image) : const AssetImage('assets/membread.jpg'),
           title: honor.value,
           description: honor.description,
           progress: 1,
@@ -32,7 +31,7 @@ class AchievementScreen extends ConsumerWidget {
         if(progress>=1){
           achievementComponents.add(
               AchievementCard(
-                achievementImage: AssetImage('assets/newbie_achievement.jpg'),
+                achievementImage: honor.image != '' ? AssetImage(honor.image) : const AssetImage('assets/membread.jpg'),
                 title: honor.value,
                 description: honor.description,
                 progress: 1,
@@ -47,7 +46,7 @@ class AchievementScreen extends ConsumerWidget {
         }else{
           achievementComponents.add(
               AchievementCard(
-                achievementImage: AssetImage('assets/newbie_achievement.jpg'),
+                achievementImage: honor.image != '' ? AssetImage(honor.image) : const AssetImage('assets/membread.jpg'),
                 title: honor.value,
                 description: honor.description,
                 progress: progress,

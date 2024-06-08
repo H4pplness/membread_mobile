@@ -19,7 +19,7 @@ Future<List<Course>> getRecentCourse(ref) async {
       return Course(
           id: getCourseInfoDTO.id,
           title: getCourseInfoDTO.title,
-          description: getCourseInfoDTO.title,
+          description: getCourseInfoDTO.description,
           author: User(id: getCourseInfoDTO.author?.id),
           avatar: avatar(getCourseInfoDTO.avatar));
     }).toList();

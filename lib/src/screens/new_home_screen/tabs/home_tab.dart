@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/domain/repositories/course_repository/get_recent_course/get_recent_course.dart';
+import 'package:membreadflutter/src/widgets/atoms/cards/recent_course_card.dart';
 import '../../../domain/models/course.dart';
 import '../../course_screen/course_screen.dart';
 import '../notifier/tab_index/tab_index_notifier.dart';
@@ -14,67 +15,7 @@ class HomeTab extends ConsumerWidget {
   _buildRecentCourse(BuildContext context, List<Course> courses) {
     List<Widget> courseComponents = [];
     courses.forEach((course) {
-      courseComponents.add(
-        GestureDetector(
-          onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => CourseScreen(
-                        course: course,
-                      ))),
-          child: Container(
-            margin: const EdgeInsets.only(right: 20),
-            width: 250,
-            height: 280,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-                borderRadius: BorderRadius.circular(15),
-                image: course.avatar != null
-                    ? DecorationImage(
-                        image: NetworkImage(course.avatar ?? ""),
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                          Colors.grey[500]!,
-                          BlendMode.modulate,
-                        ),
-                      )
-                    : DecorationImage(
-                        image: AssetImage("assets/membread.jpg"),
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                          Colors.grey[500]!,
-                          BlendMode.modulate,
-                        ),
-                      )),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 50,
-                  child: Text(
-                    course.title ?? "",
-                    style: Theme.of(context).textTheme.labelMedium,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                const SizedBox(height: 5),
-                SizedBox(
-                  height: 40,
-                  child: Text(
-                    course.description ?? "",
-                    style: Theme.of(context).textTheme.labelSmall,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
-          ),
-        ),
-      );
+      courseComponents.add(RecentCourseCard(course: course));
     });
     return courseComponents;
   }
@@ -118,7 +59,56 @@ class HomeTab extends ConsumerWidget {
               return Container();
             }, loading: () {
               return Container();
-            })
+            }),
+            const SizedBox(height: 10),
+            Text(
+              "Today's task",
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 10),
+            Column(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width - 40,
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Title",
+                              style: Theme.of(context).textTheme.labelMedium,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Text(
+                            "17:00",
+                            style: GoogleFonts.montserrat(
+                                fontSize: 17,
+                                color: Colors.grey[400],
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                       const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "Hôm nay sẽ học bài 1 từ 5h đến 10h đêm nhé các em , nhớ học bài đúng giờ ! ",
+                        style: Theme.of(context).textTheme.labelSmall,
+                        maxLines: 3,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            )
           ],
         ),
       ),

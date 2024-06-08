@@ -12,7 +12,7 @@ Future<User> getLoginedUser(GetLoginedUserRef ref) async {
 
   User user = loginedUser.getUser();
   bool checkExpiry = await loginedUser.checkExpiry();
-  if (user.id == null || user.id == '' || checkExpiry) {
+  if (user.id == null || user.id == '' || !checkExpiry) {
     print("Loi o day nay");
     final dio = await ref.refresh(dioProviderWithAccessToken.future);
 

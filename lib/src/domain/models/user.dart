@@ -1,7 +1,8 @@
-
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable{
+import 'honor.dart';
+
+class User extends Equatable {
   String? id;
   String? username;
   String? avatar;
@@ -11,9 +12,21 @@ class User extends Equatable{
   String? lastname;
   int? numberOfFollowers;
   int? numberOfFollowings;
-
-  User({this.id,this.username,this.avatar,this.email,this.phone,this.firstname,this.lastname,this.numberOfFollowers=0,this.numberOfFollowings=0});
+  int? totalScore;
+  List<HONOR>? honors;
+  User(
+      {this.id,
+      this.username,
+      this.avatar,
+      this.email,
+      this.phone,
+      this.firstname,
+      this.lastname,
+      this.numberOfFollowers = 0,
+      this.numberOfFollowings = 0,
+      this.totalScore,
+      this.honors});
 
   @override
-  List<Object?> get props => [id,username];
+  List<Object?> get props => [id, username];
 }

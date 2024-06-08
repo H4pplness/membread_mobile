@@ -5,6 +5,7 @@ import 'package:membreadflutter/src/screens/new_home_screen/notifier/tab_index/t
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/course_tab.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/explore_tab.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/home_tab.dart';
+import 'package:membreadflutter/src/screens/new_home_screen/tabs/notification_tab.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/tabs/setting_tab.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/course_app_bar.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/new_home_page_appbar.dart';
@@ -15,7 +16,28 @@ class NewHomeScreen extends ConsumerWidget {
     final List<PreferredSizeWidget?> appBars = [
       NewHomePageAppBar(),
       CourseAppBar(),
-      null,
+      AppBar(
+        title: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Text("Explore",style: GoogleFonts.montserrat(
+              fontSize : 25,
+              color : Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
+              fontWeight : FontWeight.w600
+          ),),
+        ),
+        automaticallyImplyLeading: false,
+      ),
+      AppBar(
+        title: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Text("Notification",style: GoogleFonts.montserrat(
+              fontSize : 25,
+              color : Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white,
+              fontWeight : FontWeight.w600
+          ),),
+        ),
+        automaticallyImplyLeading: false,
+      ),
       AppBar(
         title: Padding(
           padding: const EdgeInsets.only(left: 10),
@@ -30,10 +52,11 @@ class NewHomeScreen extends ConsumerWidget {
     ];
 
     final List<Widget> contents = [
-      HomeTab(),
-      CourseTab(),
-      ExploreTab(),
-      SettingTab()
+      const HomeTab(),
+      const CourseTab(),
+      const ExploreTab(),
+      const NotificationTab(),
+      const SettingTab()
     ];
 
     final index = ref.watch(tabIndexNotifierProvider);
@@ -67,6 +90,10 @@ class NewHomeScreen extends ConsumerWidget {
             BottomNavigationBarItem(
                 icon: Icon(Icons.explore),
                 label : "Explore"
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.notifications),
+                label : "Notification"
             ),
             BottomNavigationBarItem(
                 icon: Icon(

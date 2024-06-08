@@ -56,7 +56,7 @@ class CourseTab extends ConsumerWidget {
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: EdgeInsets.only(top: 10,left: 20,right: 20),
       child: Column(
         children: [
           const SearchField(),

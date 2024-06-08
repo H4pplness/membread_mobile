@@ -42,11 +42,11 @@ ThemeData darkTheme = ThemeData(
               fontSize: 14, fontWeight: FontWeight.w400, color: Colors.white)),
       labelMedium: GoogleFonts.montserrat(
           textStyle: const TextStyle(
-              fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white)),
+              fontSize: 19, fontWeight: FontWeight.w500, color: Colors.white)),
       labelLarge: GoogleFonts.montserrat(
           textStyle: const TextStyle(
               fontSize: 25, fontWeight: FontWeight.w600, color: Colors.white)),
       labelSmall: GoogleFonts.montserrat(
           textStyle: const TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white))),
+              fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white))),
 );

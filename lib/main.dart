@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:membreadflutter/firebase_options.dart';
+import 'package:membreadflutter/src/core/firebase.dart';
 import 'package:membreadflutter/src/database/local/core/share_preferences.dart';
 import 'package:membreadflutter/src/database/local/token/token.dart';
-import 'package:membreadflutter/src/screens/add_lesson_screen/add_leson_screen.dart';
+import 'package:membreadflutter/src/screens/login_screen/login_screen.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/new_home_screen.dart';
 import 'package:membreadflutter/src/screens/welcome_screen/welcome_screen.dart';
 import 'package:membreadflutter/src/themes/dark_theme.dart';
@@ -12,6 +15,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
+  await FirebaseApi().initNotifications();
   await dotenv.load(fileName: ".env");
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(ProviderScope(
@@ -36,7 +43,11 @@ class MyApp extends ConsumerWidget {
       darkTheme: darkTheme,
       theme: lightTheme,
       themeMode:isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home : isLogin?NewHomeScreen() : WelcomeScreen()
+      home : isLogin?NewHomeScreen() : const WelcomeScreen()
+      // home: LoginScreen(),
     );
+
   }
 }
+
+

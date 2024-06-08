@@ -50,6 +50,7 @@ class _SearchFieldState extends State<SearchField> {
                         BorderSide(color: Theme.of(context).colorScheme.background, width: 0)),
                 ),
               )),
+          IconButton(onPressed: (){}, icon: Icon(Icons.tune,size: 25,))
         ],
       ),
     );

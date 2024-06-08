@@ -87,11 +87,11 @@ extension HonorExtension on HONOR {
       case HONOR.NEWBIE:
         return 'assets/newbie_achievement.jpg';
       case HONOR.BAGUETTE:
-        return '';
+        return 'assets/baguette_achievement.jpg';
       case HONOR.SANDWICH:
-        return '';
+        return 'assets/sandwich_achievement.jpg';
       case HONOR.JAMBONBEURRE:
-        return '';
+        return 'assets/jambonbeurre_achievement.jpg';
       case HONOR.WAITER:
         return '';
       case HONOR.BAKER:
