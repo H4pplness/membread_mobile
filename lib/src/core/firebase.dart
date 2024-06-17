@@ -16,6 +16,8 @@ class FirebaseApi {
     final FCMtoken = await _firebaseMessaging.getToken();
     print("TOKEN $FCMtoken");
 
+
+
     FirebaseMessaging.onMessage.listen((event) {
       print("Event : ${event.notification!.title}");
     });

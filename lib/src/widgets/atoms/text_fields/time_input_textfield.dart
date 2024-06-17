@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  CustomTextField({super.key,this.controller,required this.name,this.decoration,this.labelStyle});
+class TimeInputTextfield extends StatelessWidget {
+  TimeInputTextfield({super.key,required this.name,this.decoration,this.labelStyle});
 
-  TextEditingController? controller;
   String name;
   InputDecoration? decoration;
   TextStyle? labelStyle;
@@ -22,7 +21,8 @@ class CustomTextField extends StatelessWidget {
         ),
         const SizedBox(height: 10,),
         TextField(
-          controller: controller,
+          autofocus: false,
+          readOnly: true,
           style: Theme
               .of(context)
               .textTheme

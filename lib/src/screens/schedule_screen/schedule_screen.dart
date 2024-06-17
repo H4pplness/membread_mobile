@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:membreadflutter/src/domain/models/course.dart';
 import 'package:membreadflutter/src/domain/models/task.dart';
 import 'package:membreadflutter/src/domain/repositories/notification_repository/get_schedules/get_schedules.dart';
 import 'package:membreadflutter/src/screens/add_schedule_screen/add_schedule_screen.dart';
@@ -18,7 +19,8 @@ extension MyDateExtension on DateTime {
 }
 
 class ScheduleScreen extends ConsumerStatefulWidget {
-  const ScheduleScreen({super.key});
+  Course? course;
+  ScheduleScreen({super.key, this.course});
 
   @override
   ConsumerState<ScheduleScreen> createState() => _ScheduleScreenState();
@@ -34,6 +36,10 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.refresh(getScheduleProvider);
+    });
   }
 
   _getScheduleFromDay(DateTime time, List<Schedule> schedules) {
@@ -41,40 +47,147 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
     List<Task> selectedDayTask = [];
 
     schedules.forEach((schedule) {
-      if(schedule.scheduledDate!=null){
-        if(schedule.scheduledDate!.getDateOnly() == time.getDateOnly()){
-          selectedDayTask.add(Task(id: schedule.id,title: schedule.title,body: schedule.body,time: schedule.time));
+      if (widget.course != null) {
+        if (widget.course!.id == schedule.courseId) {
+          print("CODE DA VAO DAY !");
+          if (schedule.scheduledDate != null) {
+            if (schedule.scheduledDate!.getDateOnly() == time.getDateOnly()) {
+              selectedDayTask.add(Task(
+                  id: schedule.id,
+                  title: schedule.title,
+                  body: schedule.body,
+                  time: schedule.time));
+            }
+          } else {
+            switch (weekDay) {
+              case 1:
+                if (schedule.eachMonday ?? false) {
+                  selectedDayTask.add(Task(
+                      id: schedule.id,
+                      title: schedule.title,
+                      body: schedule.body,
+                      time: schedule.time));
+                }
+              case 2:
+                if (schedule.eachTuesday ?? false) {
+                  selectedDayTask.add(Task(
+                      id: schedule.id,
+                      title: schedule.title,
+                      body: schedule.body,
+                      time: schedule.time));
+                }
+              case 3:
+                if (schedule.eachWednesday ?? false) {
+                  selectedDayTask.add(Task(
+                      id: schedule.id,
+                      title: schedule.title,
+                      body: schedule.body,
+                      time: schedule.time));
+                }
+              case 4:
+                if (schedule.eachThursday ?? false) {
+                  selectedDayTask.add(Task(
+                      id: schedule.id,
+                      title: schedule.title,
+                      body: schedule.body,
+                      time: schedule.time));
+                }
+              case 5:
+                if (schedule.eachFriday ?? false) {
+                  selectedDayTask.add(Task(
+                      id: schedule.id,
+                      title: schedule.title,
+                      body: schedule.body,
+                      time: schedule.time));
+                }
+              case 6:
+                if (schedule.eachSaturday ?? false) {
+                  selectedDayTask.add(Task(
+                      id: schedule.id,
+                      title: schedule.title,
+                      body: schedule.body,
+                      time: schedule.time));
+                }
+              case 7:
+                if (schedule.eachSunday ?? false) {
+                  selectedDayTask.add(Task(
+                      id: schedule.id,
+                      title: schedule.title,
+                      body: schedule.body,
+                      time: schedule.time));
+                }
+            }
+          }
         }
-      }else{
-        switch(weekDay){
-          case 1 :
-            if(schedule.eachMonday??false){
-              selectedDayTask.add(Task(id: schedule.id,title: schedule.title,body: schedule.body,time: schedule.time));
-            }
-          case 2 :
-            if(schedule.eachTuesday??false){
-              selectedDayTask.add(Task(id: schedule.id,title: schedule.title,body: schedule.body,time: schedule.time));
-            }
-          case 3:
-            if(schedule.eachWednesday??false){
-              selectedDayTask.add(Task(id: schedule.id,title: schedule.title,body: schedule.body,time: schedule.time));
-            }
-          case 4:
-            if(schedule.eachThursday??false){
-              selectedDayTask.add(Task(id: schedule.id,title: schedule.title,body: schedule.body,time: schedule.time));
-            }
-          case 5:
-            if(schedule.eachFriday??false){
-              selectedDayTask.add(Task(id: schedule.id,title: schedule.title,body: schedule.body,time: schedule.time));
-            }
-          case 6:
-            if(schedule.eachSaturday??false){
-              selectedDayTask.add(Task(id: schedule.id,title: schedule.title,body: schedule.body,time: schedule.time));
-            }
-          case 7:
-            if(schedule.eachSunday??false){
-              selectedDayTask.add(Task(id: schedule.id,title: schedule.title,body: schedule.body,time: schedule.time));
-            }
+      }
+      else {
+        if (schedule.scheduledDate != null) {
+          if (schedule.scheduledDate!.getDateOnly() == time.getDateOnly()) {
+            selectedDayTask.add(Task(
+                id: schedule.id,
+                title: schedule.title,
+                body: schedule.body,
+                time: schedule.time));
+          }
+        } else {
+          switch (weekDay) {
+            case 1:
+              if (schedule.eachMonday ?? false) {
+                selectedDayTask.add(Task(
+                    id: schedule.id,
+                    title: schedule.title,
+                    body: schedule.body,
+                    time: schedule.time));
+              }
+            case 2:
+              if (schedule.eachTuesday ?? false) {
+                selectedDayTask.add(Task(
+                    id: schedule.id,
+                    title: schedule.title,
+                    body: schedule.body,
+                    time: schedule.time));
+              }
+            case 3:
+              if (schedule.eachWednesday ?? false) {
+                selectedDayTask.add(Task(
+                    id: schedule.id,
+                    title: schedule.title,
+                    body: schedule.body,
+                    time: schedule.time));
+              }
+            case 4:
+              if (schedule.eachThursday ?? false) {
+                selectedDayTask.add(Task(
+                    id: schedule.id,
+                    title: schedule.title,
+                    body: schedule.body,
+                    time: schedule.time));
+              }
+            case 5:
+              if (schedule.eachFriday ?? false) {
+                selectedDayTask.add(Task(
+                    id: schedule.id,
+                    title: schedule.title,
+                    body: schedule.body,
+                    time: schedule.time));
+              }
+            case 6:
+              if (schedule.eachSaturday ?? false) {
+                selectedDayTask.add(Task(
+                    id: schedule.id,
+                    title: schedule.title,
+                    body: schedule.body,
+                    time: schedule.time));
+              }
+            case 7:
+              if (schedule.eachSunday ?? false) {
+                selectedDayTask.add(Task(
+                    id: schedule.id,
+                    title: schedule.title,
+                    body: schedule.body,
+                    time: schedule.time));
+              }
+          }
         }
       }
     });
@@ -87,7 +200,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
     taskComponents.add(GestureDetector(
       child: Container(
         height: 70,
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.grey[300]!),
             borderRadius: BorderRadius.circular(10),
@@ -102,7 +215,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
       ),
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => AddScheduleScreen()));
+            MaterialPageRoute(builder: (context) => AddScheduleScreen(course: widget.course,day : selectedDay)));
       },
     ));
     taskComponents.add(const SizedBox(

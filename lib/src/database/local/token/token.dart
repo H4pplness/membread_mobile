@@ -21,6 +21,7 @@ class Token {
 
   static const _accessTokenKey = 'access_token';
   static const _refreshTokenKey = 'refresh_token';
+  static const _firebaseTokenKey = 'firebase_token';
 
   static const _timeStamp = 'time_stamp';
   static const int _expiryDuration = 5400;
@@ -78,5 +79,13 @@ class Token {
 
   String? getRefreshToken() {
     return sharedPreferences.getString(_refreshTokenKey);
+  }
+
+  Future<void> saveFirebaseToken(String token) async {
+    await sharedPreferences.setString(_firebaseTokenKey, token);
+  }
+
+  String? getFirebaseToken(){
+    return sharedPreferences.getString(_firebaseTokenKey);
   }
 }

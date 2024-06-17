@@ -11,6 +11,7 @@ class Schedule {
   bool? eachSaturday;
   DateTime? scheduledDate;
   String? time;
+  int? courseId;
 
   Schedule(
       {this.id,
@@ -24,5 +25,6 @@ class Schedule {
       this.eachFriday,
       this.eachSaturday,
       this.scheduledDate,
-      this.time});
+      this.time,
+      this.courseId});
 }

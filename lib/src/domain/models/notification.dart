@@ -7,6 +7,7 @@ class AppNotification{
   String? body;
   String? avatar;
   String? createAt;
+  int? courseId;
 
-  AppNotification({this.id,this.title,this.body,this.avatar,this.createAt});
+  AppNotification({this.id,this.title,this.body,this.avatar,this.createAt,this.courseId});
 }

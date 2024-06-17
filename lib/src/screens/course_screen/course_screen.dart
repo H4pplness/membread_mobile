@@ -11,6 +11,7 @@ import 'package:membreadflutter/src/screens/add_lesson_screen/add_leson_screen.d
 import 'package:membreadflutter/src/screens/course_edit_screen/course_edit_screen.dart';
 import 'package:membreadflutter/src/screens/leader_board_screen/leader_board_screen.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/new_home_screen.dart';
+import 'package:membreadflutter/src/screens/schedule_screen/schedule_screen.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/new_lesson_card.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/none_title_appbar.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/summary_course_appbar.dart';
@@ -86,6 +87,13 @@ class CourseScreen extends ConsumerWidget {
                                     ))),
                         icon: const Icon(Icons.leaderboard,
                             weight: 50, size: 25)),
+                    if (course.canStudy!)
+                      IconButton(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ScheduleScreen(course: course,))),
+                          icon: Icon(Icons.calendar_month)),
                     isAuthor
                         ? IconButton(
                             onPressed: () => Navigator.push(

@@ -50,7 +50,7 @@ class SettingTab extends ConsumerWidget {
             onTap: ()=>Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const ScheduleScreen())),
+                    builder: (context) => ScheduleScreen())),
           ),
           const SizedBox(
             height: 10,
