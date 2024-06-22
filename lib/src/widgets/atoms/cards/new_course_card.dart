@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/domain/models/course.dart';
 import 'package:membreadflutter/src/widgets/atoms/images/circle_image.dart';
@@ -50,22 +51,35 @@ class CourseCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
-                          const Icon(Icons.person, color: Colors.white54),
-                          const SizedBox(width: 3),
-                          Text(
-                            course.author?.username ?? "",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 12,
-                                color: Colors.white54,
-                                fontWeight: FontWeight.w500),
+                          Container(
+                            width: 100,
+                            child: Row(
+                              children: [
+                                const Icon(Icons.people, color: Colors.white),
+                                const SizedBox(width: 3),
+                                Text(
+                                  course.numberOfParticipants!=null?course.numberOfParticipants.toString():"0",
+                                  style: Theme.of(context).textTheme.labelSmall,
+                                )
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          SizedBox(
+                            width: 100,
+                            child: Row(
+                              children: [
+                                const FaIcon(FontAwesomeIcons.breadSlice,color: Colors.white,size: 18,),
+                                const SizedBox(width: 5,),
+                                Text(course.rating!=null?course.rating.toString():"0",style: Theme.of(context).textTheme.labelSmall,)
+                              ],
+                            ),
                           )
                         ],
-                      ),
-                      const SizedBox(height: 5),
-                      StarGroup(rating: 4.5)
+                      )
                     ],
                   )),
             )

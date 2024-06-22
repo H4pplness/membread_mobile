@@ -5,11 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:membreadflutter/src/database/local/user/logined_user.dart';
 import 'package:membreadflutter/src/domain/models/course.dart';
 import 'package:membreadflutter/src/domain/models/learning.dart';
+import 'package:membreadflutter/src/domain/models/test_lesson.dart';
 import 'package:membreadflutter/src/domain/models/vocabulary_lesson.dart';
 import 'package:membreadflutter/src/domain/repositories/course_repository/get_course_info/get_course_info.dart';
 import 'package:membreadflutter/src/screens/add_lesson_screen/add_leson_screen.dart';
 import 'package:membreadflutter/src/screens/course_edit_screen/course_edit_screen.dart';
 import 'package:membreadflutter/src/screens/leader_board_screen/leader_board_screen.dart';
+import 'package:membreadflutter/src/screens/lesson_screen/test_lesson_screen.dart';
 import 'package:membreadflutter/src/screens/new_home_screen/new_home_screen.dart';
 import 'package:membreadflutter/src/screens/schedule_screen/schedule_screen.dart';
 import 'package:membreadflutter/src/widgets/atoms/cards/new_lesson_card.dart';
@@ -55,6 +57,7 @@ class CourseScreen extends ConsumerWidget {
                 child: CircularProgressIndicator(),
               ));
         } else if (snapshot.hasError) {
+          print("ERROR : ${snapshot.error}");
           return Scaffold(
             appBar: NonTitleAppBar(onPressed: () => Navigator.pop(context)),
             body: const Center(
@@ -164,7 +167,11 @@ class CourseScreen extends ConsumerWidget {
                               switch (course.lessons![index].runtimeType) {
                                 case VocabularyLesson:
                                   return VocabularyLessonScreen(
-                                      lesson: lesson as VocabularyLesson);
+                                      lesson: lesson as VocabularyLesson,courseId: course.id!,);
+                                case TestLesson :
+                                  return TestLessonScreen(
+                                    lesson : lesson as TestLesson,courseId : course.id!
+                                  );
                                 default:
                                   return Scaffold(
                                     appBar: AppBar(

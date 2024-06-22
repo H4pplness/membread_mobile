@@ -22,7 +22,7 @@ LessonVocabularyDTO _$LessonVocabularyDTOFromJson(Map<String, dynamic> json) {
 mixin _$LessonVocabularyDTO {
   String get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  List<VocabularyDTO>? get listVocabulary => throw _privateConstructorUsedError;
+  List<VocabularyDTO>? get listLearning => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $LessonVocabularyDTOCopyWith<$Res> {
       _$LessonVocabularyDTOCopyWithImpl<$Res, LessonVocabularyDTO>;
   @useResult
   $Res call(
-      {String title, String? description, List<VocabularyDTO>? listVocabulary});
+      {String title, String? description, List<VocabularyDTO>? listLearning});
 }
 
 /// @nodoc
@@ -55,7 +55,7 @@ class _$LessonVocabularyDTOCopyWithImpl<$Res, $Val extends LessonVocabularyDTO>
   $Res call({
     Object? title = null,
     Object? description = freezed,
-    Object? listVocabulary = freezed,
+    Object? listLearning = freezed,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -66,9 +66,9 @@ class _$LessonVocabularyDTOCopyWithImpl<$Res, $Val extends LessonVocabularyDTO>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      listVocabulary: freezed == listVocabulary
-          ? _value.listVocabulary
-          : listVocabulary // ignore: cast_nullable_to_non_nullable
+      listLearning: freezed == listLearning
+          ? _value.listLearning
+          : listLearning // ignore: cast_nullable_to_non_nullable
               as List<VocabularyDTO>?,
     ) as $Val);
   }
@@ -83,7 +83,7 @@ abstract class _$$LessonVocabularyDTOImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String title, String? description, List<VocabularyDTO>? listVocabulary});
+      {String title, String? description, List<VocabularyDTO>? listLearning});
 }
 
 /// @nodoc
@@ -99,7 +99,7 @@ class __$$LessonVocabularyDTOImplCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? description = freezed,
-    Object? listVocabulary = freezed,
+    Object? listLearning = freezed,
   }) {
     return _then(_$LessonVocabularyDTOImpl(
       title: null == title
@@ -110,9 +110,9 @@ class __$$LessonVocabularyDTOImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      listVocabulary: freezed == listVocabulary
-          ? _value._listVocabulary
-          : listVocabulary // ignore: cast_nullable_to_non_nullable
+      listLearning: freezed == listLearning
+          ? _value._listLearning
+          : listLearning // ignore: cast_nullable_to_non_nullable
               as List<VocabularyDTO>?,
     ));
   }
@@ -124,8 +124,8 @@ class _$LessonVocabularyDTOImpl implements _LessonVocabularyDTO {
   const _$LessonVocabularyDTOImpl(
       {required this.title,
       this.description,
-      final List<VocabularyDTO>? listVocabulary})
-      : _listVocabulary = listVocabulary;
+      final List<VocabularyDTO>? listLearning})
+      : _listLearning = listLearning;
 
   factory _$LessonVocabularyDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$LessonVocabularyDTOImplFromJson(json);
@@ -134,19 +134,19 @@ class _$LessonVocabularyDTOImpl implements _LessonVocabularyDTO {
   final String title;
   @override
   final String? description;
-  final List<VocabularyDTO>? _listVocabulary;
+  final List<VocabularyDTO>? _listLearning;
   @override
-  List<VocabularyDTO>? get listVocabulary {
-    final value = _listVocabulary;
+  List<VocabularyDTO>? get listLearning {
+    final value = _listLearning;
     if (value == null) return null;
-    if (_listVocabulary is EqualUnmodifiableListView) return _listVocabulary;
+    if (_listLearning is EqualUnmodifiableListView) return _listLearning;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'LessonVocabularyDTO(title: $title, description: $description, listVocabulary: $listVocabulary)';
+    return 'LessonVocabularyDTO(title: $title, description: $description, listLearning: $listLearning)';
   }
 
   @override
@@ -158,13 +158,13 @@ class _$LessonVocabularyDTOImpl implements _LessonVocabularyDTO {
             (identical(other.description, description) ||
                 other.description == description) &&
             const DeepCollectionEquality()
-                .equals(other._listVocabulary, _listVocabulary));
+                .equals(other._listLearning, _listLearning));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, title, description,
-      const DeepCollectionEquality().hash(_listVocabulary));
+      const DeepCollectionEquality().hash(_listLearning));
 
   @JsonKey(ignore: true)
   @override
@@ -185,7 +185,7 @@ abstract class _LessonVocabularyDTO implements LessonVocabularyDTO {
   const factory _LessonVocabularyDTO(
       {required final String title,
       final String? description,
-      final List<VocabularyDTO>? listVocabulary}) = _$LessonVocabularyDTOImpl;
+      final List<VocabularyDTO>? listLearning}) = _$LessonVocabularyDTOImpl;
 
   factory _LessonVocabularyDTO.fromJson(Map<String, dynamic> json) =
       _$LessonVocabularyDTOImpl.fromJson;
@@ -195,7 +195,7 @@ abstract class _LessonVocabularyDTO implements LessonVocabularyDTO {
   @override
   String? get description;
   @override
-  List<VocabularyDTO>? get listVocabulary;
+  List<VocabularyDTO>? get listLearning;
   @override
   @JsonKey(ignore: true)
   _$$LessonVocabularyDTOImplCopyWith<_$LessonVocabularyDTOImpl> get copyWith =>

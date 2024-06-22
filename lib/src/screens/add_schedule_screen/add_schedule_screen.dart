@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -26,9 +27,10 @@ class AddScheduleScreen extends ConsumerStatefulWidget {
 class _AddScheduleScreenState extends ConsumerState<AddScheduleScreen> {
   final _titleController = TextEditingController();
   final _bodyController = TextEditingController();
-  String _time = DateFormat("hh:mm").format(DateTime.now()).toString();
+  String _time = DateFormat("hh:mm").format(DateTime(2024)).toString();
   Course? _course;
   late DateTime _day;
+  int _selectedOption = 0;
 
   @override
   void initState() {
@@ -53,14 +55,14 @@ class _AddScheduleScreenState extends ConsumerState<AddScheduleScreen> {
                         title: _titleController.text,
                         description: _bodyController.text,
                         time: _time,
-                        scheduledDate: widget.day,
-                        eachMonday: repeatNotifier.contains(Day.MON),
-                        eachSunday: repeatNotifier.contains(Day.SUN),
-                        eachTuesday: repeatNotifier.contains(Day.TUE),
-                        eachThursday: repeatNotifier.contains(Day.THU),
-                        eachWednesday: repeatNotifier.contains(Day.WED),
-                        eachSaturday: repeatNotifier.contains(Day.SAT),
-                        eachFriday: repeatNotifier.contains(Day.FRI)))
+                        scheduledDate:_selectedOption==0? DateFormat('yyyy-MM-dd').format(_day) : null,
+                        eachMonday:_selectedOption==1? repeatNotifier.contains(Day.MON) : false,
+                        eachSunday:_selectedOption==1?  repeatNotifier.contains(Day.SUN) : false,
+                        eachTuesday:_selectedOption==1?  repeatNotifier.contains(Day.TUE) : false,
+                        eachThursday:_selectedOption==1?  repeatNotifier.contains(Day.THU) : false,
+                        eachWednesday:_selectedOption==1?  repeatNotifier.contains(Day.WED) : false,
+                        eachSaturday:_selectedOption==1?  repeatNotifier.contains(Day.SAT) : false,
+                        eachFriday:_selectedOption==1?  repeatNotifier.contains(Day.FRI) : false))
                     .future);
               });
               Navigator.pop(context);
@@ -131,20 +133,55 @@ class _AddScheduleScreenState extends ConsumerState<AddScheduleScreen> {
                     },
                     icon: const Icon(Icons.access_time),
                   ),
-                  enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(width: 0.5, color: Colors.grey))),
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(width: 0.5, color: Colors.grey[300]!)))
+            ),
+            Row(
+              children: [
+                Row(
+                  children: [
+                    Radio(
+                      value: 0,
+                      groupValue: _selectedOption,
+                      onChanged: (int? value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
+                    ),
+                    const SizedBox(width: 5,),
+                    Text('Date',style: Theme.of(context).textTheme.displayMedium,),
+                  ],
+                ),
+                const SizedBox(width: 20,),
+                Row(
+                  children: [
+                    Radio(
+                      value: 1,
+                      groupValue: _selectedOption,
+                      onChanged: (int? value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
+                    ),
+                    const SizedBox(width: 5,),
+                    Text('Repeat',style: Theme.of(context).textTheme.displayMedium,),
+                  ],
+                ),
+              ],
             ),
             const SizedBox(height: 15,),
+            if(_selectedOption == 0)
             ScheduleDateTextField(day: _day),
-            const SizedBox(height: 15),
-            Container(
-              child: RepeatScheduleGroup(
-                weekDay: repeatNotifier,
-                onTap: (day) {
-                  ref.read(repeatNotifierProvider.notifier).addDay(day);
-                },
-              ),
+            if(_selectedOption == 1)
+              RepeatScheduleGroup(
+              weekDay: repeatNotifier,
+              onTap: (day) {
+                ref.read(repeatNotifierProvider.notifier).addDay(day);
+              }
             )
+            ,
           ],
         ),
       ),

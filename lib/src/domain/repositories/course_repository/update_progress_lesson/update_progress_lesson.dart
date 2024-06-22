@@ -9,6 +9,7 @@ part 'update_progress_lesson.g.dart';
 @riverpod
 Future<dynamic> updateProgressLesson(ref , UpdateProgressLessonVocabularyDTO learned) async{
   final dio = await ref.read(dioProviderWithAccessToken.future);
+  print("LEARNED : ${learned.toJson()}");
   Response response = await dio.post('/study/course/update-progress/vocabulary-lesson',
     data : learned.toJson()
   );

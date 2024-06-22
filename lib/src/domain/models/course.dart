@@ -11,7 +11,7 @@ class Course extends Equatable{
   List<Lesson>? lessons;
   User? author;
   String? avatar;
-  double? rating;
+  int? rating;
   int? numberOfParticipants;
   bool? canStudy;
   Course({this.id,this.title,this.description,this.lessons,this.avatar,this.author,this.rating,this.numberOfParticipants,this.canStudy = true});

@@ -11,6 +11,7 @@ _$LessonDTOImpl _$$LessonDTOImplFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       description: json['description'] as String?,
+      type: json['type'] as String?,
     );
 
 Map<String, dynamic> _$$LessonDTOImplToJson(_$LessonDTOImpl instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$LessonDTOImplToJson(_$LessonDTOImpl instance) =>
       'id': instance.id,
       'title': instance.title,
       'description': instance.description,
+      'type': instance.type,
     };

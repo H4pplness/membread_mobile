@@ -11,7 +11,7 @@ _$LessonVocabularyDTOImpl _$$LessonVocabularyDTOImplFromJson(
     _$LessonVocabularyDTOImpl(
       title: json['title'] as String,
       description: json['description'] as String?,
-      listVocabulary: (json['listVocabulary'] as List<dynamic>?)
+      listLearning: (json['listLearning'] as List<dynamic>?)
           ?.map((e) => VocabularyDTO.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -21,5 +21,5 @@ Map<String, dynamic> _$$LessonVocabularyDTOImplToJson(
     <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
-      'listVocabulary': instance.listVocabulary,
+      'listLearning': instance.listLearning,
     };

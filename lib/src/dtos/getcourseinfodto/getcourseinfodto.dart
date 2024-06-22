@@ -16,7 +16,9 @@ class GetCourseInfoDTO with _$GetCourseInfoDTO{
     int? currentLesson,
     GetUserInfoDTO? author,
     bool? canStudy,
-    String? avatar
+    String? avatar,
+    String? rating,
+    @Default(0) int? numberOfParticipant
   }) = _GetCourseInfoDTO;
 
   factory GetCourseInfoDTO.fromJson(Map<String,dynamic> json) => _$GetCourseInfoDTOFromJson(json);

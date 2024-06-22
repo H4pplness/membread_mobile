@@ -7,7 +7,8 @@ class BorderButton extends StatelessWidget {
   ButtonStyle? style;
   EdgeInsetsGeometry? padding;
   Color? color;
-  BorderButton({Key? key,this.width,this.onPressed,required this.child,this.style,this.padding,this.color}) : super(key: key);
+  Color? borderColor;
+  BorderButton({Key? key,this.width,this.borderColor,this.onPressed,required this.child,this.style,this.padding,this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class BorderButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: color?? Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white)
+          border: Border.all(color: borderColor??Colors.white)
         ),
         child: child,
       ),

@@ -9,7 +9,7 @@ class LessonVocabularyDTO with _$LessonVocabularyDTO{
   const factory LessonVocabularyDTO({
     required String title,
     String? description,
-    List<VocabularyDTO>? listVocabulary
+    List<VocabularyDTO>? listLearning
   }) = _LessonVocabularyDTO;
 
   factory LessonVocabularyDTO.fromJson(Map<String, dynamic> json) => _$LessonVocabularyDTOFromJson(json);

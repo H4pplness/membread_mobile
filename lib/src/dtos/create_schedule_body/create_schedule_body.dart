@@ -9,7 +9,7 @@ class CreateScheduleBody with _$CreateScheduleBody{
     String? title,
     String? description,
     String? time,
-    DateTime? scheduledDate,
+    String? scheduledDate,
     int? courseId,
     @Default(false) bool eachSunday,
     @Default(false) bool eachMonday,

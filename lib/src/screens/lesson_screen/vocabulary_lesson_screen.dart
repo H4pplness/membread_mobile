@@ -12,8 +12,9 @@ import '../../domain/repositories/course_repository/get_lesson/get_lesson.dart';
 import '../../widgets/atoms/cards/study_type_card.dart';
 
 class VocabularyLessonScreen extends ConsumerWidget {
+  int courseId;
   VocabularyLesson lesson;
-  VocabularyLessonScreen({super.key, required this.lesson});
+  VocabularyLessonScreen({super.key, required this.lesson,required this.courseId});
 
   _getListVocabulary(VocabularyLesson currentLesson) {
     return currentLesson.listLearning?.map((vocabulary) {
@@ -89,6 +90,8 @@ class VocabularyLessonScreen extends ConsumerWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => StudyVocabularyScreen(
+                          courseId: courseId,
+                            lessonId: lesson.id!,
                             listVocabulary: _getListVocabulary(detailLesson)))),
               ),
             ),
@@ -105,7 +108,7 @@ class VocabularyLessonScreen extends ConsumerWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => TestVocabularyScreen(
-                            listVocabulary: _getListVocabulary(detailLesson)))),
+                            listVocabulary: _getListVocabulary(detailLesson),courseId: courseId,lessonId: lesson.id!,))),
               ),
             ),
             const SizedBox(

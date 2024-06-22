@@ -343,6 +343,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
             );
           },
           error: (error, _) {
+            print(error);
             return Container();
           },
           loading: () => Center(

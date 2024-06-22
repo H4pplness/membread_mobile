@@ -16,7 +16,8 @@ enum LessonType{
   VOCABULARY,
   GRAMMAR,
   VIDEO,
-  ALGEBRA
+  ALGEBRA,
+  TEST
 }
 
 extension LessonTypeExtension on LessonType{
@@ -30,6 +31,8 @@ extension LessonTypeExtension on LessonType{
         return "Video";
       case LessonType.ALGEBRA:
         return "Algebra";
+      case LessonType.TEST:
+        return 'Test';
     }
   }
 
@@ -43,6 +46,8 @@ extension LessonTypeExtension on LessonType{
         return LessonType.VIDEO;
       case "Algebra" :
         return LessonType.ALGEBRA;
+      case "Test" :
+        return LessonType.TEST;
       default:
         throw ArgumentError('Invalid honor value: $value');
     }

@@ -14,8 +14,10 @@ import '../../../dtos/progressvocabularydto/progress_vocabulary_dto.dart';
 import '../../../dtos/updateprogresslessondto/update_progress_lesson_vocabulary_dto.dart';
 
 class TestVocabularyScreen extends ConsumerWidget {
+  int courseId;
+  int lessonId;
   List<Vocabulary> listVocabulary;
-  TestVocabularyScreen({super.key, required this.listVocabulary});
+  TestVocabularyScreen({super.key, required this.listVocabulary,required this.courseId,required this.lessonId});
 
   List<Vocabulary> getRandomElements(List<Vocabulary> list, int count) {
     if (count > list.length) {
@@ -59,6 +61,8 @@ class TestVocabularyScreen extends ConsumerWidget {
             listVocabulary: listVocabulary,
             backFunction: () async {
               final learned = UpdateProgressLessonVocabularyDTO(
+                  course_id: courseId,
+                  lesson_id: lessonId,
                   score: scoreStatistics.totalScore,
                   listVocabulary: listVocabulary
                       .map((vocabulary) => ProgressVocabularyDTO(

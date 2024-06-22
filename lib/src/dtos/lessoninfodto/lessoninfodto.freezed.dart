@@ -23,6 +23,7 @@ mixin _$LessonInfoDTO {
   int? get id => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $LessonInfoDTOCopyWith<$Res> {
           LessonInfoDTO value, $Res Function(LessonInfoDTO) then) =
       _$LessonInfoDTOCopyWithImpl<$Res, LessonInfoDTO>;
   @useResult
-  $Res call({int? id, String? title, String? description});
+  $Res call({int? id, String? title, String? description, String? type});
 }
 
 /// @nodoc
@@ -55,6 +56,7 @@ class _$LessonInfoDTOCopyWithImpl<$Res, $Val extends LessonInfoDTO>
     Object? id = freezed,
     Object? title = freezed,
     Object? description = freezed,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -69,6 +71,10 @@ class _$LessonInfoDTOCopyWithImpl<$Res, $Val extends LessonInfoDTO>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -81,7 +87,7 @@ abstract class _$$LessonDTOImplCopyWith<$Res>
       __$$LessonDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? title, String? description});
+  $Res call({int? id, String? title, String? description, String? type});
 }
 
 /// @nodoc
@@ -98,6 +104,7 @@ class __$$LessonDTOImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
     Object? description = freezed,
+    Object? type = freezed,
   }) {
     return _then(_$LessonDTOImpl(
       id: freezed == id
@@ -112,6 +119,10 @@ class __$$LessonDTOImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -119,7 +130,7 @@ class __$$LessonDTOImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LessonDTOImpl implements _LessonDTO {
-  const _$LessonDTOImpl({this.id, this.title, this.description});
+  const _$LessonDTOImpl({this.id, this.title, this.description, this.type});
 
   factory _$LessonDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$LessonDTOImplFromJson(json);
@@ -130,10 +141,12 @@ class _$LessonDTOImpl implements _LessonDTO {
   final String? title;
   @override
   final String? description;
+  @override
+  final String? type;
 
   @override
   String toString() {
-    return 'LessonInfoDTO(id: $id, title: $title, description: $description)';
+    return 'LessonInfoDTO(id: $id, title: $title, description: $description, type: $type)';
   }
 
   @override
@@ -144,12 +157,13 @@ class _$LessonDTOImpl implements _LessonDTO {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, description);
+  int get hashCode => Object.hash(runtimeType, id, title, description, type);
 
   @JsonKey(ignore: true)
   @override
@@ -169,7 +183,8 @@ abstract class _LessonDTO implements LessonInfoDTO {
   const factory _LessonDTO(
       {final int? id,
       final String? title,
-      final String? description}) = _$LessonDTOImpl;
+      final String? description,
+      final String? type}) = _$LessonDTOImpl;
 
   factory _LessonDTO.fromJson(Map<String, dynamic> json) =
       _$LessonDTOImpl.fromJson;
@@ -180,6 +195,8 @@ abstract class _LessonDTO implements LessonInfoDTO {
   String? get title;
   @override
   String? get description;
+  @override
+  String? get type;
   @override
   @JsonKey(ignore: true)
   _$$LessonDTOImplCopyWith<_$LessonDTOImpl> get copyWith =>

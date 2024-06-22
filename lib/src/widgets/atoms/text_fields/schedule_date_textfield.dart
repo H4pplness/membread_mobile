@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 
 class ScheduleDateTextField extends ConsumerWidget {
   DateTime day;
-  ScheduleDateTextField({super.key,required this.day});
+  ScheduleDateTextField({super.key, required this.day});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,27 +20,28 @@ class ScheduleDateTextField extends ConsumerWidget {
               fontWeight: FontWeight.w400,
               color: Colors.grey[700]),
         ),
-        SizedBox(height: 10,),
+        const SizedBox(
+          height: 10,
+        ),
         TextField(
             autofocus: false,
             readOnly: true,
-            style: Theme
-                .of(context)
-                .textTheme
-                .displayMedium,
+            style: Theme.of(context).textTheme.displayMedium,
             cursorWidth: 1.5,
             decoration: InputDecoration(
                 hintText: DateFormat("dd-MM-yyyy").format(day),
-                hintStyle: Theme.of(context).textTheme.displayMedium,
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    // _getTimeFromUser(isStartTime: true);
-                  },
-                  icon: const Icon(Icons.calendar_month),
+                hintStyle: GoogleFonts.montserrat(
+                    textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.grey)),
+                suffixIcon: Icon(
+                  Icons.calendar_month,
+                  color: Colors.grey[300]!,
                 ),
-                enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(width: 0.5, color: Colors.grey)))
-        ),
+                enabledBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 0.5, color: Colors.grey[300]!)))),
       ],
     );
   }
