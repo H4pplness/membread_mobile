@@ -6,10 +6,11 @@ import '../../learningdto/testdto/testdto.dart';
 
 class LessonTestDTO {
   int? id;
+  String? title;
   String? description;
   List<TestDTO>? listLearning;
 
-  LessonTestDTO({this.id, this.description, this.listLearning});
+  LessonTestDTO({this.id, this.description, this.listLearning,this.title});
 
   factory LessonTestDTO.fromJson(Map<String,dynamic> json){
     var listLearning = json['listLearning'] as List;
@@ -17,7 +18,7 @@ class LessonTestDTO {
       if(e.containsKey('short-answer')){
         return ShortAnswerDTO.fromJson(e);
       }
-      if(e.containsKet('correct-answer')){
+      if(e.containsKey('correct-answer')){
         return MultiChoiceDTO.fromJson(e);
       }
       throw Exception();
@@ -26,6 +27,7 @@ class LessonTestDTO {
     return LessonTestDTO(
       id: json['id'],
       description: json['description'],
+      title: json['title'],
       listLearning: learningList
     );
   }

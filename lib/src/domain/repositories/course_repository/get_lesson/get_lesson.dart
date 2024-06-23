@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:membreadflutter/src/domain/models/multichoice.dart';
 import 'package:membreadflutter/src/domain/models/short_answer.dart';
+import 'package:membreadflutter/src/domain/models/test_lesson.dart';
 import 'package:membreadflutter/src/domain/models/vocabulary.dart';
 import 'package:membreadflutter/src/domain/models/vocabulary_lesson.dart';
 import 'package:membreadflutter/src/dtos/learningdto/multichoicedto/multichoicedto.dart';
@@ -52,16 +53,19 @@ Future<Lesson> getLesson(ref, int lessonId) async {
                 correctAnswer: e.correctAnswer,
                 progress: e.progress);
           }
-          if(e is ShortAnswerDTO){
+          if (e is ShortAnswerDTO) {
             return ShortAnswer(
-              id : e.id,
-              question: e.question,
-              progress: e.progress,
-              shortAnswer: e.shortAnswer
-            );
+                id: e.id,
+                question: e.question,
+                progress: e.progress,
+                shortAnswer: e.shortAnswer);
           }
+          throw Exception();
         }).toList();
-        return Lesson();
+        return TestLesson(
+            title: result.title,
+            description: result.description ?? "",
+            listLearning: listLearning);
       default:
         throw Exception();
     }

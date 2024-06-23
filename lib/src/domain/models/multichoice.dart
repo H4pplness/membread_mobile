@@ -8,5 +8,5 @@ class MultiChoice extends Test{
   int? correctAnswer;
 
   MultiChoice({super.id,super.progress,super.question,this.choice1, this.choice2, this.choice3, this.choice4,
-      this.correctAnswer});
+      this.correctAnswer,super.studiedLevel =0});
 }

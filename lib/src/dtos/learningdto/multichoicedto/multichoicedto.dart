@@ -20,7 +20,7 @@ class MultiChoiceDTO extends TestDTO{
       choice2: json['choice2'],
       choice3: json['choice3'],
       choice4: json['choice4'],
-      correctAnswer: json['correct-answer']
+      correctAnswer: int.parse(json['correct-answer'])
     );
   }
 }

@@ -14,6 +14,7 @@ class LessonCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+          width: MediaQuery.of(context).size.width-40,
           margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -25,7 +26,7 @@ class LessonCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
+              Expanded(child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -50,7 +51,7 @@ class LessonCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   )
                 ],
-              ),
+              ),),
               const Icon(
                 Icons.arrow_forward_ios,
                 size: 20,
