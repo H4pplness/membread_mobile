@@ -1,8 +1,7 @@
 
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../vocabularydto/vocabularydto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../lesson_type_dto/vocabularydto/vocabularydto.dart';
 
 part 'create_vocabulary_lesson_dto.g.dart';
 part 'create_vocabulary_lesson_dto.freezed.dart';

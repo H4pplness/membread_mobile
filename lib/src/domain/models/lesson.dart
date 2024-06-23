@@ -14,9 +14,6 @@ class Lesson<T extends Learning> {
 
 enum LessonType{
   VOCABULARY,
-  GRAMMAR,
-  VIDEO,
-  ALGEBRA,
   TEST
 }
 
@@ -25,12 +22,6 @@ extension LessonTypeExtension on LessonType{
     switch(this){
       case LessonType.VOCABULARY:
         return "Vocabulary";
-      case LessonType.GRAMMAR:
-        return "Grammar";
-      case LessonType.VIDEO :
-        return "Video";
-      case LessonType.ALGEBRA:
-        return "Algebra";
       case LessonType.TEST:
         return 'Test';
     }
@@ -40,12 +31,6 @@ extension LessonTypeExtension on LessonType{
     switch(value){
       case "Vocabulary":
         return LessonType.VOCABULARY;
-      case "Grammar" :
-        return LessonType.GRAMMAR;
-      case "Video" :
-        return LessonType.VIDEO;
-      case "Algebra" :
-        return LessonType.ALGEBRA;
       case "Test" :
         return LessonType.TEST;
       default:

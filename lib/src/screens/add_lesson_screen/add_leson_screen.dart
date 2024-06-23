@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:membreadflutter/src/domain/models/lesson.dart';
+import 'package:membreadflutter/src/screens/add_lesson_screen/sub_screen/add_quiz_lesson/add_quiz_lesson_screen.dart';
 import 'package:membreadflutter/src/screens/add_lesson_screen/sub_screen/add_vocabulary_screen/add_vocabulary_screen.dart';
 import 'package:membreadflutter/src/screens/add_lesson_screen/sub_screen/notifiers/create_course_notifier/create_lesson_notifier.dart';
 import 'package:membreadflutter/src/screens/add_lesson_screen/sub_screen/notifiers/lesson_type_notifier/lesson_type_notifier.dart';
@@ -31,16 +32,22 @@ class AddLessonScreen extends ConsumerWidget {
           TextButton(
               onPressed: () {
                 ref
-                    .read(createLessonNotifierProvider.notifier)
+                    .watch(createLessonNotifierProvider.notifier)
                     .setTitleAndDescription(titleController.text,
                         descriptionController.text, courseId);
+                print(lesson.title);
+                print(lesson.description);
                 Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        AddVocabularyScreen(
-                      courseId: courseId,
-                    ),
+                    pageBuilder: (context, animation, secondaryAnimation){
+                      switch(lessonType){
+                        case LessonType.VOCABULARY :
+                          return AddVocabularyScreen(courseId: courseId);
+                        case LessonType.TEST :
+                          return AddQuizLessonScreen(courseId : courseId);
+                      }
+                    },
                     transitionsBuilder:
                         (context, animation, secondaryAnimation, child) {
                       const begin = Offset(1.0, 0.0);
@@ -65,7 +72,7 @@ class AddLessonScreen extends ConsumerWidget {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -7,7 +7,7 @@ part of 'create_vocabulary_lesson.dart';
 // **************************************************************************
 
 String _$createVocabularyLessonHash() =>
-    r'5a7a1a8f0d6120b31766a3083208cade22ff8a21';
+    r'6f3d77fd20422c0b9e02a18dfe8326afbd3b5fe5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -41,10 +41,10 @@ class CreateVocabularyLessonFamily extends Family<AsyncValue<bool>> {
 
   /// See also [createVocabularyLesson].
   CreateVocabularyLessonProvider call(
-    CreateVocabularyLessonDTO vocabularyLesson,
+    CreateLessonDTO lesson,
   ) {
     return CreateVocabularyLessonProvider(
-      vocabularyLesson,
+      lesson,
     );
   }
 
@@ -53,7 +53,7 @@ class CreateVocabularyLessonFamily extends Family<AsyncValue<bool>> {
     covariant CreateVocabularyLessonProvider provider,
   ) {
     return call(
-      provider.vocabularyLesson,
+      provider.lesson,
     );
   }
 
@@ -76,11 +76,11 @@ class CreateVocabularyLessonFamily extends Family<AsyncValue<bool>> {
 class CreateVocabularyLessonProvider extends AutoDisposeFutureProvider<bool> {
   /// See also [createVocabularyLesson].
   CreateVocabularyLessonProvider(
-    CreateVocabularyLessonDTO vocabularyLesson,
+    CreateLessonDTO lesson,
   ) : this._internal(
           (ref) => createVocabularyLesson(
             ref as CreateVocabularyLessonRef,
-            vocabularyLesson,
+            lesson,
           ),
           from: createVocabularyLessonProvider,
           name: r'createVocabularyLessonProvider',
@@ -91,7 +91,7 @@ class CreateVocabularyLessonProvider extends AutoDisposeFutureProvider<bool> {
           dependencies: CreateVocabularyLessonFamily._dependencies,
           allTransitiveDependencies:
               CreateVocabularyLessonFamily._allTransitiveDependencies,
-          vocabularyLesson: vocabularyLesson,
+          lesson: lesson,
         );
 
   CreateVocabularyLessonProvider._internal(
@@ -101,10 +101,10 @@ class CreateVocabularyLessonProvider extends AutoDisposeFutureProvider<bool> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.vocabularyLesson,
+    required this.lesson,
   }) : super.internal();
 
-  final CreateVocabularyLessonDTO vocabularyLesson;
+  final CreateLessonDTO lesson;
 
   @override
   Override overrideWith(
@@ -119,7 +119,7 @@ class CreateVocabularyLessonProvider extends AutoDisposeFutureProvider<bool> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        vocabularyLesson: vocabularyLesson,
+        lesson: lesson,
       ),
     );
   }
@@ -131,22 +131,21 @@ class CreateVocabularyLessonProvider extends AutoDisposeFutureProvider<bool> {
 
   @override
   bool operator ==(Object other) {
-    return other is CreateVocabularyLessonProvider &&
-        other.vocabularyLesson == vocabularyLesson;
+    return other is CreateVocabularyLessonProvider && other.lesson == lesson;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, vocabularyLesson.hashCode);
+    hash = _SystemHash.combine(hash, lesson.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 mixin CreateVocabularyLessonRef on AutoDisposeFutureProviderRef<bool> {
-  /// The parameter `vocabularyLesson` of this provider.
-  CreateVocabularyLessonDTO get vocabularyLesson;
+  /// The parameter `lesson` of this provider.
+  CreateLessonDTO get lesson;
 }
 
 class _CreateVocabularyLessonProviderElement
@@ -155,8 +154,8 @@ class _CreateVocabularyLessonProviderElement
   _CreateVocabularyLessonProviderElement(super.provider);
 
   @override
-  CreateVocabularyLessonDTO get vocabularyLesson =>
-      (origin as CreateVocabularyLessonProvider).vocabularyLesson;
+  CreateLessonDTO get lesson =>
+      (origin as CreateVocabularyLessonProvider).lesson;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

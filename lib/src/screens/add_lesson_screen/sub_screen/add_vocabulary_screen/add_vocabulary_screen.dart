@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:membreadflutter/src/domain/repositories/course_repository/create_lesson/create_vocabulary_lesson/create_vocabulary_lesson.dart';
+import 'package:membreadflutter/src/dtos/create_lesson_dto/create_lesson_dto.dart';
 import 'package:membreadflutter/src/dtos/create_lesson_dto/create_vocabulary_lesson_dto/create_vocabulary_lesson_dto.dart';
-import 'package:membreadflutter/src/dtos/vocabularydto/vocabularydto.dart';
 import 'package:membreadflutter/src/screens/add_lesson_screen/sub_screen/notifiers/create_course_notifier/create_lesson_notifier.dart';
 import 'package:membreadflutter/src/widgets/atoms/buttons/primarybutton.dart';
 import 'package:membreadflutter/src/widgets/atoms/text_fields/custom_textfield.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/none_title_appbar.dart';
+import '../../../../dtos/lesson_type_dto/vocabularydto/vocabularydto.dart';
 import 'notifiers/list_vocabulary_notifier.dart';
 
 class AddVocabularyScreen extends ConsumerWidget {
@@ -136,7 +137,6 @@ class AddVocabularyScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final listVocabulary = ref.watch(listVocabularyNotifierProvider);
-
     return Scaffold(
       appBar: NonTitleAppBar(
         onPressed: () => Navigator.pop(context),
@@ -149,10 +149,10 @@ class AddVocabularyScreen extends ConsumerWidget {
 
                 final newLesson = ref.watch(createLessonNotifierProvider);
 
-                CreateVocabularyLessonDTO lesson = CreateVocabularyLessonDTO(
+                CreateLessonDTO lesson = CreateLessonDTO(
                     title: newLesson.title ?? "",
                     courseId: courseId,
-                    listVocabulary: newLesson.listVocabulary);
+                    listLearning: newLesson.listLearning);
 
                 await ref.read(createVocabularyLessonProvider(lesson).future);
 

@@ -21,9 +21,24 @@ import 'package:membreadflutter/src/widgets/organisms/app_bars/summary_course_ap
 import '../../domain/models/lesson.dart';
 import '../lesson_screen/vocabulary_lesson_screen.dart';
 
-class CourseScreen extends ConsumerWidget {
+class CourseScreen extends ConsumerStatefulWidget {
   final Course course;
   CourseScreen({super.key, required this.course});
+
+  @override
+  ConsumerState<CourseScreen> createState() => _CourseScreenState();
+}
+
+class _CourseScreenState extends ConsumerState<CourseScreen> {
+  late Future<Course> courseDetailFuture;
+
+  @override
+  void initState(){
+    super.initState();
+    final courseParams = GetCourseInfoParams(widget.course.id ?? 0);
+    courseDetailFuture =
+    ref.read(getCourseInfoProvider(courseParams).future);
+  }
 
   _buildAlert() {
     return SnackBar(
@@ -37,10 +52,8 @@ class CourseScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final courseParams = GetCourseInfoParams(course.id ?? 0);
-    final courseDetailFuture =
-        ref.read(getCourseInfoProvider(courseParams).future);
+  Widget build(BuildContext context) {
+
     final user = ref.watch(loginedUserProvider);
 
     return FutureBuilder<Course>(

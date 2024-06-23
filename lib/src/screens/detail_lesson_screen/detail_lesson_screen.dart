@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/repositories/course_repository/get_lesson/get_lesson.dart';
-import '../../dtos/vocabularydto/vocabularydto.dart';
+import '../../dtos/lesson_type_dto/vocabularydto/vocabularydto.dart';
 import '../../widgets/atoms/cards/voca_card.dart';
 import '../../widgets/atoms/sliders/progress_slider.dart';
 import '../../widgets/organisms/app_bars/close_title_appbar.dart';

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../vocabularydto/vocabularydto.dart';
+
+import '../lesson_type_dto/vocabularydto/vocabularydto.dart';
 
 part 'lessonvocabularydto.freezed.dart';
 part 'lessonvocabularydto.g.dart';

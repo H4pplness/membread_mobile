@@ -1,7 +1,7 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../../../domain/models/vocabulary.dart';
-import '../../../../../dtos/vocabularydto/vocabularydto.dart';
+
+import '../../../../../dtos/lesson_type_dto/vocabularydto/vocabularydto.dart';
 
 part 'list_vocabulary_notifier.g.dart';
 

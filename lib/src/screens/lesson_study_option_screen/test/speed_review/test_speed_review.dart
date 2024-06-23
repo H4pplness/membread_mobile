@@ -6,14 +6,15 @@ import 'package:membreadflutter/src/domain/models/test.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/test/speed_review/notifier/test_speed_progress_notifier.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/test/speed_review/option/multichoice_component.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/test/speed_review/option/short_answer_component.dart';
+import 'package:membreadflutter/src/screens/lesson_study_option_screen/test/speed_review/option/test_result_component.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/close_title_appbar.dart';
 
 import '../../../../domain/models/test_lesson.dart';
 
 class TestSpeedReview extends ConsumerStatefulWidget {
-  TestLesson lesson;
+  List<Test> listLearning;
   int courseId;
-  TestSpeedReview({super.key, required this.lesson, required this.courseId});
+  TestSpeedReview({super.key, required this.listLearning, required this.courseId});
 
   @override
   ConsumerState<TestSpeedReview> createState() => _TestSpeedReviewState();
@@ -30,7 +31,7 @@ class _TestSpeedReviewState extends ConsumerState<TestSpeedReview> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ref
             .read(testSpeedProgressNotifierProvider.notifier)
-            .initial(widget.lesson.listLearning!);
+            .initial(widget.listLearning);
       });
     }
   }
@@ -53,7 +54,6 @@ class _TestSpeedReviewState extends ConsumerState<TestSpeedReview> {
         body = MultichoiceComponent(
           question: question,
           onTap: (isTrue) {
-            print("DA CHON");
             _removeQuestion(question);
           },
         );
@@ -61,13 +61,12 @@ class _TestSpeedReviewState extends ConsumerState<TestSpeedReview> {
         body = ShortAnswerComponent(
           question: question as ShortAnswer,
           onTap: () {
-            print("DA CHON");
             _removeQuestion(question);
           }
         );
       }
     } else {
-      body = Container();
+      body = TestResultComponent();
     }
 
     return Scaffold(
