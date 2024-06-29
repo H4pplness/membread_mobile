@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:membreadflutter/src/domain/models/vocabulary.dart';
 
 import '../notifier/speed_choice_notifier/speed_choice_notifier.dart';
 
@@ -13,7 +14,7 @@ class Choice {
 }
 
 class ChooseAnswerOption extends ConsumerWidget {
-  final String vocabulary;
+  final Vocabulary vocabulary;
   final List<Choice> choices;
   Function(bool isTrue)? onTap;
   ChooseAnswerOption(
@@ -30,7 +31,7 @@ class ChooseAnswerOption extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.only(top: 30),
             child: Text(
-              vocabulary,
+              vocabulary.vocabulary??"",
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
@@ -69,14 +70,14 @@ class ChooseAnswerOption extends ConsumerWidget {
                 return GestureDetector(
                   onTap: () async {
                     print("CHOOSE... ");
-                    ref.read(speedChoiceNotifierProvider.notifier).choose(index);
+                    ref.watch(speedChoiceNotifierProvider.notifier).choose(index);
                     await Future.delayed(const Duration(milliseconds: 500),(){
                       print("NEXT ...");
                     });
                     if (onTap != null) {
                       onTap!(choices[index].isTrue);
                     }
-                    ref.read(speedChoiceNotifierProvider.notifier).resetChoice();
+                    ref.watch(speedChoiceNotifierProvider.notifier).resetChoice();
                   },
                   child: Container(
                     alignment: Alignment.center,

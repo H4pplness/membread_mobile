@@ -9,6 +9,30 @@ class Lesson<T extends Learning> {
   List<T>? listLearning;
 
   Lesson({this.id,this.title,this.description,this.listLearning});
+
+  Lesson copyWith({
+    int? id,
+    String? title,
+    String? description,
+    List<T>? listLearning
+  }){
+    return Lesson(
+      id: id??this.id,
+      title: title??this.title,
+      description: description??this.description,
+      listLearning: listLearning??this.listLearning
+    );
+  }
+
+  void updateLearningList(List<T> newLearnings) {
+    final updatedList = listLearning?.map((learning) {
+      final newLearning = newLearnings.firstWhere(
+              (newLearning) => newLearning.id == learning.id,
+          orElse: () => learning);
+      return newLearning;
+    }).toList();
+    listLearning = updatedList;
+  }
 }
 
 

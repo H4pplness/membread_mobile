@@ -5,9 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:membreadflutter/src/domain/models/course.dart';
+import 'package:membreadflutter/src/domain/models/schedule.dart';
 import 'package:membreadflutter/src/domain/repositories/notification_repository/create_schedule/create_schedule.dart';
+import 'package:membreadflutter/src/domain/repositories/notification_repository/get_schedules/get_schedules.dart';
 import 'package:membreadflutter/src/dtos/day_enum/day_enum.dart';
 import 'package:membreadflutter/src/screens/add_schedule_screen/notifiers/repeat_notifier/repeat_notifier.dart';
+import 'package:membreadflutter/src/widgets/atoms/buttons/save_button.dart';
 import 'package:membreadflutter/src/widgets/atoms/text_fields/custom_textfield.dart';
 import 'package:membreadflutter/src/widgets/atoms/text_fields/schedule_date_textfield.dart';
 import 'package:membreadflutter/src/widgets/atoms/text_fields/time_input_textfield.dart';
@@ -48,31 +51,44 @@ class _AddScheduleScreenState extends ConsumerState<AddScheduleScreen> {
       appBar: NonTitleAppBar(
         onPressed: () => Navigator.pop(context),
         actions: [
-          GestureDetector(
+          SaveButton(
             onTap: () async {
-              await Future.delayed(const Duration(microseconds: 100), () async {
+              await Future.delayed(const Duration(microseconds: 200), () async {
                 await ref.read(createScheduleProvider(CreateScheduleBody(
-                        title: _titleController.text,
-                        description: _bodyController.text,
-                        time: _time,
-                        scheduledDate:_selectedOption==0? DateFormat('yyyy-MM-dd').format(_day) : null,
-                        eachMonday:_selectedOption==1? repeatNotifier.contains(Day.MON) : false,
-                        eachSunday:_selectedOption==1?  repeatNotifier.contains(Day.SUN) : false,
-                        eachTuesday:_selectedOption==1?  repeatNotifier.contains(Day.TUE) : false,
-                        eachThursday:_selectedOption==1?  repeatNotifier.contains(Day.THU) : false,
-                        eachWednesday:_selectedOption==1?  repeatNotifier.contains(Day.WED) : false,
-                        eachSaturday:_selectedOption==1?  repeatNotifier.contains(Day.SAT) : false,
-                        eachFriday:_selectedOption==1?  repeatNotifier.contains(Day.FRI) : false))
+                    title: "${_course!=null?_course!.title!+": " : ""}${_titleController.text}",
+                    description: _bodyController.text,
+                    time: _time,
+                    courseId: _course!=null? _course!.id : null,
+                    scheduledDate:_selectedOption==0? DateFormat('yyyy-MM-dd').format(_day) : null,
+                    eachMonday:_selectedOption==1? repeatNotifier.contains(Day.MON) : false,
+                    eachSunday:_selectedOption==1?  repeatNotifier.contains(Day.SUN) : false,
+                    eachTuesday:_selectedOption==1?  repeatNotifier.contains(Day.TUE) : false,
+                    eachThursday:_selectedOption==1?  repeatNotifier.contains(Day.THU) : false,
+                    eachWednesday:_selectedOption==1?  repeatNotifier.contains(Day.WED) : false,
+                    eachSaturday:_selectedOption==1?  repeatNotifier.contains(Day.SAT) : false,
+                    eachFriday:_selectedOption==1?  repeatNotifier.contains(Day.FRI) : false),
+
+                )
                     .future);
+                ref.watch(getScheduleProvider.notifier).addSchedule(Schedule(
+                    title: "${_course!=null?_course!.title!+": " : ""}${_titleController.text}",
+                    body: _bodyController.text,
+                    time: _time,
+                    courseId: _course!=null? _course!.id : null,
+                    scheduledDate:_selectedOption==0?_day:null,
+                    eachMonday:_selectedOption==1? repeatNotifier.contains(Day.MON) : false,
+                    eachSunday:_selectedOption==1?  repeatNotifier.contains(Day.SUN) : false,
+                    eachTuesday:_selectedOption==1?  repeatNotifier.contains(Day.TUE) : false,
+                    eachThursday:_selectedOption==1?  repeatNotifier.contains(Day.THU) : false,
+                    eachWednesday:_selectedOption==1?  repeatNotifier.contains(Day.WED) : false,
+                    eachSaturday:_selectedOption==1?  repeatNotifier.contains(Day.SAT) : false,
+                    eachFriday:_selectedOption==1?  repeatNotifier.contains(Day.FRI) : false
+                ));
               });
+
               Navigator.pop(context);
-            },
-            child: Text(
-              "Save",
-              style: Theme.of(context).appBarTheme.titleTextStyle,
-            ),
-          ),
-          SizedBox(
+            },),
+          const SizedBox(
             width: 10,
           ),
         ],

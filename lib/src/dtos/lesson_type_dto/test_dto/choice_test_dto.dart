@@ -1,13 +1,13 @@
 
 
 class ChoiceTestDTO {
-  String? question;
+  String? content;
   bool isCorrect;
 
-  ChoiceTestDTO({this.question,this.isCorrect = false});
+  ChoiceTestDTO({this.content,this.isCorrect = false});
 
   Map<String,dynamic> toJson()=>{
-    'question' : question,
+    'content' : content,
     'isCorrect' : isCorrect
   };
 }

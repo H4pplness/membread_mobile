@@ -24,6 +24,8 @@ mixin _$VocabularyDTO {
   String? get vocabulary => throw _privateConstructorUsedError;
   String? get mean => throw _privateConstructorUsedError;
   int? get progress => throw _privateConstructorUsedError;
+  bool? get need_to_review => throw _privateConstructorUsedError;
+  String? get last_updated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +39,13 @@ abstract class $VocabularyDTOCopyWith<$Res> {
           VocabularyDTO value, $Res Function(VocabularyDTO) then) =
       _$VocabularyDTOCopyWithImpl<$Res, VocabularyDTO>;
   @useResult
-  $Res call({int? id, String? vocabulary, String? mean, int? progress});
+  $Res call(
+      {int? id,
+      String? vocabulary,
+      String? mean,
+      int? progress,
+      bool? need_to_review,
+      String? last_updated});
 }
 
 /// @nodoc
@@ -57,6 +65,8 @@ class _$VocabularyDTOCopyWithImpl<$Res, $Val extends VocabularyDTO>
     Object? vocabulary = freezed,
     Object? mean = freezed,
     Object? progress = freezed,
+    Object? need_to_review = freezed,
+    Object? last_updated = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -75,6 +85,14 @@ class _$VocabularyDTOCopyWithImpl<$Res, $Val extends VocabularyDTO>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as int?,
+      need_to_review: freezed == need_to_review
+          ? _value.need_to_review
+          : need_to_review // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      last_updated: freezed == last_updated
+          ? _value.last_updated
+          : last_updated // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -87,7 +105,13 @@ abstract class _$$VocbularyDTOImplCopyWith<$Res>
       __$$VocbularyDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? vocabulary, String? mean, int? progress});
+  $Res call(
+      {int? id,
+      String? vocabulary,
+      String? mean,
+      int? progress,
+      bool? need_to_review,
+      String? last_updated});
 }
 
 /// @nodoc
@@ -105,6 +129,8 @@ class __$$VocbularyDTOImplCopyWithImpl<$Res>
     Object? vocabulary = freezed,
     Object? mean = freezed,
     Object? progress = freezed,
+    Object? need_to_review = freezed,
+    Object? last_updated = freezed,
   }) {
     return _then(_$VocbularyDTOImpl(
       id: freezed == id
@@ -123,6 +149,14 @@ class __$$VocbularyDTOImplCopyWithImpl<$Res>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as int?,
+      need_to_review: freezed == need_to_review
+          ? _value.need_to_review
+          : need_to_review // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      last_updated: freezed == last_updated
+          ? _value.last_updated
+          : last_updated // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -131,7 +165,12 @@ class __$$VocbularyDTOImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$VocbularyDTOImpl implements _VocbularyDTO {
   const _$VocbularyDTOImpl(
-      {this.id, this.vocabulary, this.mean, this.progress});
+      {this.id,
+      this.vocabulary,
+      this.mean,
+      this.progress,
+      this.need_to_review,
+      this.last_updated});
 
   factory _$VocbularyDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$VocbularyDTOImplFromJson(json);
@@ -144,10 +183,14 @@ class _$VocbularyDTOImpl implements _VocbularyDTO {
   final String? mean;
   @override
   final int? progress;
+  @override
+  final bool? need_to_review;
+  @override
+  final String? last_updated;
 
   @override
   String toString() {
-    return 'VocabularyDTO(id: $id, vocabulary: $vocabulary, mean: $mean, progress: $progress)';
+    return 'VocabularyDTO(id: $id, vocabulary: $vocabulary, mean: $mean, progress: $progress, need_to_review: $need_to_review, last_updated: $last_updated)';
   }
 
   @override
@@ -160,12 +203,17 @@ class _$VocbularyDTOImpl implements _VocbularyDTO {
                 other.vocabulary == vocabulary) &&
             (identical(other.mean, mean) || other.mean == mean) &&
             (identical(other.progress, progress) ||
-                other.progress == progress));
+                other.progress == progress) &&
+            (identical(other.need_to_review, need_to_review) ||
+                other.need_to_review == need_to_review) &&
+            (identical(other.last_updated, last_updated) ||
+                other.last_updated == last_updated));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, vocabulary, mean, progress);
+  int get hashCode => Object.hash(runtimeType, id, vocabulary, mean, progress,
+      need_to_review, last_updated);
 
   @JsonKey(ignore: true)
   @override
@@ -186,7 +234,9 @@ abstract class _VocbularyDTO implements VocabularyDTO {
       {final int? id,
       final String? vocabulary,
       final String? mean,
-      final int? progress}) = _$VocbularyDTOImpl;
+      final int? progress,
+      final bool? need_to_review,
+      final String? last_updated}) = _$VocbularyDTOImpl;
 
   factory _VocbularyDTO.fromJson(Map<String, dynamic> json) =
       _$VocbularyDTOImpl.fromJson;
@@ -199,6 +249,10 @@ abstract class _VocbularyDTO implements VocabularyDTO {
   String? get mean;
   @override
   int? get progress;
+  @override
+  bool? get need_to_review;
+  @override
+  String? get last_updated;
   @override
   @JsonKey(ignore: true)
   _$$VocbularyDTOImplCopyWith<_$VocbularyDTOImpl> get copyWith =>

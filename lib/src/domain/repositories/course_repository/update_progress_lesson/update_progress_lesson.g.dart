@@ -7,7 +7,7 @@ part of 'update_progress_lesson.dart';
 // **************************************************************************
 
 String _$updateProgressLessonHash() =>
-    r'5d444cbd019a74e4ef1ac8544eae601720d68874';
+    r'cbf62e65dc56940ce78142f5224482c943df274f';
 
 /// Copied from Dart SDK
 class _SystemHash {

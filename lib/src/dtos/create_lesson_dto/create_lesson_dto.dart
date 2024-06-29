@@ -13,6 +13,6 @@ class CreateLessonDTO {
     'title' : title,
     'description' : description,
     'courseId' : courseId,
-    'listLearning' : listLearning
+    'listLearning' : listLearning!.map((e) => e.toJson()).toList()
   };
 }

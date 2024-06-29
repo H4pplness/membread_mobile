@@ -25,6 +25,7 @@ class _TestLessonScreenState extends ConsumerState<TestLessonScreen> {
   void initState() {
     super.initState();
     listQuestion = [];
+    _fetchLesson();
   }
 
   _buildLearningComponent(List<Test> listTest, BuildContext context) {
@@ -71,59 +72,57 @@ class _TestLessonScreenState extends ConsumerState<TestLessonScreen> {
     }
   }
 
+  Future<void> _fetchLesson() async {
+    await ref.read(getLessonProvider.notifier).fetchLesson(widget.lesson.id!);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final testLesson = ref.watch(getLessonProvider(widget.lesson.id!));
+    final testLesson = ref.watch(getLessonProvider);
     return Scaffold(
       appBar: TitleAppbar(
         leadingButtonOnPressed: () => Navigator.pop(context),
         title: Text(widget.lesson.title ?? "",
             style: Theme.of(context).appBarTheme.titleTextStyle),
       ),
-      body: testLesson.when(
-          data: (testLesson) {
-            return Stack(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: _buildLearningComponent(
-                          testLesson.listLearning! as List<Test>, context),
-                    ),
+      body: (testLesson!=null && testLesson.id == widget.lesson.id)?
+      Stack(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: SingleChildScrollView(
+              child: Column(
+                children: _buildLearningComponent(
+                    testLesson.listLearning! as List<Test>, context),
+              ),
+            ),
+          ),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 15),
+                child: PrimaryButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TestSpeedReview(
+                                listLearning: listQuestion ?? [],
+                                courseId: widget.courseId,
+                              lessonId: widget.lesson.id!,
+                            )));
+                  },
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Text(
+                    "Start",
+                    style: Theme.of(context).textTheme.labelMedium,
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 15),
-                      child: PrimaryButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TestSpeedReview(
-                                      listLearning: listQuestion ?? [],
-                                      courseId: widget.courseId)));
-                        },
-                        width: MediaQuery.of(context).size.width - 40,
-                        child: Text(
-                          "Start",
-                          style: Theme.of(context).textTheme.labelMedium,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ))
-              ],
-            );
-          },
-          error: (error, _) {
-            print("ERROR : $error");
-            return Container();
-          },
-          loading: () => Center(
-                child: CircularProgressIndicator(),
-              )),
+              ))
+        ],
+      ) :
+      Center(child: CircularProgressIndicator())
     );
   }
 }

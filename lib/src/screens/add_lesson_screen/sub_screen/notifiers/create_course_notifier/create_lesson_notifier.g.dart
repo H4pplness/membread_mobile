@@ -7,7 +7,7 @@ part of 'create_lesson_notifier.dart';
 // **************************************************************************
 
 String _$createLessonNotifierHash() =>
-    r'45a6b9d038e1984c57b60bb15be5771e1a9ba68b';
+    r'6f0bc386ead12d94e364791957e687d8aefa7fca';
 
 /// See also [CreateLessonNotifier].
 @ProviderFor(CreateLessonNotifier)

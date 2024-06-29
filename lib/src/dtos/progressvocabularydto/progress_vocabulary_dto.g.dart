@@ -11,6 +11,7 @@ _$ProgressVocabularyDTOImpl _$$ProgressVocabularyDTOImplFromJson(
     _$ProgressVocabularyDTOImpl(
       learning_id: (json['learning_id'] as num).toInt(),
       progress: (json['progress'] as num).toInt(),
+      need_to_review: json['need_to_review'] as bool,
     );
 
 Map<String, dynamic> _$$ProgressVocabularyDTOImplToJson(
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$ProgressVocabularyDTOImplToJson(
     <String, dynamic>{
       'learning_id': instance.learning_id,
       'progress': instance.progress,
+      'need_to_review': instance.need_to_review,
     };

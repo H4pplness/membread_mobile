@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:membreadflutter/src/dtos/lesson_type_dto/test_dto/create_test_dto.dart';
+import 'package:membreadflutter/src/screens/add_lesson_screen/sub_screen/add_quiz_lesson/notifiers/add_multichoice_notifier.dart';
 import 'package:membreadflutter/src/screens/add_lesson_screen/sub_screen/notifiers/create_course_notifier/create_lesson_notifier.dart';
 import 'package:membreadflutter/src/widgets/atoms/buttons/primarybutton.dart';
+import 'package:membreadflutter/src/widgets/atoms/text_fields/custom_textfield.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/close_title_appbar.dart';
 
 class AddMultiChoiceScreen extends ConsumerStatefulWidget {
@@ -15,16 +17,139 @@ class AddMultiChoiceScreen extends ConsumerStatefulWidget {
 }
 
 class _AddMultiChoiceScreenState extends ConsumerState<AddMultiChoiceScreen> {
-  CreateTestDTO choiceTestDTO = CreateTestDTO();
+  final questionController = TextEditingController();
+  final answerController = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    ref.refresh(addMultiChoiceNotifierProvider);
+  }
+
+  _buildQuestionField() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            width: double.infinity,
+            height: 400,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomTextField(
+                  controller: questionController,
+                  name: "Question",
+                  decoration: InputDecoration(
+                      // Add decoration properties if needed
+                      ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    PrimaryButton(
+                      onPressed: (){
+                        ref.watch(addMultiChoiceNotifierProvider.notifier).addQuestion(questionController.text);
+                        Navigator.pop(context);
+                      },
+                        child: Text(
+                      "Submit",
+                      style: Theme.of(context).textTheme.labelMedium,
+                    )),
+                    PrimaryButton(
+                      onPressed: (){
+                        Navigator.pop(context);
+                      },
+                        child: Text(
+                      "Cancel",
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ))
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  _buildAnswerField(int index) {
+    final multiChoice = ref.watch(addMultiChoiceNotifierProvider);
+    switch(index){
+      case 1 :
+        answerController.text = ((multiChoice.choice1 != null)?  multiChoice.choice1!.content : "")!;
+      case 2 :
+        answerController.text = ((multiChoice.choice2 != null)?  multiChoice.choice2!.content : "")!;
+      case 3 :
+        answerController.text = ((multiChoice.choice3 != null)?  multiChoice.choice3!.content : "")!;
+      case 4 :
+        answerController.text = ((multiChoice.choice4 != null)?  multiChoice.choice4!.content : "")!;
+    }
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            width: double.infinity,
+            height: 400,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomTextField(
+                  controller: answerController,
+                  name: "Choice $index",
+                  decoration: InputDecoration(
+                    // Add decoration properties if needed
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    PrimaryButton(
+                        onPressed: (){
+                          switch(index){
+                            case 1:
+                              ref.watch(addMultiChoiceNotifierProvider.notifier).fillChoice1(answerController.text);
+                            case 2:
+                              ref.watch(addMultiChoiceNotifierProvider.notifier).fillChoice2(answerController.text);
+                            case 3:
+                              ref.watch(addMultiChoiceNotifierProvider.notifier).fillChoice3(answerController.text);
+                            case 4:
+                              ref.watch(addMultiChoiceNotifierProvider.notifier).fillChoice4(answerController.text);
+                          }
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "Submit",
+                          style: Theme.of(context).textTheme.labelMedium,
+                        )),
+                    PrimaryButton(
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "Cancel",
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ))
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final choiceTestDTO = ref.watch(addMultiChoiceNotifierProvider);
     final addLesson = ref.watch(createLessonNotifierProvider);
     return Scaffold(
         appBar: CloseTitleAppbar(
@@ -40,11 +165,7 @@ class _AddMultiChoiceScreenState extends ConsumerState<AddMultiChoiceScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Container();
-                            });
+                        _buildQuestionField();
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -73,11 +194,7 @@ class _AddMultiChoiceScreenState extends ConsumerState<AddMultiChoiceScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Container();
-                            });
+                        _buildAnswerField(1);
                       },
                       child: Container(
                           decoration: BoxDecoration(
@@ -94,16 +211,27 @@ class _AddMultiChoiceScreenState extends ConsumerState<AddMultiChoiceScreen> {
                                   child: Text(
                                 choiceTestDTO.choice1 == null
                                     ? "Fill your answer"
-                                    : choiceTestDTO.choice1!.question!,
+                                    : choiceTestDTO.choice1!.content!,
                                 style: Theme.of(context).textTheme.labelSmall,
                               )),
                               GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    if (choiceTestDTO.choice1 != null) {
+                                      ref
+                                          .watch(addMultiChoiceNotifierProvider
+                                              .notifier)
+                                          .chooseCorrectAnswer(1);
+                                    }
+                                  },
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(30),
                                       child: Container(
                                         padding: const EdgeInsets.all(2),
-                                        color: choiceTestDTO.choice1 == null ? Colors.grey : choiceTestDTO.choice1!.isCorrect! ? Colors.green : Colors.grey,
+                                        color: choiceTestDTO.choice1 == null
+                                            ? Colors.grey
+                                            : choiceTestDTO.choice1!.isCorrect
+                                                ? Colors.green
+                                                : Colors.grey,
                                         child: const Icon(
                                           Icons.check,
                                           color: Colors.white,
@@ -118,11 +246,7 @@ class _AddMultiChoiceScreenState extends ConsumerState<AddMultiChoiceScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Container();
-                            });
+                        _buildAnswerField(2);
                       },
                       child: Container(
                           decoration: BoxDecoration(
@@ -139,16 +263,27 @@ class _AddMultiChoiceScreenState extends ConsumerState<AddMultiChoiceScreen> {
                                   child: Text(
                                 choiceTestDTO.choice2 == null
                                     ? "Fill your answer"
-                                    : choiceTestDTO.choice2!.question!,
+                                    : choiceTestDTO.choice2!.content!,
                                 style: Theme.of(context).textTheme.labelSmall,
                               )),
                               GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    if (choiceTestDTO.choice2 != null) {
+                                      ref
+                                          .watch(addMultiChoiceNotifierProvider
+                                              .notifier)
+                                          .chooseCorrectAnswer(2);
+                                    }
+                                  },
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(30),
                                       child: Container(
                                         padding: EdgeInsets.all(2),
-                                        color: choiceTestDTO.choice2 == null ? Colors.grey : choiceTestDTO.choice2!.isCorrect! ? Colors.green : Colors.grey,
+                                        color: choiceTestDTO.choice2 == null
+                                            ? Colors.grey
+                                            : choiceTestDTO.choice2!.isCorrect
+                                                ? Colors.green
+                                                : Colors.grey,
                                         child: const Icon(
                                           Icons.check,
                                           color: Colors.white,
@@ -163,11 +298,7 @@ class _AddMultiChoiceScreenState extends ConsumerState<AddMultiChoiceScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Container();
-                            });
+                        _buildAnswerField(3);
                       },
                       child: Container(
                           decoration: BoxDecoration(
@@ -184,16 +315,27 @@ class _AddMultiChoiceScreenState extends ConsumerState<AddMultiChoiceScreen> {
                                   child: Text(
                                 choiceTestDTO.choice3 == null
                                     ? "Fill your answer"
-                                    : choiceTestDTO.choice3!.question!,
+                                    : choiceTestDTO.choice3!.content!,
                                 style: Theme.of(context).textTheme.labelSmall,
                               )),
                               GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    if (choiceTestDTO.choice3 != null) {
+                                      ref
+                                          .watch(addMultiChoiceNotifierProvider
+                                              .notifier)
+                                          .chooseCorrectAnswer(3);
+                                    }
+                                  },
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(30),
                                       child: Container(
                                         padding: const EdgeInsets.all(2),
-                                        color: choiceTestDTO.choice3 == null ? Colors.grey : choiceTestDTO.choice3!.isCorrect! ? Colors.green : Colors.grey,
+                                        color: choiceTestDTO.choice3 == null
+                                            ? Colors.grey
+                                            : choiceTestDTO.choice3!.isCorrect
+                                                ? Colors.green
+                                                : Colors.grey,
                                         child: const Icon(
                                           Icons.check,
                                           color: Colors.white,
@@ -208,11 +350,7 @@ class _AddMultiChoiceScreenState extends ConsumerState<AddMultiChoiceScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Container();
-                            });
+                        _buildAnswerField(4);
                       },
                       child: Container(
                           decoration: BoxDecoration(
@@ -229,16 +367,27 @@ class _AddMultiChoiceScreenState extends ConsumerState<AddMultiChoiceScreen> {
                                   child: Text(
                                 choiceTestDTO.choice4 == null
                                     ? "Fill your answer"
-                                    : choiceTestDTO.choice4!.question!,
+                                    : choiceTestDTO.choice4!.content!,
                                 style: Theme.of(context).textTheme.labelSmall,
                               )),
                               GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    if (choiceTestDTO.choice4 != null) {
+                                      ref
+                                          .watch(addMultiChoiceNotifierProvider
+                                              .notifier)
+                                          .chooseCorrectAnswer(4);
+                                    }
+                                  },
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(30),
                                       child: Container(
                                         padding: const EdgeInsets.all(2),
-                                        color: choiceTestDTO.choice4 == null ? Colors.grey : choiceTestDTO.choice4!.isCorrect! ? Colors.green : Colors.grey,
+                                        color: choiceTestDTO.choice4 == null
+                                            ? Colors.grey
+                                            : choiceTestDTO.choice4!.isCorrect
+                                                ? Colors.green
+                                                : Colors.grey,
                                         child: const Icon(
                                           Icons.check,
                                           color: Colors.white,

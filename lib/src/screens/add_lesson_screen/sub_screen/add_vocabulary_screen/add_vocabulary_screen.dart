@@ -152,6 +152,7 @@ class AddVocabularyScreen extends ConsumerWidget {
                 CreateLessonDTO lesson = CreateLessonDTO(
                     title: newLesson.title ?? "",
                     courseId: courseId,
+                    description: newLesson.description,
                     listLearning: newLesson.listLearning);
 
                 await ref.read(createVocabularyLessonProvider(lesson).future);

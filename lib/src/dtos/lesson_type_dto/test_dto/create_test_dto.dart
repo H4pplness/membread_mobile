@@ -19,4 +19,20 @@ class CreateTestDTO extends LearningDTO{
     'choice4' : choice4!.toJson(),
     'type' : 'choose'
   };
+
+  CreateTestDTO copyWith({
+    String? question,
+    ChoiceTestDTO? choice1,
+    ChoiceTestDTO? choice2,
+    ChoiceTestDTO? choice3,
+    ChoiceTestDTO? choice4,
+  }) {
+    return CreateTestDTO(
+      question: question ?? this.question,
+      choice1: choice1 ?? this.choice1,
+      choice2: choice2 ?? this.choice2,
+      choice3: choice3 ?? this.choice3,
+      choice4: choice4 ?? this.choice4,
+    );
+  }
 }

@@ -6,7 +6,7 @@ part of 'result_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$resultNotifierHash() => r'57d724217000aa38af9cb8287a4ac21ef2034e05';
+String _$resultNotifierHash() => r'9172b566c89e506f44d6c86066e4d94746264e75';
 
 /// See also [ResultNotifier].
 @ProviderFor(ResultNotifier)

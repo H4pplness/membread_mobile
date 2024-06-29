@@ -25,8 +25,8 @@ class AutoDecreaseSlider extends StatefulWidget {
 final GlobalKey<_AutoDecreaseSliderState> autoDecreaseSliderKey = GlobalKey();
 
 class _AutoDecreaseSliderState extends State<AutoDecreaseSlider> {
-  bool resetAnimation = false;
   late int _numberOfQuestion;
+  int _keyIndex = 0;
 
   @override
   void initState() {
@@ -35,27 +35,18 @@ class _AutoDecreaseSliderState extends State<AutoDecreaseSlider> {
   }
 
   void resetSlider() {
+    print("RESET");
     setState(() {
-      resetAnimation = true;
       --_numberOfQuestion;
+      _keyIndex++;
     });
-    print("RESET SLIDER : $resetAnimation");
   }
 
   @override
   Widget build(BuildContext context) {
-    if (resetAnimation) {
-      print("NOT WORKING");
-      setState(() {
-        resetAnimation = false;
-      }); // Reset the flag
-      return SizedBox(
-        height: widget.height,
-      ); // Return an empty widget to reset the animation
-    }
-
     print("MAKE ANIMATION");
     return TweenAnimationBuilder<double>(
+      key: ValueKey<int>(_keyIndex),
       tween: Tween<double>(begin: widget.width, end: 0.0),
       duration: Duration(seconds: widget.timeSecond),
       builder: (context, value, child) {
@@ -70,7 +61,7 @@ class _AutoDecreaseSliderState extends State<AutoDecreaseSlider> {
           widget.onEnd!();
         }
         if(_numberOfQuestion > 0){
-          resetSlider();// Reset the animation after it ends
+          resetSlider();
         }
       },
     );

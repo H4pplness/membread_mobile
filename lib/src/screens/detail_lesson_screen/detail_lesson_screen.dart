@@ -26,12 +26,12 @@ class DetailLessonScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,ref) {
-    final _data = ref.watch(getLessonProvider(lessonId));
+    final data = ref.watch(getLessonProvider.notifier).fetchLesson(lessonId);
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: CloseTitleAppbar(
           onLeadingButtonPressed: () => Navigator.pop(context),
-          title: _data.when(data: (data)=>data.title, error: (err,s)=> "" , loading: ()=>""),
+          title: data.when(data: (data)=>data.title, error: (err,s)=> "" , loading: ()=>""),
         ),
         body: Stack(
           children: [

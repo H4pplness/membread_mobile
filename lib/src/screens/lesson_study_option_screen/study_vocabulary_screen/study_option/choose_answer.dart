@@ -21,12 +21,13 @@ class ChooseAnswerOption extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final choiceStates = ref.watch(choiceNotifierProvider);
     return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: MediaQuery.of(context).size.height-120,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 30),
+            padding: EdgeInsets.only(top: 40,left: 20,right: 20),
             child: Text(
               vocabulary,
               style: Theme.of(context).textTheme.titleLarge,
@@ -40,16 +41,14 @@ class ChooseAnswerOption extends ConsumerWidget {
             ),
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 1,
-                crossAxisSpacing: 10,
+                crossAxisCount: 1,
+                childAspectRatio: 4,
                 mainAxisSpacing: 10,
               ),
               itemCount: choices.length,
               itemBuilder: (context, index) {
                 final choiceState = choiceStates;
                 Color backgroundColor = Theme.of(context).primaryColor;
-                print("Choice ${choiceState.isChoose}");
                 if(choiceStates.isChoose<1){
                   if (choiceState.choice == -1) {
                     backgroundColor = Theme.of(context).primaryColor;
@@ -66,22 +65,20 @@ class ChooseAnswerOption extends ConsumerWidget {
                 }
                 return GestureDetector(
                   onTap: () async {
-                    print("CHOOSE... ");
                     ref.read(choiceNotifierProvider.notifier).choose(index);
-                    await Future.delayed(const Duration(milliseconds: 500),(){
-                      print("NEXT ...");
-                    });
+                    await Future.delayed(const Duration(milliseconds: 500),(){});
                     if (onTap != null) {
                       onTap!(choices[index].isTrue);
                     }
                     ref.read(choiceNotifierProvider.notifier).resetChoice();
                   },
                   child: Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
                       color: backgroundColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
                       choices[index].choice,
                       style: Theme.of(context).textTheme.labelMedium,

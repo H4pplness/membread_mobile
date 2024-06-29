@@ -7,7 +7,8 @@ part 'progress_vocabulary_dto.freezed.dart';
 class ProgressVocabularyDTO with _$ProgressVocabularyDTO {
   const factory ProgressVocabularyDTO({
     required int learning_id,
-    required int progress
+    required int progress,
+    required bool need_to_review
   }) = _ProgressVocabularyDTO;
 
   factory ProgressVocabularyDTO.fromJson(Map<String , dynamic> json) => _$ProgressVocabularyDTOFromJson(json);

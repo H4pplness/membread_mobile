@@ -10,7 +10,9 @@ class VocabularyDTO extends LearningDTO with _$VocabularyDTO {
     int? id,
     String? vocabulary,
     String? mean,
-    int? progress
+    int? progress,
+    bool? need_to_review,
+    String? last_updated
   }) = _VocbularyDTO;
 
   factory VocabularyDTO.fromJson(Map<String, dynamic> json) => _$VocabularyDTOFromJson(json);

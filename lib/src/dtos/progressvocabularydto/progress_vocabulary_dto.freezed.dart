@@ -23,6 +23,7 @@ ProgressVocabularyDTO _$ProgressVocabularyDTOFromJson(
 mixin _$ProgressVocabularyDTO {
   int get learning_id => throw _privateConstructorUsedError;
   int get progress => throw _privateConstructorUsedError;
+  bool get need_to_review => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $ProgressVocabularyDTOCopyWith<$Res> {
           $Res Function(ProgressVocabularyDTO) then) =
       _$ProgressVocabularyDTOCopyWithImpl<$Res, ProgressVocabularyDTO>;
   @useResult
-  $Res call({int learning_id, int progress});
+  $Res call({int learning_id, int progress, bool need_to_review});
 }
 
 /// @nodoc
@@ -55,6 +56,7 @@ class _$ProgressVocabularyDTOCopyWithImpl<$Res,
   $Res call({
     Object? learning_id = null,
     Object? progress = null,
+    Object? need_to_review = null,
   }) {
     return _then(_value.copyWith(
       learning_id: null == learning_id
@@ -65,6 +67,10 @@ class _$ProgressVocabularyDTOCopyWithImpl<$Res,
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as int,
+      need_to_review: null == need_to_review
+          ? _value.need_to_review
+          : need_to_review // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -78,7 +84,7 @@ abstract class _$$ProgressVocabularyDTOImplCopyWith<$Res>
       __$$ProgressVocabularyDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int learning_id, int progress});
+  $Res call({int learning_id, int progress, bool need_to_review});
 }
 
 /// @nodoc
@@ -95,6 +101,7 @@ class __$$ProgressVocabularyDTOImplCopyWithImpl<$Res>
   $Res call({
     Object? learning_id = null,
     Object? progress = null,
+    Object? need_to_review = null,
   }) {
     return _then(_$ProgressVocabularyDTOImpl(
       learning_id: null == learning_id
@@ -105,6 +112,10 @@ class __$$ProgressVocabularyDTOImplCopyWithImpl<$Res>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as int,
+      need_to_review: null == need_to_review
+          ? _value.need_to_review
+          : need_to_review // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -113,7 +124,9 @@ class __$$ProgressVocabularyDTOImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProgressVocabularyDTOImpl implements _ProgressVocabularyDTO {
   const _$ProgressVocabularyDTOImpl(
-      {required this.learning_id, required this.progress});
+      {required this.learning_id,
+      required this.progress,
+      required this.need_to_review});
 
   factory _$ProgressVocabularyDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProgressVocabularyDTOImplFromJson(json);
@@ -122,10 +135,12 @@ class _$ProgressVocabularyDTOImpl implements _ProgressVocabularyDTO {
   final int learning_id;
   @override
   final int progress;
+  @override
+  final bool need_to_review;
 
   @override
   String toString() {
-    return 'ProgressVocabularyDTO(learning_id: $learning_id, progress: $progress)';
+    return 'ProgressVocabularyDTO(learning_id: $learning_id, progress: $progress, need_to_review: $need_to_review)';
   }
 
   @override
@@ -136,12 +151,15 @@ class _$ProgressVocabularyDTOImpl implements _ProgressVocabularyDTO {
             (identical(other.learning_id, learning_id) ||
                 other.learning_id == learning_id) &&
             (identical(other.progress, progress) ||
-                other.progress == progress));
+                other.progress == progress) &&
+            (identical(other.need_to_review, need_to_review) ||
+                other.need_to_review == need_to_review));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, learning_id, progress);
+  int get hashCode =>
+      Object.hash(runtimeType, learning_id, progress, need_to_review);
 
   @JsonKey(ignore: true)
   @override
@@ -161,7 +179,8 @@ class _$ProgressVocabularyDTOImpl implements _ProgressVocabularyDTO {
 abstract class _ProgressVocabularyDTO implements ProgressVocabularyDTO {
   const factory _ProgressVocabularyDTO(
       {required final int learning_id,
-      required final int progress}) = _$ProgressVocabularyDTOImpl;
+      required final int progress,
+      required final bool need_to_review}) = _$ProgressVocabularyDTOImpl;
 
   factory _ProgressVocabularyDTO.fromJson(Map<String, dynamic> json) =
       _$ProgressVocabularyDTOImpl.fromJson;
@@ -170,6 +189,8 @@ abstract class _ProgressVocabularyDTO implements ProgressVocabularyDTO {
   int get learning_id;
   @override
   int get progress;
+  @override
+  bool get need_to_review;
   @override
   @JsonKey(ignore: true)
   _$$ProgressVocabularyDTOImplCopyWith<_$ProgressVocabularyDTOImpl>

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VocaCard extends StatelessWidget {
-  VocaCard({super.key, required this.voca, required this.mean, this.level = 0});
+  VocaCard({super.key, required this.voca, required this.mean, this.level = 0,this.needToReview=false});
   String voca;
   String mean;
   int level;
+  bool needToReview;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,6 +16,7 @@ class VocaCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               decoration: BoxDecoration(
@@ -26,8 +28,8 @@ class VocaCard extends StatelessWidget {
               height: 30,
               child: level == 0
                   ? Container()
-                  : level == 4
-                      ? const Icon(Icons.check)
+                  : level >= 3
+                      ? Icon(Icons.star,color: Colors.yellow[700],)
                       : Center(
                           child: Text(
                             '$level',
@@ -36,34 +38,39 @@ class VocaCard extends StatelessWidget {
                           ),
                         ),
             ),
-            const SizedBox(
-              width: 15,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Expanded(child: Row(
               children: [
-                Text(
-                  voca,
-                  style: GoogleFonts.montserrat(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: MediaQuery.of(context).platformBrightness ==
-                              Brightness.light
-                          ? Colors.black
-                          : Colors.white),
+                const SizedBox(
+                  width: 15,
                 ),
-                Text(
-                  mean,
-                  style: GoogleFonts.montserrat(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: MediaQuery.of(context).platformBrightness ==
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      voca,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: MediaQuery.of(context).platformBrightness ==
                               Brightness.light
-                          ? Colors.black
-                          : Colors.white),
-                )
+                              ? Colors.black
+                              : Colors.white),
+                    ),
+                    Text(
+                      mean,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: MediaQuery.of(context).platformBrightness ==
+                              Brightness.light
+                              ? Colors.black
+                              : Colors.white),
+                    )
+                  ],
+                ),
               ],
-            ),
+            )),
+            if(needToReview)Icon(Icons.flash_on,color: Colors.yellow[700],size: 30,)
           ],
         ),
       ),

@@ -2,16 +2,15 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:membreadflutter/src/screens/lesson_study_option_screen/study_vocabulary_screen/study_option/result.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:membreadflutter/src/domain/repositories/course_repository/get_lesson/get_lesson.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/test_vocabulary_screen/notifiers/result_notifier/result_notifier.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/test_vocabulary_screen/study_option/choose_answer.dart';
 import 'package:membreadflutter/src/screens/lesson_study_option_screen/test_vocabulary_screen/notifiers/progress_notifier/progress_notifier.dart';
+import 'package:membreadflutter/src/screens/lesson_study_option_screen/test_vocabulary_screen/study_option/result.dart';
 import 'package:membreadflutter/src/widgets/atoms/sliders/progress_slider.dart';
 import 'package:membreadflutter/src/widgets/organisms/app_bars/close_title_appbar.dart';
 import '../../../domain/models/vocabulary.dart';
-import '../../../domain/repositories/course_repository/update_progress_lesson/update_progress_lesson.dart';
-import '../../../dtos/progressvocabularydto/progress_vocabulary_dto.dart';
-import '../../../dtos/updateprogresslessondto/update_progress_lesson_vocabulary_dto.dart';
 
 class TestVocabularyScreen extends ConsumerWidget {
   int courseId;
@@ -60,16 +59,7 @@ class TestVocabularyScreen extends ConsumerWidget {
         body = ResultOption(
             listVocabulary: listVocabulary,
             backFunction: () async {
-              final learned = UpdateProgressLessonVocabularyDTO(
-                  course_id: courseId,
-                  lesson_id: lessonId,
-                  score: scoreStatistics.totalScore,
-                  listVocabulary: listVocabulary
-                      .map((vocabulary) => ProgressVocabularyDTO(
-                          learning_id: vocabulary.id ?? 0,
-                          progress: vocabulary.progress))
-                      .toList());
-              await ref.read(updateProgressLessonProvider(learned).future);
+              await ref.watch(getLessonProvider.notifier).updateProgress(listVocabulary, scoreStatistics.totalScore, courseId, lessonId);
               Navigator.pop(context);
             });
       } else {
@@ -101,6 +91,7 @@ class TestVocabularyScreen extends ConsumerWidget {
             onTap: (isTrue) {
               ref.read(progressNotifierProvider.notifier).increase();
               randomVocabulary.studiedLevel++;
+              randomVocabulary.needToReview = !isTrue;
               if (isTrue) {
                 randomVocabulary.progress++;
                 ref.read(resultNotifierProvider.notifier).correctAnswer();
@@ -113,7 +104,29 @@ class TestVocabularyScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: CloseTitleAppbar(
-        onLeadingButtonPressed: () => Navigator.pop(context),
+        onLeadingButtonPressed: () {
+          showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: Text('Warning !',style: GoogleFonts.montserrat(fontSize:23,color:Colors.red,fontWeight:FontWeight.w600),),
+                content: Text('If you exit, the results will not be saved.',style: Theme.of(context).textTheme.displayMedium,),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: Text('Cancel',style: Theme.of(context).textTheme.displayMedium,),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      ref.refresh(resultNotifierProvider);
+                      ref.refresh(progressNotifierProvider);
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    },
+                    child: Text('Ok',style: Theme.of(context).textTheme.displayMedium),
+                  ),
+                ],
+              ));
+        },
         actions: [
           Text(
             scoreStatistics.totalScore.toString(),
