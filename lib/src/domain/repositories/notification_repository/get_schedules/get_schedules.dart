@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:membreadflutter/src/screens/schedule_screen/schedule_screen.dart';
 import '../../../../core/network.dart';
 import '../../../models/schedule.dart';
 
-class ScheduleNotifier extends StateNotifier<List<Schedule>?>{
+class ScheduleNotifier extends StateNotifier<List<Schedule>?> {
   final Ref ref;
-  ScheduleNotifier(this.ref):super(null){
+  ScheduleNotifier(this.ref) : super(null) {
     fetchSchedule();
   }
 
@@ -22,7 +23,9 @@ class ScheduleNotifier extends StateNotifier<List<Schedule>?>{
             title: schedule['title'],
             body: schedule['body'],
             courseId: schedule['courseId'],
-            scheduledDate: schedule['scheduledDate']!=null ?  DateTime.parse(schedule['scheduledDate']) : null,
+            scheduledDate: schedule['scheduledDate'] != null
+                ? DateTime.parse(schedule['scheduledDate'])
+                : null,
             eachFriday: schedule['eachFriday'],
             eachMonday: schedule['eachMonday'],
             eachSaturday: schedule['eachSaturday'],
@@ -36,13 +39,63 @@ class ScheduleNotifier extends StateNotifier<List<Schedule>?>{
     }
   }
 
-  void addSchedule(Schedule schedule){
-    if(state!=null) {
-      state = [...state!,schedule];
-    } else{
+  void addSchedule(Schedule schedule) {
+    if (state != null) {
+      state = [...state!, schedule];
+    } else {
       state = [schedule];
     }
   }
+
+  List<Schedule> getTodaySchedule() {
+    final now = DateTime.now();
+    final weekDay = now.weekday;
+    if (state == null) return [];
+
+    List<Schedule> selectedDayTask = [];
+    state!.forEach((schedule) {
+      if (schedule.scheduledDate != null) {
+        if (schedule.scheduledDate!.getDateOnly() == now.getDateOnly()) {
+          selectedDayTask.add(schedule);
+        }
+      } else {
+        switch (weekDay) {
+          case 1:
+            if (schedule.eachMonday ?? false) {
+              selectedDayTask.add(schedule);
+            }
+          case 2:
+            if (schedule.eachTuesday ?? false) {
+              selectedDayTask.add(schedule);
+            }
+          case 3:
+            if (schedule.eachWednesday ?? false) {
+              selectedDayTask.add(schedule);
+            }
+          case 4:
+            if (schedule.eachThursday ?? false) {
+              selectedDayTask.add(schedule);
+            }
+          case 5:
+            if (schedule.eachFriday ?? false) {
+              selectedDayTask.add(schedule);
+            }
+          case 6:
+            if (schedule.eachSaturday ?? false) {
+              selectedDayTask.add(schedule);
+            }
+          case 7:
+            if (schedule.eachSunday ?? false) {
+              selectedDayTask.add(schedule);
+            }
+        }
+      }
+    });
+
+    return selectedDayTask;
+  }
 }
 
-final getScheduleProvider = StateNotifierProvider<ScheduleNotifier, List<Schedule>?>((ref) => ScheduleNotifier(ref));
+final getScheduleProvider =
+    StateNotifierProvider<ScheduleNotifier, List<Schedule>?>(
+        (ref) => ScheduleNotifier(ref));
